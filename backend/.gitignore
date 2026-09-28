@@ -1,0 +1,38 @@
+# 1. Thư viện phụ thuộc (rất nặng, không commit lên git)
+node_modules/
+
+# 2. Biến môi trường và thông tin bảo mật (chứa DB URL, Secret Key, Token)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 3. File nhật ký hoạt động (Logs)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 4. Thư mục file người dùng tải lên (nếu có upload file)
+uploads/
+backend/public/uploads/
+
+# 5. File hệ điều hành sinh ra
+.DS_Store
+Thumbs.db
+
+# 6. Cấu hình riêng của trình soạn thảo code (IDE)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 7. File báo cáo test và coverage (nếu dùng Jest/Vitest)
+coverage/
+.nyc_output/
