@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
 
 // Sửa lỗi icon mặc định của Leaflet trên React/Vite
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-let DefaultIcon = L.icon({
+const DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 });
-L.Marker.parseOptions = { icon: DefaultIcon };
+
 L.Marker.prototype.options.icon = DefaultIcon;
 
 interface Station {
@@ -25,11 +25,46 @@ interface Station {
 }
 
 const STATIONS: Station[] = [
-  { id: 1, name: 'Tháp Po Klong Garai', lat: 11.5833, lng: 108.9667, district: 'Đô Vinh', desc: 'Cụm tháp Kalan gạch nung sừng sững trên Đồi Trầu.' },
-  { id: 2, name: 'Làng Gốm Bàu Trúc', lat: 11.5333, lng: 108.9167, district: 'Phước Dân', desc: 'Nơi đất sét kết hợp cát mịn, nung lộ thiên không men.' },
-  { id: 3, name: 'Làng Dệt Mỹ Nghiệp', lat: 11.5167, lng: 108.9333, district: 'Ninh Phước', desc: 'Gìn giữ kỹ nghệ dệt thủ công hoa văn kỷ hà.' },
-  { id: 4, name: 'Tháp Thiêng Po Rome', lat: 11.4667, lng: 108.9833, district: 'Hậu Sanh', desc: 'Tháp cuối cùng của vương triều Champa độc lập.' },
-  { id: 5, name: 'Bảo tàng Văn hóa Chăm', lat: 11.5667, lng: 108.9833, district: 'Phan Rang', desc: 'Trưng bày hơn 1.000 hiện vật khảo cổ học quý giá.' },
+  {
+    id: 1,
+    name: "Tháp Po Klong Garai",
+    lat: 11.5833,
+    lng: 108.9667,
+    district: "Đô Vinh",
+    desc: "Cụm tháp Kalan gạch nung sừng sững trên Đồi Trầu.",
+  },
+  {
+    id: 2,
+    name: "Làng Gốm Bàu Trúc",
+    lat: 11.5333,
+    lng: 108.9167,
+    district: "Phước Dân",
+    desc: "Nơi đất sét kết hợp cát mịn, nung lộ thiên không men.",
+  },
+  {
+    id: 3,
+    name: "Làng Dệt Mỹ Nghiệp",
+    lat: 11.5167,
+    lng: 108.9333,
+    district: "Ninh Phước",
+    desc: "Gìn giữ kỹ nghệ dệt thủ công hoa văn kỷ hà.",
+  },
+  {
+    id: 4,
+    name: "Tháp Thiêng Po Rome",
+    lat: 11.4667,
+    lng: 108.9833,
+    district: "Hậu Sanh",
+    desc: "Tháp cuối cùng của vương triều Champa độc lập.",
+  },
+  {
+    id: 5,
+    name: "Bảo tàng Văn hóa Chăm",
+    lat: 11.5667,
+    lng: 108.9833,
+    district: "Phan Rang",
+    desc: "Trưng bày hơn 1.000 hiện vật khảo cổ học quý giá.",
+  },
 ];
 
 // Component phụ để tự động di chuyển tâm bản đồ khi activeStation thay đổi
@@ -46,9 +81,16 @@ interface HeritageMapProps {
   onSelectStation: (id: number) => void;
 }
 
-export default function HeritageMap({ activeStation, onSelectStation }: HeritageMapProps) {
-  const currentStation = STATIONS.find((s) => s.id === activeStation) || STATIONS[0];
-  const centerPosition: [number, number] = [currentStation.lat, currentStation.lng];
+export default function HeritageMap({
+  activeStation,
+  onSelectStation,
+}: HeritageMapProps) {
+  const currentStation =
+    STATIONS.find((s) => s.id === activeStation) || STATIONS[0];
+  const centerPosition: [number, number] = [
+    currentStation.lat,
+    currentStation.lng,
+  ];
 
   return (
     <div className="relative w-full h-[450px] lg:h-[580px] rounded-xl overflow-hidden shadow-xl z-10">
@@ -74,7 +116,9 @@ export default function HeritageMap({ activeStation, onSelectStation }: Heritage
           >
             <Popup>
               <div className="p-1">
-                <span className="text-[10px] uppercase font-bold text-primary">Trạm 0{station.id} • {station.district}</span>
+                <span className="text-[10px] uppercase font-bold text-primary">
+                  Trạm 0{station.id} • {station.district}
+                </span>
                 <h5 className="font-bold text-sm">{station.name}</h5>
                 <p className="text-xs text-gray-600 mt-1">{station.desc}</p>
               </div>

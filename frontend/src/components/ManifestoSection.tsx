@@ -1,40 +1,82 @@
-import { Flower2 } from 'lucide-react';
-import { MANIFESTO_STATS } from '../data/champaData';
-import { Card, CardContent } from '../components/ui/card';
+import {
+  Handshake,
+  Landmark,
+  Award,
+  Users,
+} from "lucide-react";
+import { MANIFESTO_METRICS } from "../data/champaData";
 
-const SAWTOOTH = Array.from({ length: 65 }, (_, i) => `${i * 5},${i % 2 === 0 ? 10 : 0}`).join(' ');
+const METRIC_ICONS = {
+  handshake: Handshake,
+  museum: Landmark,
+  workspace_premium: Award,
+  diversity_1: Users,
+};
 
 export default function ManifestoSection() {
   return (
-    <section className="w-full px-margin-mobile py-space-md">
-      <Card className="bg-surface-container-low shadow-sm overflow-hidden">
-        <CardContent className="pt-space-md flex flex-col gap-space-md">
-          <div className="w-full text-primary/40">
-            <svg className="w-full h-2.5" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 320 10">
-              <polygon points={SAWTOOTH} />
-            </svg>
+    <section id="triet-ly" className="w-full bg-surface-container-low py-space-xl border-y border-surface-container-high/60">
+      <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
+        {/* Champa Geometric Motif Divider */}
+        <div className="w-full flex items-center justify-center gap-space-md opacity-80 mb-space-lg">
+          <div className="h-0.5 w-16 sm:w-24 bg-gradient-to-r from-transparent to-primary"></div>
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rotate-45 bg-primary shadow-sm"></span>
+            <span className="w-3.5 h-3.5 rotate-45 bg-secondary shadow-sm"></span>
+            <span className="w-2.5 h-2.5 rotate-45 bg-primary shadow-sm"></span>
           </div>
+          <div className="h-0.5 w-16 sm:w-24 bg-gradient-to-l from-transparent to-primary"></div>
+        </div>
 
-          <div className="flex flex-col gap-space-xs">
-            <div className="flex items-center gap-2 text-primary">
-              <Flower2 className="h-5 w-5" />
-              <span className="font-label-sm text-label-sm uppercase tracking-widest font-bold">Triết Lý Dana</span>
-            </div>
-            <p className="font-body-md text-body-md text-on-surface leading-relaxed italic">
-              “Chúng tôi tin rằng, mỗi viên gạch tháp Chăm đều có linh hồn, mỗi vệt khói gốm Bàu Trúc đều cất giấu ký ức tiền nhân. Dana không dẫn bạn đi check-in vội vã. Chúng tôi đưa bạn ngồi xuống cùng các Muk, uống ngụm trà mát, tự tay vuốt thớ đất sét dẻo quánh và thấu hiểu một nền văn hóa bằng cả trái tim trân kính.”
-            </p>
-          </div>
+        {/* Philosophy Heading & Core Statement */}
+        <div className="max-w-3xl mx-auto text-center mb-space-xl">
+          <span className="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold block mb-space-xs">
+            Triết lý Dana • Di sản trong từng nhịp thở
+          </span>
+          <h2 className="font-serif text-3xl xl:text-4xl text-on-surface mb-space-md font-semibold">
+            Chữa lành ký ức, tiếp nối hồn thiêng
+          </h2>
+          <p className="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic text-base xl:text-lg">
+            “Chúng tôi tin rằng, mỗi viên gạch tháp Chăm đều có linh hồn, mỗi
+            vệt khói gốm Bàu Trúc đều cất giấu ký ức tiền nhân. Dana không dẫn
+            bạn đi check-in vội vã. Chúng tôi đưa bạn ngồi xuống cùng các Muk,
+            uống ngụm trà mát, tự tay vuốt thớ đất sét dẻo quánh và thấu hiểu một
+            nền văn hóa bằng cả trái tim trân kính.”
+          </p>
+        </div>
 
-          <div className="grid grid-cols-3 gap-space-xs bg-surface-container rounded-lg p-space-sm text-center">
-            {MANIFESTO_STATS.map((s) => (
-              <div key={s.label} className="flex flex-col items-center">
-                <span className={`font-headline-sm text-headline-sm font-bold ${s.className}`}>{s.value}</span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant leading-tight mt-0.5">{s.label}</span>
+        {/* 4 Impact Metric Cards Desktop Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          {MANIFESTO_METRICS.map((metric) => {
+            const IconComponent =
+              METRIC_ICONS[metric.icon as keyof typeof METRIC_ICONS] ?? Handshake;
+
+            return (
+              <div
+                key={metric.title}
+                className="p-space-lg rounded-2xl bg-surface-container-lowest shadow-md flex flex-col justify-between hover:-translate-y-1 transition-all duration-300 border border-outline-variant/30 group"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-surface-container text-primary flex items-center justify-center mb-space-md group-hover:scale-110 transition-transform">
+                    <IconComponent className="h-6 w-6 text-primary" />
+                  </div>
+                  <div
+                    className={`font-serif text-4xl xl:text-5xl font-bold leading-none mb-1.5 ${metric.colorClass}`}
+                  >
+                    {metric.value}
+                  </div>
+                  <div className="font-title-md text-title-md text-on-surface mb-space-xs font-semibold">
+                    {metric.title}
+                  </div>
+                </div>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                  {metric.desc}
+                </p>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }

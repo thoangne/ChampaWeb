@@ -2,14 +2,20 @@ export interface Chip { label: string; className: string }
 
 export interface Tour {
   id: number;
+  slug: string;
   badge: string;
   badgeClass: string;
   duration: string;
   location: string;
   price: string;
+  adultPrice?: number;
+  childPrice?: number;
   title: string;
   description: string;
   image: string;
+  category?: 'all' | 'craft' | 'architecture' | 'ritual';
+  rating?: string;
+  reviewsCount?: string;
   chips: Chip[];
 }
 
@@ -21,6 +27,24 @@ export interface Waypoint {
   title: string;
   sub: string;
   rules: string;
+  coords?: [number, number];
+  badge?: string;
+  badgeClass?: string;
+  openHours?: string;
+  distance?: string;
+}
+
+export interface Artisan {
+  id: number;
+  name: string;
+  title: string;
+  experience: string;
+  village: string;
+  quote: string;
+  bio: string;
+  schedule: string;
+  image: string;
+  badgeClass: string;
 }
 
 export interface Testimonial {

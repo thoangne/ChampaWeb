@@ -1,38 +1,127 @@
-import { Handshake, Quote } from 'lucide-react';
-import { ARTISAN_IMAGE } from '../data/champaData';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
-import { Card, CardContent } from '../components/ui/card';
+import { ArrowRight, Leaf, Quote, Sparkles } from "lucide-react";
+import { ARTISANS } from "../data/champaData";
+import { toast } from "./ui/sonner";
 
 export default function ArtisansSection() {
+  const handleViewReport = () => {
+    toast.success("Báo cáo Hoàn lưu Sinh kế 2024", {
+      description: "70% doanh thu đã được phân bổ cho 140 hộ gia đình nghệ nhân và 3 lớp truyền dạy chữ Akhar Thrah.",
+    });
+  };
+
   return (
-    <section className="w-full px-margin-mobile py-space-md">
-      <Card className="bg-surface-container-low">
-        <CardContent className="pt-space-md flex flex-col gap-space-md">
-          <div className="flex items-center gap-space-sm">
-            <Avatar className="h-16 w-16 shadow-sm">
-              <AvatarImage alt="Chân dung Muk Đàng Thị Phan" src={ARTISAN_IMAGE} />
-              <AvatarFallback>MP</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col min-w-0">
-              <span className="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Nghệ Nhân Di Sản Sống</span>
-              <h3 className="font-title-lg text-title-lg text-on-surface truncate">Muk Đàng Thị Phan</h3>
-              <span className="font-body-sm text-body-sm text-on-surface-variant">Làng gốm Bàu Trúc (Hơn 60 năm gắn bó cùng đất sét)</span>
+    <section id="nghe-nhan" className="w-full bg-surface py-space-xl">
+      <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-space-xl">
+          <span className="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold block mb-space-xs">
+            Người Giữ Lửa Ngàn Năm
+          </span>
+          <h2 className="font-serif text-3xl xl:text-4xl text-on-surface font-semibold">
+            Góc Nghệ Nhân: Ký ức trong đôi bàn tay
+          </h2>
+          <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+            Họ không chỉ làm nghề để mưu sinh. Từng đường vuốt đất, từng lượt
+            thoi dệt là hành trình gìn giữ danh dự và linh hồn của cả một dân tộc.
+          </p>
+        </div>
+
+        {/* Feature Split Section: Spotlight 2 Master Artisans */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-space-xl">
+          {ARTISANS.map((artisan) => (
+            <div
+              key={artisan.name}
+              className="p-space-lg rounded-2xl bg-surface-container-low shadow-md flex flex-col justify-between border border-outline-variant/30 hover:shadow-lg transition-all"
+            >
+              <div>
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-space-md mb-space-md items-center">
+                  <div className="sm:col-span-5 h-56 rounded-xl overflow-hidden bg-surface-container-high shadow-inner">
+                    <img
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                      alt={artisan.name}
+                      src={artisan.image}
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-7">
+                    <span
+                      className={`px-space-xs py-0.5 rounded font-label-sm text-[11px] uppercase font-bold tracking-wider ${artisan.badgeClass}`}
+                    >
+                      {artisan.title}
+                    </span>
+                    <h3 className="font-serif text-2xl text-on-surface mt-space-xs font-semibold">
+                      {artisan.name}
+                    </h3>
+                    <p className="font-label-md text-xs text-secondary mt-0.5 font-semibold">
+                      {artisan.experience}
+                    </p>
+
+                    <div className="mt-space-sm p-space-sm rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/20 relative">
+                      <Quote className="absolute right-2 top-2 h-5 w-5 text-primary/15" />
+                      <p className="font-body-sm text-xs xl:text-sm text-on-surface-variant italic leading-relaxed pr-3">
+                        {artisan.quote}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <p className="font-body-md text-sm xl:text-base text-on-surface-variant leading-relaxed">
+                  {artisan.bio}
+                </p>
+              </div>
+
+              <div className="pt-space-md mt-space-md flex flex-wrap items-center justify-between gap-2 border-t border-surface-container/60">
+                <span className="font-body-sm text-xs text-on-surface-variant font-medium">
+                  {artisan.schedule}
+                </span>
+                <button
+                  onClick={() =>
+                    toast(`Câu chuyện về ${artisan.name}`, {
+                      description: `Đang kết nối trang tư liệu phóng sự độc bản về ${artisan.village}.`,
+                    })
+                  }
+                  className="font-label-md text-xs text-primary font-bold hover:underline flex items-center gap-1"
+                  type="button"
+                >
+                  <span>Đọc câu chuyện</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Regenerative Tourism Commitment Banner */}
+        <div className="p-space-lg xl:p-space-xl rounded-2xl bg-gradient-to-r from-primary via-primary-container to-secondary text-on-primary shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+          <div className="flex items-center gap-space-md">
+            <div className="w-14 h-14 rounded-2xl bg-on-primary/10 flex items-center justify-center shrink-0 border border-white/20">
+              <Leaf className="h-8 w-8 text-primary-fixed" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5 mb-1">
+                <Sparkles className="h-4 w-4 text-secondary-fixed" />
+                <h4 className="font-serif text-xl xl:text-2xl font-bold">
+                  Cam kết Du lịch Chữa lành & Tái tạo Xứ Chăm
+                </h4>
+              </div>
+              <p className="font-body-md text-sm xl:text-base text-on-primary/90 max-w-2xl leading-relaxed">
+                100% rác thải nhựa bị loại bỏ trong mọi tour. Khách được trang bị
+                bình nước gốm Bàu Trúc và túi thổ cẩm Mỹ Nghiệp tái sử dụng làm
+                quà lưu niệm vĩnh cửu.
+              </p>
             </div>
           </div>
 
-          <blockquote className="relative p-space-sm rounded-lg bg-card font-body-md text-body-md text-on-surface leading-relaxed italic">
-            <Quote className="absolute right-2 bottom-1 h-10 w-10 text-primary/10 select-none" />
-            “Người Chăm làm gốm bằng đôi chân đi giật lùi, xoay quanh chiếc trụ đất. Đất dẻo theo tâm người, lửa đỏ theo lòng người.”
-          </blockquote>
-
-          <div className="flex items-start gap-space-xs p-space-sm rounded-lg bg-surface-container text-on-surface-variant">
-            <Handshake className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-            <p className="font-body-sm text-body-sm leading-snug">
-              <strong className="text-primary font-semibold">Cam kết trách nhiệm Dana:</strong> 70% nguồn thu được hoàn lưu trực tiếp đến các hộ gia đình nghệ nhân và quỹ văn hóa thiếu nhi Chăm Panduranga.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+          <button
+            onClick={handleViewReport}
+            className="px-space-lg py-3 rounded-xl bg-surface text-on-surface font-label-lg text-sm xl:text-base whitespace-nowrap shadow-md hover:bg-surface-container transition-all font-semibold hover:shadow-lg"
+            type="button"
+          >
+            Xem Báo cáo Hoàn lưu 2024
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
