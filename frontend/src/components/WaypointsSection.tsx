@@ -5,7 +5,6 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { cn } from '../lib/utils';
 
-// Tên icon (Material Symbols) trong data -> icon lucide
 const ICONS: Record<string, LucideIcon> = {
   temple_hindu: Tent,
   potted_plant: Sprout,

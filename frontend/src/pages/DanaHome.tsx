@@ -14,8 +14,7 @@ export default function DanaHome() {
     <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen">
       <Header />
       <main className="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen">
-
-        <div className="w-full max-w-7xl mx-auto flex flex-col">
+        <div className="flex flex-col w-full">
           <HeroSection />
           <ManifestoSection />
           <ToursSection />
