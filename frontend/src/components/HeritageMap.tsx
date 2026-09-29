@@ -2,9 +2,14 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 
+<<<<<<< Updated upstream
 // Sửa lỗi icon mặc định của Leaflet trên React/Vite
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
+=======
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+>>>>>>> Stashed changes
 
 const DefaultIcon = L.icon({
   iconUrl: icon,
@@ -67,7 +72,6 @@ const STATIONS: Station[] = [
   },
 ];
 
-// Component phụ để tự động di chuyển tâm bản đồ khi activeStation thay đổi
 function MapFlyTo({ center }: { center: [number, number] }) {
   const map = useMap();
   useEffect(() => {
