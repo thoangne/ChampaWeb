@@ -1,0 +1,4 @@
+# Cài thư viện (Tailwind v3 + shadcn/ui)
+npm i class-variance-authority clsx tailwind-merge@2 lucide-react sonner \
+  @radix-ui/react-slot @radix-ui/react-select @radix-ui/react-label @radix-ui/react-avatar
+npm i -D tailwindcss@3 postcss autoprefixer tailwindcss-animate @vitejs/plugin-react

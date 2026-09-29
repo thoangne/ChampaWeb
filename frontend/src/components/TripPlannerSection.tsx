@@ -1,57 +1,78 @@
-export default function TestimonialsSection() {
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import { CalendarDays, Send } from 'lucide-react';
+import { DESTINATION_OPTIONS, TRAVELER_OPTIONS } from '../data/champaData';
+import type { TripFormValues } from '../types/heritage';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
+import { toast } from '../components/ui/sonner';
+
+export default function TripPlannerSection() {
+  const [form, setForm] = useState<TripFormValues>({
+    destination: DESTINATION_OPTIONS[0],
+    date: new Date().toISOString().slice(0, 10),
+    travelers: TRAVELER_OPTIONS[0],
+  });
+
+  const update = <K extends keyof TripFormValues>(key: K, value: TripFormValues[K]) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // TODO: gửi `form` tới backend (src/api)
+    toast.success('Dana đã tiếp nhận yêu cầu hành trình', {
+      description: 'Hướng dẫn viên bản địa sẽ liên hệ trong ít phút qua số điện thoại để trao đổi chi tiết.',
+    });
+  };
+
   return (
-    <section className="w-full py-2 flex flex-col gap-3">
-      <div className="flex flex-col">
-        <div className="flex items-center gap-1.5 text-[#8f4e00]">
-          <span className="material-symbols-outlined text-[16px]">favorite</span>
-          <span className="text-[10px] uppercase tracking-widest font-semibold">Lắng Nghe Lữ Khách</span>
+    <Card>
+      <CardHeader className="gap-space-sm">
+        <div className="flex items-center gap-2 text-primary">
+          <CalendarDays className="h-5 w-5" />
+          <CardTitle>Khởi hành Chuyến đi Di sản</CardTitle>
         </div>
-        <h2 className="font-serif text-[26px] text-[#241915] font-bold">Cảm nhận từ trái tim</h2>
-      </div>
+        <CardDescription className="text-on-surface-variant">
+          Chọn lộ trình theo nhịp chân của bạn, Dana đồng hành để mỗi khoảnh khắc trọn vẹn ý nghĩa.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="flex flex-col gap-space-xs" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-1">
+            <Label htmlFor="destination">Điểm trải nghiệm mong muốn</Label>
+            <Select value={form.destination} onValueChange={(v) => update('destination', v)}>
+              <SelectTrigger id="destination"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                {DESTINATION_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <div className="w-full rounded-xl bg-white p-4 shadow-sm flex flex-col gap-1 border border-[#dfc0b8]/40">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-[#fea047] text-[#6d3a00] flex items-center justify-center font-bold text-xs">
-              TM
+          <div className="grid grid-cols-2 gap-space-xs">
+            <div className="flex flex-col gap-1">
+              <Label htmlFor="date">Dự kiến ngày đi</Label>
+              <Input id="date" type="date" value={form.date} onChange={(e) => update('date', e.target.value)} />
             </div>
-            <div>
-              <span className="font-bold text-[14px] text-[#241915] block leading-tight">Thảo My</span>
-              <span className="text-[11px] text-[#58423c]">TP. Hồ Chí Minh</span>
+            <div className="flex flex-col gap-1">
+              <Label htmlFor="travelers">Số người</Label>
+              <Select value={form.travelers} onValueChange={(v) => update('travelers', v)}>
+                <SelectTrigger id="travelers"><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {TRAVELER_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          <div className="flex text-[#8f4e00]">
-            {[...Array(5)].map((_, i) => (
-              <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-            ))}
-          </div>
-        </div>
-        <p className="text-[13px] text-[#241915] italic mt-1 leading-relaxed">
-          “Đi tour của Dana, lần đầu tiên mình hiểu vì sao phụ nữ Chăm lại đi lùi quanh khối đất để làm gốm. Cảm xúc trân quý vô cùng! Cảm giác như được chạm vào mạch nguồn văn hóa chứ không phải cưỡi ngựa xem hoa.”
-        </p>
-      </div>
 
-      <div className="w-full rounded-xl bg-white p-4 shadow-sm flex flex-col gap-1 border border-[#dfc0b8]/40">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-[#526e87] text-white flex items-center justify-center font-bold text-xs">
-              DM
-            </div>
-            <div>
-              <span className="font-bold text-[14px] text-[#241915] block leading-tight">David Miller</span>
-              <span className="text-[11px] text-[#58423c]">Melbourne, Úc</span>
-            </div>
-          </div>
-          <div className="flex text-[#8f4e00]">
-            {[...Array(5)].map((_, i) => (
-              <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-            ))}
-          </div>
-        </div>
-        <p className="text-[13px] text-[#241915] italic mt-1 leading-relaxed">
-          “Authentic and deeply respectful. Not a tourist trap, but a real connection with living heritage. The sound of the Saranai horn at dusk next to the ancient Kalan tower will stay with me forever.”
-        </p>
-      </div>
-    </section>
+          <Button type="submit" className="mt-space-xs w-full">
+            Nhận tư vấn hành trình
+            <Send className="h-[18px] w-[18px]" />
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

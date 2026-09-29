@@ -1,29 +1,39 @@
-'use client';
+import { BookOpen, Download } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
+import { toast } from '../components/ui/sonner';
 
 export default function GuideBanner() {
-  const downloadGuide = () => {
-    alert('Cẩm nang "Ứng xử Văn hóa khi thăm viếng tháp cổ và làng Chăm Panduranga" (Bản PDF màu) đang được gửi về máy của bạn!');
+  const handleDownload = () => {
+    // TODO: thay bằng link PDF thật, ví dụ window.open('/guide.pdf')
+    toast('Đang gửi cẩm nang về máy của bạn', {
+      description: 'Ứng xử Văn hóa khi thăm viếng tháp cổ và làng Chăm Panduranga (PDF màu).',
+    });
   };
 
   return (
-    <div className="w-full rounded-xl bg-[#f9e4dd] p-4 shadow-sm flex items-center justify-between gap-3 border border-[#dfc0b8]/40">
-      <div className="flex items-start gap-2.5 min-w-0">
-        <div className="w-10 h-10 rounded-lg bg-[#972f12]/10 text-[#972f12] flex items-center justify-center flex-shrink-0">
-          <span className="material-symbols-outlined text-[22px]">menu_book</span>
+    <>
+      <Card className="bg-surface-container-high shadow-sm p-space-md flex items-center justify-between gap-space-sm">
+        <div className="flex items-start gap-space-xs min-w-0">
+          <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+            <BookOpen className="h-[22px] w-[22px]" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="font-title-md text-title-md text-on-surface leading-tight">Cẩm nang Ứng xử Văn hóa</span>
+            <span className="font-body-sm text-body-sm text-on-surface-variant truncate">Quy tắc thăm viếng tháp thiêng &amp; làng Chăm (PDF Miễn phí)</span>
+          </div>
         </div>
-        <div className="flex flex-col min-w-0">
-          <span className="text-[15px] font-bold text-[#241915] leading-tight">Cẩm nang Ứng xử Văn hóa</span>
-          <span className="text-[12px] text-[#58423c] truncate">Quy tắc thăm viếng tháp thiêng & làng Chăm (PDF Miễn phí)</span>
-        </div>
+        <Button variant="soft" size="sm" onClick={handleDownload} className="bg-card text-label-sm font-bold flex-shrink-0 px-space-sm">
+          <Download className="h-4 w-4" />
+          Tải về
+        </Button>
+      </Card>
+
+      <div className="text-center pt-2">
+        <span className="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">
+          Dana Panduranga • Giữ gìn di sản bằng lòng tự hào bản địa
+        </span>
       </div>
-      <button
-        type="button"
-        onClick={downloadGuide}
-        className="h-10 px-3 rounded bg-white text-[#972f12] text-[11px] font-bold flex items-center gap-1 shadow-sm active:bg-[#972f12] active:text-white transition-colors flex-shrink-0 border border-[#dfc0b8]/40"
-      >
-        <span className="material-symbols-outlined text-[16px]">download</span>
-        <span>Tải về</span>
-      </button>
-    </div>
+    </>
   );
 }

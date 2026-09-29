@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#fff8f6;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-surface-variant": "#58423c", "secondary-fixed-dim": "#ffb77a", "primary-fixed-dim": "#ffb4a1", "on-secondary-fixed-variant": "#6d3a00", "tertiary-container": "#526e87", "inverse-on-surface": "#ffede7", "on-primary-container": "#ffe8e3", "surface-container-lowest": "#ffffff", "inverse-primary": "#ffb4a1", "on-error": "#ffffff", "on-tertiary-fixed": "#001e31", "secondary-container": "#fea047", "surface-tint": "#a73a1d", "on-surface": "#241915", "surface-container": "#ffe9e2", "on-tertiary-container": "#e0efff", "surface-bright": "#fff8f6", "tertiary-fixed": "#cce5ff", "secondary": "#8f4e00", "tertiary-fixed-dim": "#accae6", "primary-container": "#b84628", "surface-container-highest": "#f3ded7", "surface-container-high": "#f9e4dd", "secondary-fixed": "#ffdcc2", "tertiary": "#39566d", "outline": "#8b716b", "on-primary-fixed": "#3c0800", "surface-container-low": "#fff1ec", "on-error-container": "#93000a", "on-background": "#241915", "on-secondary-container": "#6d3a00", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "on-primary": "#ffffff", "on-tertiary-fixed-variant": "#2d4a61", "on-primary-fixed-variant": "#862206", "error": "#ba1a1a", "background": "#fff8f6", "on-secondary-fixed": "#2e1500", "surface-variant": "#f3ded7", "outline-variant": "#dfc0b8", "error-container": "#ffdad6", "surface": "#fff8f6", "primary": "#972f12", "inverse-surface": "#3a2e29", "surface-dim": "#ebd6cf", "primary-fixed": "#ffdbd2" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2.5rem", "space-xs": "0.25rem", "margin": "3rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "margin-mobile": "1.25rem", "space-lg": "1.5rem", "space-md": "1rem" }, fontFamily: { "body-md": ["Be Vietnam Pro"], "label-sm": ["Be Vietnam Pro"], "title-md": ["Be Vietnam Pro"], "body-sm": ["Be Vietnam Pro"], "headline-lg": ["Playfair Display"], "headline-md": ["Playfair Display"], "label-lg": ["Be Vietnam Pro"], "label-md": ["Be Vietnam Pro"], "title-lg": ["Be Vietnam Pro"], "headline-sm": ["Playfair Display"], "display-lg": ["Playfair Display"], "body-lg": ["Be Vietnam Pro"], "display-lg-mobile": ["Playfair Display"], "headline-lg-mobile": ["Playfair Display"] }, fontSize: { "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.12em", "fontWeight": "600" }], "title-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "0", "fontWeight": "500" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }], "title-lg": ["18px", { "lineHeight": "26px", "letterSpacing": "0", "fontWeight": "600" }], "headline-sm": ["22px", { "lineHeight": "30px", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-lg": ["56px", { "lineHeight": "68px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-lg-mobile": ["38px", { "lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "0", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_2px_12px_rgba(36,25,21,0.05)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><img alt="Logo Dana Di sản Chăm" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA8pmruKOFThAklkUBt3Dr_Efa4HrMrgSyhUnMLwlzXi2AfaZ6MJo900yTWgO87EFl4toG7ZcFPI1GtRNfkcZpSNNGvw9HusC53kNh4_CUYnlJr4TU9zHMhRZemrVjSY1SzRoTJfM5GWHcDadv-UYF-jDtdhEAci3gnsfPk6ut7yXAwF-yhzgvPZ0hmEmCOSYPIIcJY8Nicufsa3RIh6RFJ3jX6UBfNhYIq86WF_VdNQHu6Hi2LS8Rpg"/><div class="flex flex-col min-w-0"><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight leading-none">Dana</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Panduranga</span></div><span class="font-body-sm text-body-sm text-on-surface-variant truncate text-[11px] leading-tight">Di sản Chăm • Cổng Di Sản</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Âm nhạc Katê Saranai Paranưng" class="h-11 px-space-sm rounded-full bg-surface-container flex items-center gap-1.5 text-primary hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">graphic_eq</span><span class="font-label-sm text-label-sm hidden sm:inline text-on-surface-variant">Katê</span></button><button aria-label="Menu văn hóa" class="w-11 h-11 rounded-lg flex items-center justify-center text-on-surface hover:text-primary hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[24px]">menu</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 ml-0.5"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- 1. HERO SECTION: Cánh Cổng Thời Gian -->
+<section class="relative w-full px-margin-mobile pt-space-md pb-space-lg flex flex-col gap-space-md">
+<!-- Top Heritage Badge -->
+<div class="inline-flex items-center gap-1.5 self-start px-space-sm py-1 rounded-full bg-surface-container text-primary shadow-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Khám phá Chiều sâu Di sản Panduranga</span>
+</div>
+<!-- Editorial Typography Block -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-secondary font-bold">Dana • Panduranga</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight leading-tight mt-1">
+          Chạm vào nhịp thở ngàn năm xứ Panduranga
+        </h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Không đơn thuần là chuyến du ngoạn. Đây là hành trình trở về để lắng nghe đất nung kể chuyện, thổ cẩm hát ca và tâm hồn người Chăm mở lối.
+      </p>
+</div>
+<!-- Visual Banner with Kalan Silhouette & Terracotta Atmospheric Light -->
+<div class="relative w-full rounded-xl overflow-hidden shadow-md bg-surface-container-high">
+<img class="w-full h-72 object-cover" data-alt="Majestic terracotta brick Po Klong Garai tower at golden hour sunset in Ninh Thuan, Vietnam. Warm earthen red bricks glowing under dramatic dusk sky with gentle plumes of pottery smoke drifting across ancient stone steps, cultural heritage photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAGi4ZrMVPgv0DZTeazcl9xBmgMPbILKbLeMkQwoseksXokyUW9M8iaEq2PgXSgTLXoKVfxP-ilB2ne6SG-w5Q6ZRxyzWBTgPCBCmbYSD0K5u7NMMn1PTKseCFVnwHYuA4YdPZIm06yUhfhsM3x7mRhtPGfUrVcwgoLq4C_nQo9RVmLzaX070J4RNxYKLU09b5h0udtgbDoV6v_mE1pM-BSTuZT1Af_55SVE1LgIJYLoT5X1V1rwlXBg"/>
+<!-- Soft Gradient Scrim -->
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/30 to-transparent flex flex-col justify-end p-space-md">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed">Tháp Po Klong Garai • Thế kỷ XII</span>
+</div>
+<p class="font-title-md text-title-md text-on-primary font-serif italic">
+          “Gạch đỏ ngàn năm không vữa kết, hồn Chăm vương vấn khói rơm sương.”
+        </p>
+</div>
+</div>
+<!-- CTA Cluster -->
+<div class="flex flex-col gap-space-xs pt-1">
+<a class="w-full h-12 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-md active:scale-[0.99] transition-transform" href="#featured-tours">
+<span>Khám phá Hành trình</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<!-- Audio Exploration Trigger -->
+<button class="w-full h-12 rounded-lg bg-surface-container text-on-surface-variant font-label-lg text-label-lg flex items-center justify-between px-space-md shadow-sm active:bg-surface-container-high transition-colors" id="audioPlayBtn" onclick="toggleAudioDemo()" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]" id="playIcon">play_circle</span>
+<span class="font-title-md text-title-md text-on-surface">Lắng nghe thanh âm Panduranga</span>
+</div>
+<!-- Saranai Soundwave Graphic Indicator -->
+<div class="flex items-center gap-1 h-5" id="soundWaves">
+<span class="w-1 h-3 bg-secondary rounded-full"></span>
+<span class="w-1 h-5 bg-primary rounded-full"></span>
+<span class="w-1 h-2 bg-secondary rounded-full"></span>
+<span class="w-1 h-4 bg-primary-container rounded-full"></span>
+</div>
+</button>
+<div class="hidden text-center py-1" id="audioToast">
+<span class="font-label-sm text-label-sm text-secondary italic">Đang phát độc tấu Saranai &amp; tiếng trống Paranưng lễ Katê...</span>
+</div>
+</div>
+</section>
+<!-- 2. BRAND MANIFESTO: Tuyên Ngôn Triết Lý Dana -->
+<section class="w-full px-margin-mobile py-space-md">
+<div class="relative w-full rounded-xl bg-surface-container-low p-space-md shadow-sm overflow-hidden flex flex-col gap-space-md">
+<!-- Decorative Champa Sawtooth Motif Top Header (SVG) -->
+<div class="w-full flex justify-between items-center text-primary/40">
+<svg class="w-full h-2.5" fill="currentColor" preserveaspectratio="none" viewbox="0 0 320 10">
+<polygon points="0,10 5,0 10,10 15,0 20,10 25,0 30,10 35,0 40,10 45,0 50,10 55,0 60,10 65,0 70,10 75,0 80,10 85,0 90,10 95,0 100,10 105,0 110,10 115,0 120,10 125,0 130,10 135,0 140,10 145,0 150,10 155,0 160,10 165,0 170,10 175,0 180,10 185,0 190,10 195,0 200,10 205,0 210,10 215,0 220,10 225,0 230,10 235,0 240,10 245,0 250,10 255,0 260,10 265,0 270,10 275,0 280,10 285,0 290,10 295,0 300,10 305,0 310,10 315,0 320,10"></polygon>
+</svg>
+</div>
+<!-- Manifesto Content -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">spa</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Triết Lý Dana</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+          “Chúng tôi tin rằng, mỗi viên gạch tháp Chăm đều có linh hồn, mỗi vệt khói gốm Bàu Trúc đều cất giấu ký ức tiền nhân. Dana không dẫn bạn đi check-in vội vã. Chúng tôi đưa bạn ngồi xuống cùng các Muk, uống ngụm trà mát, tự tay vuốt thớ đất sét dẻo quánh và thấu hiểu một nền văn hóa bằng cả trái tim trân kính.”
+        </p>
+</div>
+<!-- 3 Key Heritage Stat Pillars -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs bg-surface-container rounded-lg p-space-sm text-center">
+<div class="flex flex-col items-center">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">100%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight mt-0.5">Nghệ nhân bản địa</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">02</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight mt-0.5">Làng cổ Đông Nam Á</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold">UNESCO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight mt-0.5">Di sản bảo tồn</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. FEATURED CURATED TOURS: Trải Nghiệm Tiêu Biểu -->
+<section class="w-full px-margin-mobile py-space-md flex flex-col gap-space-md" id="featured-tours">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest font-semibold">Những Chuyến Đi Có Chiều Sâu Văn Hóa</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Hành trình Độc bản</h2>
+</div>
+<!-- Tour Card 1 -->
+<article class="w-full rounded-xl bg-surface-container-lowest shadow-md overflow-hidden flex flex-col">
+<div class="relative w-full h-48 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An elderly Cham female artisan Muk in traditional headband gently shaping raw terracotta clay jar without spinning wheel in Bau Truc pottery village, surrounded by dried clay pots and warm afternoon sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA1qd3wd4H9rql4c2RFG4UARX3D0o_ONETTWqT3p4q6AJ6m42r9JYLWkDmljAwvW0tuBiZXltd9MQMFI_pENmpWTkO-5fABt5t_kiYfrMQ3QmUnF1BmLSRQ3uBLQ4H6oT6rGuR8aAM48fEev59ST_V5kCjhnw6qGFOo0QYQhl5NLpKV9brvunkPoJGCC3LB9bKOuZLgmCcsRyZT5vgdLeVFLUhIN0jcdXPeOWIIRsE5fyvB0th-WhFrA"/>
+<div class="absolute top-space-sm left-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">
+            UNESCO Heritage
+          </span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm bg-on-surface/85 backdrop-blur-sm text-surface-bright px-2 py-1 rounded text-label-sm font-semibold">
+          1 Ngày
+        </div>
+</div>
+<div class="p-space-md flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-semibold">Làng Gốm Bàu Trúc</span>
+<span class="font-title-md text-title-md text-primary font-bold">Từ 650.000đ</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Ký ức Bàu Trúc: Đất sét, Lửa &amp; Bàn tay Người Mẹ</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Học kỹ thuật nặn gốm “tay quay, chân chạy” không bàn xoay, chứng kiến nghi thức nổi lửa nung lộ thiên rơm rạ rực khói chiều hoàng hôn.
+        </p>
+<!-- Highlights Chips -->
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm">Gốm không bàn xoay</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Nung lộ thiên rơm</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Trò chuyện Muk Phan</span>
+</div>
+<button class="mt-space-xs w-full h-10 rounded-lg bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md flex items-center justify-center gap-1" type="button">
+<span>Xem chi tiết lịch trình</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</article>
+<!-- Tour Card 2 -->
+<article class="w-full rounded-xl bg-surface-container-lowest shadow-md overflow-hidden flex flex-col">
+<div class="relative w-full h-48 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Sunlit details of ancient Cham Kalan red brick architecture with intricate relief carvings of Shiva and dancing Apsara deity under brilliant blue clear sky, architectural heritage documentary shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoJTrQmxZalm9DCpbg-OrKoyI2aUB70X1NhQ5-L0MfEUQk1KwqxnkOyxF5jkTIr1e-Ruk3Pftm1O304UAxlSgvXYM0J_v-HCO2S-Hv1xlKiNHWSvQwB2IuK-rasesk6bz6hm0AsCPJs1-q9xuvTqqy58gghWm3jVeaGATgeQWf78xR8frvovrSisrfEFEk7t9nC78-E4EQoT0rKXMRcSwc8T07Ie6E3JwUdWKeQhSMZTLZYp4-2k2nsw"/>
+<div class="absolute top-space-sm left-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-bold shadow-sm">
+            Kiến trúc &amp; Lịch sử
+          </span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm bg-on-surface/85 backdrop-blur-sm text-surface-bright px-2 py-1 rounded text-label-sm font-semibold">
+          Nửa ngày
+        </div>
+</div>
+<div class="p-space-md flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-semibold">Cụm Tháp Đô Vinh</span>
+<span class="font-title-md text-title-md text-primary font-bold">Từ 450.000đ</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Huyền thoại Kalan: Tháp cổ dưới vòm trời Panduranga</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Giải mã bí ẩn kỹ thuật mài chập gắn kết gạch Chăm ngàn năm không vôi vữa, lắng nghe văn bia cổ và hòa mình vào độc tấu kèn Saranai.
+        </p>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm">Ghép gạch không vữa</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Văn bia cổ Phạn - Chăm</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Độc tấu Saranai</span>
+</div>
+<button class="mt-space-xs w-full h-10 rounded-lg bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md flex items-center justify-center gap-1" type="button">
+<span>Xem chi tiết lịch trình</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</article>
+<!-- Tour Card 3 -->
+<article class="w-full rounded-xl bg-surface-container-lowest shadow-md overflow-hidden flex flex-col">
+<div class="relative w-full h-48 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Cham weavers working on wooden backstrap looms crafting colorful geometric brocade silk textiles inside a rustic wooden village house during Katê festival, warm ambient lamp light and rich fabric patterns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZcQx9kfudplqxbFYgc1MQlzLzO77p1zpSRmFiwjJAs7lPSYNafVxcAeX1dcNS5H8bQRsXueo70hk0lANEw8ZtjwbF5nvlAj3fIImf--2QSp0kvr9sg2prm0zbrYctKapJXNssEwslR5pJBoUff0TzZH9PIg4IMSIeHSJGu9QcfUemNgAxKtSKAblFqx-MZJowbK3F4s6qbM4VgytBa-m-HygAHkqTaIOKezz1IWzUAQx54YAzUW3Dsw"/>
+<div class="absolute top-space-sm left-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm font-bold shadow-sm">
+            Trải nghiệm Sâu
+          </span>
+</div>
+<div class="absolute bottom-space-sm right-space-sm bg-on-surface/85 backdrop-blur-sm text-surface-bright px-2 py-1 rounded text-label-sm font-semibold">
+          2N1Đ
+        </div>
+</div>
+<div class="p-space-md flex flex-col gap-space-xs">
+<div class="flex items-baseline justify-between">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-semibold">Làng Mỹ Nghiệp</span>
+<span class="font-title-md text-title-md text-primary font-bold">Từ 1.850.000đ</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface">Đêm Katê thiêng liêng &amp; Nhịp thở Làng dệt</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+          Nghỉ đêm homestay bản địa, khoác thử trang phục truyền thống Chăm hoa văn dệt Mỹ Nghiệp và thưởng thức mâm cơm cổ truyền Um Bơk thắm tình.
+        </p>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm">Homestay Chăm mộc mạc</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">Dệt thổ cẩm cổ truyền</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-label-sm text-label-sm">Ẩm thực Um Bơk</span>
+</div>
+<button class="mt-space-xs w-full h-10 rounded-lg bg-surface-container-high text-primary hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md flex items-center justify-center gap-1" type="button">
+<span>Xem chi tiết lịch trình</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</article>
+</section>
+<!-- 4. INTERACTIVE CULTURAL ROUTE: Bản Đồ Văn Hóa Số -->
+<section class="w-full px-margin-mobile py-space-md flex flex-col gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest font-semibold">Bản Đồ Tuyến Khảo Cổ &amp; Văn Hóa</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Cung đường Panduranga</h2>
+</div>
+<!-- Map Preview Box -->
+<div class="relative w-full rounded-xl overflow-hidden shadow-md bg-surface-container">
+<div class="w-full h-56 bg-cover bg-center" data-location="Ninh Thuan, Vietnam" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUfYzm1NZ4arEZYOjXP-ADVRrL2xvxRYpA11bkxwybvUPyaLDDHcbzdna3ORWQdNhRZ691hmCL8NhJzSAjGU5gLcf6loBzxm9LlDDjY-bDf5UiEUEa8dCbgRQO5NwMElBhJX6SjLnotVvZ4SesvgT8Thywsaeywlcgwf1tW1jO8xFQbtJMa3R7BXOwL3MrVqNKr5Y-maFTUq9d3YpEzE5Uvj6QVImJxg-rCyKTWSyfkqmmjoELc7hWkA')"></div>
+<!-- Interactive Pins Overlay Bar -->
+<div class="p-space-sm bg-surface-container-lowest flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">
+          Bấm vào các trạm di sản để tra cứu quy chuẩn trang phục &amp; giờ viếng thăm:
+        </span>
+<!-- 4 Heritage Waypoints Tabs -->
+<div class="grid grid-cols-2 gap-2 pt-1" id="waypointGrid">
+<button class="station-btn active-station p-2 rounded-lg bg-primary text-on-primary text-left flex items-start gap-1.5 transition-colors shadow-sm" id="st-btn-1" onclick="selectStation(1, 'Tháp Po Klong Garai', 'Cách Phan Rang 7km • 07:00 - 17:30', 'Trang phục kín đáo qua đầu gối, áo có tay. Không leo trèo lên gạch tháp.')" type="button">
+<span class="material-symbols-outlined text-[18px] flex-shrink-0 mt-0.5">temple_hindu</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold block truncate">1. Po Klong Garai</span>
+<span class="font-label-sm text-label-sm opacity-80 block truncate">Đô Vinh</span>
+</div>
+</button>
+<button class="station-btn p-2 rounded-lg bg-surface-container text-on-surface text-left flex items-start gap-1.5 transition-colors" id="st-btn-2" onclick="selectStation(2, 'Làng Gốm Bàu Trúc', 'Cách Phan Rang 10km • Mở cửa cả ngày', 'Trang phục thoải mái, tháo giày dép khi bước vào sân nhà cổ Muk.')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">potted_plant</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold block truncate">2. Gốm Bàu Trúc</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block truncate">Phước Dân</span>
+</div>
+</button>
+<button class="station-btn p-2 rounded-lg bg-surface-container text-on-surface text-left flex items-start gap-1.5 transition-colors" id="st-btn-3" onclick="selectStation(3, 'Làng Dệt Mỹ Nghiệp', 'Cách Bàu Trúc 2km • 08:00 - 18:00', 'Tôn trọng khung dệt cổ, hỏi ý kiến trước khi chụp cận cảnh nghệ nhân luồn sợi.')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">texture</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold block truncate">3. Dệt Mỹ Nghiệp</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block truncate">Ninh Phước</span>
+</div>
+</button>
+<button class="station-btn p-2 rounded-lg bg-surface-container text-on-surface text-left flex items-start gap-1.5 transition-colors" id="st-btn-4" onclick="selectStation(4, 'Tháp Thiêng Po Rome', 'Cách Phan Rang 18km • 07:30 - 17:00', 'Tháp còn nghi lễ thờ cúng linh thiêng, giữ trật tự và bỏ nón khi vào kalan.')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary flex-shrink-0 mt-0.5">account_balance</span>
+<div class="min-w-0">
+<span class="font-label-md text-label-md font-bold block truncate">4. Tháp Po Rome</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block truncate">Hậu Sanh</span>
+</div>
+</button>
+</div>
+<!-- Selected Waypoint Info Detail Box -->
+<div class="mt-2 p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1 transition-all" id="stationDetailBox">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary font-bold" id="stTitle">Tháp Po Klong Garai</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="stSub">Cách Phan Rang 7km</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface" id="stRules">
+            Trang phục kín đáo qua đầu gối, áo có tay. Không leo trèo lên gạch tháp.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. ARTISANS & COMMUNITY STORY: Người Giữ Lửa Di Sản -->
+<section class="w-full px-margin-mobile py-space-md">
+<div class="w-full rounded-xl bg-surface-container-low p-space-md shadow-md flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Intimate portrait of Muk Dang Thi Phan, an elderly Cham artisan potter with smiling wrinkled eyes, wearing traditional Cham head scarf, hands stained with natural terracotta river clay." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYK61rpwBLH-q6nuL4Fc2DSMV9wr3oVAQcsOsGtsTGkC7XQtBHaJD10id6leier9i_IEzuuC0kQnfsC3MLmtbGE7hzPWe9tK2NnAvFrri6y_DZnh2jCysg0z4sPZ_05rIDK7P5nOI7S7ab8joooFe403Bv0yGSWQYKvenEBx0Q_nVxOxRkoaaXviW-0R95317JKv8ffX4p9n6b4o3_S6hjDwM5iONcMyTPKoRT2epucw4SpZrWl_E4nA"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold">Nghệ Nhân Di Sản Sống</span>
+<h3 class="font-title-lg text-title-lg text-on-surface truncate">Muk Đàng Thị Phan</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Làng gốm Bàu Trúc (Hơn 60 năm gắn bó cùng đất sét)</span>
+</div>
+</div>
+<!-- Emotional Quote -->
+<blockquote class="p-space-sm rounded-lg bg-surface-container-lowest font-body-md text-body-md text-on-surface leading-relaxed italic relative">
+<span class="material-symbols-outlined absolute right-2 bottom-1 text-primary/10 text-5xl select-none">format_quote</span>
+        “Người Chăm làm gốm bằng đôi chân đi giật lùi, xoay quanh chiếc trụ đất. Đất dẻo theo tâm người, lửa đỏ theo lòng người.”
+      </blockquote>
+<!-- Responsible Heritage Re-investment Commitment -->
+<div class="flex items-start gap-space-xs p-space-sm rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5 flex-shrink-0">handshake</span>
+<p class="font-body-sm text-body-sm leading-snug">
+<strong class="text-primary font-semibold">Cam kết trách nhiệm Dana:</strong> 70% nguồn thu được hoàn lưu trực tiếp đến các hộ gia đình nghệ nhân và quỹ văn hóa thiếu nhi Chăm Panduranga.
+        </p>
+</div>
+</div>
+</section>
+<!-- 6. TESTIMONIALS: Cảm Nhận Du Khách -->
+<section class="w-full px-margin-mobile py-space-md flex flex-col gap-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest font-semibold">Lắng Nghe Lữ Khách</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Cảm nhận từ trái tim</h2>
+</div>
+<!-- Review 1 -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-sm">
+            TM
+          </div>
+<div>
+<span class="font-title-md text-title-md text-on-surface block leading-tight">Thảo My</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">TP. Hồ Chí Minh</span>
+</div>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic mt-1 leading-relaxed">
+        “Đi tour của Dana, lần đầu tiên mình hiểu vì sao phụ nữ Chăm lại đi lùi quanh khối đất để làm gốm. Cảm xúc trân quý vô cùng! Cảm giác như được chạm vào mạch nguồn văn hóa chứ không phải cưỡi ngựa xem hoa.”
+      </p>
+</div>
+<!-- Review 2 -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold text-sm">
+            DM
+          </div>
+<div>
+<span class="font-title-md text-title-md text-on-surface block leading-tight">David Miller</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Melbourne, Úc</span>
+</div>
+</div>
+<div class="flex text-secondary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface italic mt-1 leading-relaxed">
+        “Authentic and deeply respectful. Not a tourist trap, but a real connection with living heritage. The sound of the Saranai horn at dusk next to the ancient Kalan tower will stay with me forever.”
+      </p>
+</div>
+</section>
+<!-- 7. QUICK TRIP PLANNER & CULTURAL ETIQUETTE GUIDE -->
+<section class="w-full px-margin-mobile pt-space-md pb-space-xl flex flex-col gap-space-md">
+<!-- Quick Trip Planner Card -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_month</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Khởi hành Chuyến đi Di sản</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Chọn lộ trình theo nhịp chân của bạn, Dana đồng hành để mỗi khoảnh khắc trọn vẹn ý nghĩa.
+      </p>
+<form class="flex flex-col gap-space-xs mt-1" onsubmit="handleTripSubmit(event)">
+<!-- Destination Selection -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Điểm trải nghiệm mong muốn</label>
+<div class="relative">
+<select class="w-full h-11 px-3 rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none appearance-none">
+<option>Trọn vẹn Panduranga (3 ngày 2 đêm)</option>
+<option>Làng Gốm Bàu Trúc &amp; Dệt Mỹ Nghiệp (1 ngày)</option>
+<option>Cụm tháp Po Klong Garai &amp; Po Rome (1 ngày)</option>
+<option>Tour Đêm hội Katê huyền bí (2 ngày 1 đêm)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- Departure Date -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Dự kiến ngày đi</label>
+<input class="w-full h-11 px-3 rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none" type="date" value="2025-04-15"/>
+</div>
+<!-- Number of Travelers -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Số người</label>
+<div class="relative">
+<select class="w-full h-11 px-3 rounded bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none appearance-none">
+<option>2 Người (Cặp đôi / Bạn bè)</option>
+<option>3 - 5 Người (Gia đình)</option>
+<option>Đoàn trên 6 người</option>
+<option>Đi một mình (Solo traveler)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<button class="mt-space-xs w-full h-12 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-md active:scale-[0.99] transition-transform" type="submit">
+<span>Nhận tư vấn hành trình</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</form>
+</div>
+<!-- Free Cultural Etiquette Guide Download Box -->
+<div class="w-full rounded-xl bg-surface-container-high p-space-md shadow-sm flex items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-xs min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface leading-tight">Cẩm nang Ứng xử Văn hóa</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Quy tắc thăm viếng tháp thiêng &amp; làng Chăm (PDF Miễn phí)</span>
+</div>
+</div>
+<button class="h-10 px-space-sm rounded bg-surface-container-lowest text-primary font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm active:bg-primary active:text-on-primary transition-colors flex-shrink-0" onclick="downloadGuide()" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Tải về</span>
+</button>
+</div>
+<!-- Cultural Footer Note -->
+<div class="text-center pt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">
+        Dana Panduranga • Giữ gìn di sản bằng lòng tự hào bản địa
+      </span>
+</div>
+</section>
+<!-- Interactive Logic for Audio, Station Switcher, and Guide Download -->
+<script>
+    function toggleAudioDemo() {
+      const toast = document.getElementById('audioToast');
+      const icon = document.getElementById('playIcon');
+      if (toast.classList.contains('hidden')) {
+        toast.classList.remove('hidden');
+        icon.innerText = 'pause_circle';
+      } else {
+        toast.classList.add('hidden');
+        icon.innerText = 'play_circle';
+      }
+    }
+
+    function selectStation(id, title, sub, rules) {
+      document.querySelectorAll('.station-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        btn.classList.add('bg-surface-container', 'text-on-surface');
+      });
+      const activeBtn = document.getElementById('st-btn-' + id);
+      activeBtn.classList.remove('bg-surface-container', 'text-on-surface');
+      activeBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+
+      document.getElementById('stTitle').innerText = title;
+      document.getElementById('stSub').innerText = sub;
+      document.getElementById('stRules').innerText = rules;
+    }
+
+    function handleTripSubmit(e) {
+      e.preventDefault();
+      alert('Dana đã tiếp nhận yêu cầu hành trình của bạn. Hướng dẫn viên bản địa sẽ liên hệ trong ít phút qua số điện thoại để trao đổi chi tiết!');
+    }
+
+    function downloadGuide() {
+      alert('Cẩm nang "Ứng xử Văn hóa khi thăm viếng tháp cổ và làng Chăm Panduranga" (Bản PDF màu) đang được gửi về máy của bạn!');
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(36,25,21,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-primary transition-colors gap-0.5" data-path="cong-di-san" href="#"><span class="material-symbols-outlined text-[22px]">temple_buddhist</span><span class="font-label-sm text-label-sm text-center leading-none mt-0.5">Cổng di sản</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-primary transition-colors gap-0.5" data-path="hanh-trinh-kham-pha" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm text-center leading-none mt-0.5">Hành trình</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-primary transition-colors gap-0.5" data-path="ban-do-thap-cham" href="#"><span class="material-symbols-outlined text-[22px]">map</span><span class="font-label-sm text-label-sm text-center leading-none mt-0.5">Bản đồ số</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-primary transition-colors gap-0.5" data-path="dat-tour-trai-nghiem" href="#"><span class="material-symbols-outlined text-[22px]">calendar_month</span><span class="font-label-sm text-label-sm text-center leading-none mt-0.5">Đặt tour</span></a></div></nav></body></html>

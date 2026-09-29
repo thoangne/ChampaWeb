@@ -1,11 +1,11 @@
-# 1. Thư viện phụ thuộc (rất nặng, không commit lên git)
+# 1. Thư viện
 node_modules/
 
-# 2. Biến môi trường và thông tin bảo mật (chứa DB URL, Secret Key, Token)
+# 2. Biến môi trường và thông tin bảo mật
 .env
 .env.local
 .env.development.local
-.env.test.local
+.env.test.localcd
 .env.production.local
 
 # 3. File nhật ký hoạt động (Logs)
@@ -16,7 +16,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# 4. Thư mục file người dùng tải lên (nếu có upload file)
+# 4. Thư mục file người dùng tải lên
 uploads/
 backend/public/uploads/
 
@@ -24,7 +24,7 @@ backend/public/uploads/
 .DS_Store
 Thumbs.db
 
-# 6. Cấu hình riêng của trình soạn thảo code (IDE)
+# 6. Cấu hình riêng của trình soạn thảo code
 .vscode/
 .idea/
 *.suo
@@ -33,6 +33,6 @@ Thumbs.db
 *.sln
 *.sw?
 
-# 7. File báo cáo test và coverage (nếu dùng Jest/Vitest)
+# 7. File báo cáo test và coverage
 coverage/
 .nyc_output/
