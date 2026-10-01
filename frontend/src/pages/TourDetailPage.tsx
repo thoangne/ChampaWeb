@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom"; // Thêm useNavigate
 import {
   Calendar,
   CheckCircle,
@@ -23,6 +23,8 @@ import {
   Star,
   Users,
   UtensilsCrossed,
+  X,
+  ChevronLeft,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -33,9 +35,15 @@ import { toast } from "../components/ui/sonner";
 
 export default function TourDetailPage() {
   const { tourSlug } = useParams<{ tourSlug: string }>();
+  const navigate = useNavigate(); // Khởi tạo useNavigate
 
   // Tìm tour theo slug hoặc mặc định tour 1
   const tour = TOURS.find((t) => t.slug === tourSlug) ?? TOURS[0];
+
+  // YÊU CẦU: Đồng bộ liên kết trang - Tự động cuộn lên đầu khi chuyển tour
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [tourSlug]);
 
   // State đặt tour
   const [selectedDate, setSelectedDate] = useState("2025-05-15");
@@ -45,6 +53,52 @@ export default function TourDetailPage() {
   // State Audio
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isPlayingLocalAudio, setIsPlayingLocalAudio] = useState(false);
+
+  // State mở Modal Lightbox
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+  const photos =
+    tour.gallery && tour.gallery.length > 0
+      ? tour.gallery
+      : [
+          {
+            url: tour.image,
+            tag: tour.badge,
+            caption: tour.title,
+            subcaption: tour.description,
+          },
+        ];
+
+  const handleOpenLightbox = (index: number) => {
+    setCurrentPhotoIndex(index);
+    setIsLightboxOpen(true);
+  };
+
+  const handleCloseLightbox = () => {
+    setIsLightboxOpen(false);
+  };
+
+  const handleNextPhoto = useCallback(() => {
+    setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
+  }, [photos.length]);
+
+  const handlePrevPhoto = useCallback(() => {
+    setCurrentPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  }, [photos.length]);
+
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleCloseLightbox();
+      if (e.key === "ArrowRight") handleNextPhoto();
+      if (e.key === "ArrowLeft") handlePrevPhoto();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isLightboxOpen, handleNextPhoto, handlePrevPhoto]);
 
   // Giá tính toán
   const adultPrice = tour.adultPrice ?? 650000;
@@ -115,7 +169,7 @@ export default function TourDetailPage() {
             {/* Main Headline */}
             <div className="mt-space-sm max-w-4xl">
               <div className="text-secondary font-label-md text-xs uppercase tracking-widest font-semibold mb-1">
-                Paley Hamu Trok • Ninh Thuận
+                {tour.location}
               </div>
               <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl text-on-surface tracking-tight leading-tight font-semibold">
                 {tour.title}
@@ -193,11 +247,14 @@ export default function TourDetailPage() {
         <section className="w-full max-w-7xl mx-auto px-margin-mobile xl:px-margin py-space-lg">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-sm relative">
             {/* Big Hero Lead Image (Left 7 cols) */}
-            <div className="lg:col-span-7 h-[380px] lg:h-[520px] rounded-2xl overflow-hidden relative group shadow-md border border-outline-variant/30">
+            <div
+              onClick={() => handleOpenLightbox(0)}
+              className="lg:col-span-7 h-[380px] lg:h-[520px] rounded-2xl overflow-hidden relative group shadow-md border border-outline-variant/30 cursor-pointer"
+            >
               <img
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                alt={tour.title}
-                src={tour.image}
+                alt={photos[0]?.caption || tour.title}
+                src={photos[0]?.url || tour.image}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-on-surface/85 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6 text-on-primary">
@@ -215,11 +272,14 @@ export default function TourDetailPage() {
 
             {/* 4 Mosaic Images (Right 5 cols) */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-space-sm h-[380px] lg:h-[520px]">
-              <div className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30">
+              <div
+                onClick={() => handleOpenLightbox(photos.length > 1 ? 1 : 0)}
+                className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30 cursor-pointer"
+              >
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  alt="Nung lộ thiên Bàu Trúc"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt_hnHv8MSUQf0py0ynEvhkSV2e4p4SMS9Q282P610DIZhydSA0rJw-hMAX-JpSXE8MG1lugbD6vTMZeWdcBLTeLkORCzuyKK08FU5siSY0-G-tiPLmr9rRjg52wi5r7OarT-VeZz0o3YCMSvcRUV1omHj-BH_8oS7-hyEnGPZ34LOS7GbgYpx7b-4m0o9ESJwSAP204yX5PowwTZYaJJzhfpmRtNW5Ihs2gT0_Cuw-zpDGkV0jl-CMg"
+                  alt={photos[1]?.caption || "Nung lộ thiên Bàu Trúc"}
+                  src={photos[1]?.url || tour.image}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/75 via-transparent to-transparent"></div>
                 <span className="absolute bottom-3 left-3 text-white font-label-md text-xs font-semibold drop-shadow">
@@ -227,11 +287,14 @@ export default function TourDetailPage() {
                 </span>
               </div>
 
-              <div className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30">
+              <div
+                onClick={() => handleOpenLightbox(photos.length > 2 ? 2 : 0)}
+                className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30 cursor-pointer"
+              >
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  alt="Hoa văn vỏ sò"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtvNGaJiE3oaRERXQxaSh8f7Ohr7XoF1mLHbZBrkpAPKb_aL6BCzQyBFWfPmZlh14Os0lL6AMG_Dm-w_IQGOIbYiSFlWTSNFXVGwsRh0x-l0PNWtDxcBYZV-Sl7YoZDJYnV1amxvnokaNk_zv4eEgYc9nucgIcZn9bvd3KQSHNyRDyBqqXOrbVseNvITq8c6SP8rInOeAtADqsbZqfdJA6L11ugMHMAjpgGeKb8ZvqXoZUeEZlKe1WIg"
+                  alt={photos[2]?.caption || "Hoa văn vỏ sò"}
+                  src={photos[2]?.url || tour.image}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/75 via-transparent to-transparent"></div>
                 <span className="absolute bottom-3 left-3 text-white font-label-md text-xs font-semibold drop-shadow">
@@ -239,11 +302,14 @@ export default function TourDetailPage() {
                 </span>
               </div>
 
-              <div className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30">
+              <div
+                onClick={() => handleOpenLightbox(photos.length > 3 ? 3 : 0)}
+                className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30 cursor-pointer"
+              >
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  alt="Ẩm thực cơm nhà Paley"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV-8RUgw0srHvraf7Gp1ybk4TCDAgVuSuyAq6ru5eNwiCn7IJm2eeSYl5E2fg2ee1Ue9BrfqBIgdP5rNptRN3t-wm4knOnEQPArBtaVq6FglH5XkpvvlzMgDXsGqd6tE1dhHgmKMe_3658tObQazzxmvha14W3KuxsQ0Zw_Bo-ZkA-Gdqiopb4TBp_hu4nuY5sILuBcw79mXDgjzLp0RgSGTJJ-TMv6oxyX0qrrO-EsB707RbSWhBRKQ"
+                  alt={photos[3]?.caption || "Ẩm thực cơm nhà Paley"}
+                  src={photos[3]?.url || tour.image}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-on-surface/75 via-transparent to-transparent"></div>
                 <span className="absolute bottom-3 left-3 text-white font-label-md text-xs font-semibold drop-shadow">
@@ -251,11 +317,14 @@ export default function TourDetailPage() {
                 </span>
               </div>
 
-              <div className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30">
+              <div
+                onClick={() => handleOpenLightbox(photos.length > 4 ? 4 : 0)}
+                className="h-full rounded-2xl overflow-hidden relative group shadow-sm border border-outline-variant/30 cursor-pointer"
+              >
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  alt="Nhà rường Chăm"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAYI1UKFS1eeLuWJTTi5FvacI0yuky2YnM14r5tE0fYUl9eghVFRJ-2ybp7j-EdNdYA_ZHkGOTgpq5Vsd0n4hO7mvSZBnxppbD2h5Ft8OD_yy81RH4ZKZdAXIvMPSLqq0lhdoV7JD3lpnoVJjp_6FrfexJumQtHe9WAENv22ncenTkl4UNfTUgStfMFlHUajO2tHfSzxU3sN3MFjwlk-0yin75G2aGuNTdBb3jrdLN0j1oFtxqgbTNhg"
+                  alt={photos[4]?.caption || "Nhà rường Chăm"}
+                  src={photos[4]?.url || tour.image}
                 />
                 <div className="absolute inset-0 bg-on-surface/60 group-hover:bg-on-surface/70 transition-colors flex flex-col items-center justify-center p-space-sm text-center">
                   <Sparkles className="h-7 w-7 text-white mb-1" />
@@ -301,7 +370,7 @@ export default function TourDetailPage() {
           </div>
         </section>
 
-        {/* Main 2-Column Section (Content 68% + Booking Sticky 32%) */}
+        {/* Main 2-Column Section */}
         <section className="w-full max-w-7xl mx-auto px-margin-mobile xl:px-margin py-space-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
             {/* LEFT COLUMN: Content (lg:col-span-8) */}
@@ -970,7 +1039,7 @@ export default function TourDetailPage() {
           </div>
         </section>
 
-        {/* Related Cultural Expeditions Section */}
+        {/* YÊU CẦU: Đồng bộ liên kết trang - Khám Phá Tiếp Theo */}
         <section className="w-full bg-surface-container-low py-space-xl border-t border-surface-container-high/60">
           <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-space-sm">
@@ -995,7 +1064,8 @@ export default function TourDetailPage() {
               {relatedTours.map((rTour) => (
                 <div
                   key={rTour.id}
-                  className="rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row border border-outline-variant/30"
+                  onClick={() => navigate(`/tour/${rTour.slug}`)} // Click bất kỳ đâu trên thẻ đều chuyển trang
+                  className="rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row border border-outline-variant/30 cursor-pointer"
                 >
                   <div className="w-full sm:w-48 h-48 sm:h-auto overflow-hidden shrink-0">
                     <img
@@ -1014,8 +1084,8 @@ export default function TourDetailPage() {
                           {rTour.duration}
                         </span>
                       </div>
-                      <h4 className="font-serif text-base sm:text-lg text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">
-                        <Link to={`/tour/${rTour.slug}`}>{rTour.title}</Link>
+                      <h4 className="font-serif text-base sm:text-lg text-on-surface font-semibold hover:text-primary transition-colors">
+                        {rTour.title}
                       </h4>
                       <p className="font-body-sm text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
                         {rTour.description}
@@ -1025,12 +1095,9 @@ export default function TourDetailPage() {
                       <span className="font-serif text-lg text-primary font-bold">
                         {rTour.price} <span className="font-sans text-xs text-on-surface-variant font-normal">/ khách</span>
                       </span>
-                      <Link
-                        to={`/tour/${rTour.slug}`}
-                        className="text-secondary font-label-md text-xs font-semibold hover:underline"
-                      >
+                      <span className="text-secondary font-label-md text-xs font-semibold hover:underline">
                         Chi tiết →
-                      </Link>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1039,6 +1106,82 @@ export default function TourDetailPage() {
           </div>
         </section>
       </main>
+
+      {/* YÊU CẦU: Modal thư viện ảnh độ phân giải cao kèm chú thích & điều hướng phím/click outside */}
+      {isLightboxOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={handleCloseLightbox}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 md:p-8 animate-in fade-in duration-200"
+        >
+          {/* Header Lightbox */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center justify-between text-white w-full max-w-6xl mx-auto z-10"
+          >
+            <div className="flex items-center gap-3">
+              <span className="px-3 py-1 rounded-full bg-white/10 text-white font-label-sm text-xs tracking-wider uppercase font-semibold">
+                {photos[currentPhotoIndex]?.tag || "Tư liệu Di sản"}
+              </span>
+              <span className="text-white/70 font-body-sm text-xs">
+                {currentPhotoIndex + 1} / {photos.length}
+              </span>
+            </div>
+            <button
+              onClick={handleCloseLightbox}
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-white"
+              title="Đóng (Esc)"
+              type="button"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Vùng xem ảnh + Nút điều hướng */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex-1 flex items-center justify-center max-w-6xl mx-auto w-full my-4 overflow-hidden"
+          >
+            <button
+              onClick={handlePrevPhoto}
+              className="absolute left-2 md:left-4 z-20 w-12 h-12 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-sm transition-all hover:scale-105"
+              title="Ảnh trước (Mũi tên trái)"
+              type="button"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            <img
+              src={photos[currentPhotoIndex]?.url || tour.image}
+              alt={photos[currentPhotoIndex]?.caption || "Ảnh di sản"}
+              className="max-h-[70vh] max-w-full object-contain rounded-xl shadow-2xl transition-all select-none"
+            />
+
+            <button
+              onClick={handleNextPhoto}
+              className="absolute right-2 md:right-4 z-20 w-12 h-12 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-sm transition-all hover:scale-105"
+              title="Ảnh tiếp theo (Mũi tên phải)"
+              type="button"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Chú thích văn hóa */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-3xl mx-auto text-center text-white pb-2 z-10"
+          >
+            <h4 className="font-serif text-lg md:text-xl font-semibold">
+              {photos[currentPhotoIndex]?.caption || tour.title}
+            </h4>
+            <p className="font-body-sm text-xs md:text-sm text-white/80 mt-1 leading-relaxed">
+              {photos[currentPhotoIndex]?.subcaption || tour.description}
+            </p>
+          </div>
+        </div>
+      )}
 
       <Footer />
       <AudioPlayerBar
