@@ -1,22 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, BookOpen, ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
 import type { BlogArticle } from "../../data/blogData";
-import { toast } from "../ui/sonner";
 
 interface BlogArticlesGridProps {
   articles: BlogArticle[];
 }
 
 export default function BlogArticlesGrid({ articles }: BlogArticlesGridProps) {
+  const navigate = useNavigate();
   const [sortOption, setSortOption] = useState<"newest" | "readTime" | "popular">(
     "newest"
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleReadArticle = (title: string) => {
-    toast.success(`Đang tải bài viết: ${title}`, {
-      description: "Tài liệu lưu trữ số từ kho tư liệu Panduranga Archives.",
-    });
+  const handleReadArticle = (slug: string) => {
+    navigate(`/blog/${slug}`);
   };
 
   return (
@@ -66,7 +65,7 @@ export default function BlogArticlesGrid({ articles }: BlogArticlesGridProps) {
             {articles.map((post) => (
               <article
                 key={post.id}
-                onClick={() => handleReadArticle(post.title)}
+                onClick={() => handleReadArticle(post.slug)}
                 className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group border border-outline-variant/30 hover:-translate-y-1 cursor-pointer"
               >
                 <div className="relative h-52 overflow-hidden bg-surface-container">

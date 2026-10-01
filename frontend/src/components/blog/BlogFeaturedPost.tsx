@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Feather, Play, Pause, Volume2 } from "lucide-react";
 import { FEATURED_POST } from "../../data/blogData";
 import { toast } from "../ui/sonner";
@@ -145,19 +146,13 @@ export default function BlogFeaturedPost({
           </div>
 
           <div className="pt-space-md flex items-center justify-between border-t border-surface-container/60 mt-space-md">
-            <a
+            <Link
               className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-semibold text-base group cursor-pointer"
-              href="#bai-khao-cuu"
-              onClick={(e) => {
-                e.preventDefault();
-                toast.info("Đang mở toàn văn khảo cứu gạch nung Po Klong Garai", {
-                  description: "Tài liệu lưu trữ định dạng số song ngữ Việt - Chăm.",
-                });
-              }}
+              to="/blog/po-klong-garai-brick"
             >
               <span>Đọc toàn bộ khảo cứu</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
             <span className="font-label-sm text-xs text-outline uppercase tracking-wider">
               {FEATURED_POST.date}
             </span>
