@@ -1,7 +1,6 @@
 import type { Artisan, NavItem, Testimonial, Tour, Waypoint } from '../types/heritage';
 
-export const LOGO_URL =
-  'https://lh3.googleusercontent.com/aida/AEtjO1XIExWz2uZU00YM6XJkcplYDWjobd6LelTOjUEGYCv1n2QLNjkzBTHI02cyuFEm4ZxIdM4958QQTZySnbAfDlSl9ziiY27sSydPIwBpkCkn0U3HMBdyxZInzn6klLPhBGAX1hV0auedP-tXROUY9l4vz8VaICyZmB5V2Qu4z3g-0CVXlS3V_eAhUZvTX9L9nfzPQ_Iw0C_Vg3fIjSDvLaRbaSkboQ2R_-9m84B4E0FwskRtqgtPfhURCw-q';
+export const LOGO_URL = '/Logo.png';
 
 export const HERO_IMAGE =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuBJO2LeFcBxrnLD3_ngvbOCay5NrUQGUVuZkFtrKpti5KEcoH30WS6OOO-NMqLrlRG0HQZsxltS-um4S3a3R0yMJmfF5gre0ab0BqJ5JhFryOZ8lehz0tESRLuaIHYpc9p3aA_VAvNr2nJQG8S6z5VUEkRsC_vENB7PbBCA9G3B4X9Xxyy6JnGaagERULeA3pN-YMcSOAxhLS-dmW3MzMG1Y4SvS7-RsxXP1Jbo4ZPAd02G32DktDt1UQ';
@@ -270,7 +269,7 @@ export const NAV_ITEMS: NavItem[] = [
 export const PC_NAV_LINKS = [
   { href: '/', label: 'Trang chủ', active: true },
   { href: '/tour', label: 'Hành trình Độc bản' },
-  { href: '/#triet-ly', label: 'Di sản Kể chuyện' },
+  { href: '/blog', label: 'Di sản Kể chuyện' },
   { href: '/#ban-do', label: 'Bản đồ Văn hóa' },
 ];
 

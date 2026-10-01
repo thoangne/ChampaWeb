@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
+import { LOGO_URL } from "../data/champaData";
 import { toast } from "./ui/sonner";
 
 export default function Footer() {
@@ -23,12 +24,19 @@ export default function Footer() {
           {/* Column 1: Brand & Commitment */}
           <div className="lg:col-span-4 flex flex-col gap-space-md">
             <div className="flex items-center gap-space-sm">
-              <span className="font-serif text-2xl font-bold text-primary">
-                Dana Champa
-              </span>
-              <span className="px-space-xs py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-xs uppercase tracking-widest font-semibold">
-                Panduranga
-              </span>
+              <img
+                src={LOGO_URL}
+                alt="Logo Dana Champa"
+                className="h-10 w-auto object-contain shrink-0"
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl font-bold text-primary leading-tight">
+                  Dana Champa
+                </span>
+                <span className="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">
+                  Panduranga Heritage
+                </span>
+              </div>
             </div>
 
             <p className="font-body-md text-sm xl:text-base text-on-surface-variant leading-relaxed">

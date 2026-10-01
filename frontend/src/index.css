@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 @tailwind base;
@@ -6,6 +6,9 @@
 @tailwind utilities;
 
 @layer base {
+  *, ::before, ::after {
+    font-family: "Times New Roman", Times, serif !important;
+  }
 
   html,
   body {
@@ -13,7 +16,7 @@
     margin: 0;
     padding: 0;
     background-color: #fff8f6;
-    font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
+    font-family: "Times New Roman", Times, serif !important;
   }
 
   body {
@@ -55,3 +58,42 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* Champa Cultural Calendar Theme */
+.champa-calendar .rdp-root {
+  --rdp-accent-color: #972f12;
+  --rdp-accent-background-color: #ffe9e2;
+  --rdp-day-height: 38px;
+  --rdp-day-width: 38px;
+  --rdp-day_button-height: 36px;
+  --rdp-day_button-width: 36px;
+  --rdp-day_button-border-radius: 12px;
+  font-family: inherit;
+  color: #241915;
+}
+
+.champa-calendar .rdp-month_caption {
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: capitalize;
+  color: #241915;
+}
+
+.champa-calendar .rdp-weekday {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8f4e00;
+  text-transform: capitalize;
+}
+
+.champa-calendar .rdp-button_previous:hover,
+.champa-calendar .rdp-button_next:hover {
+  background-color: #ffe9e2;
+  border-radius: 10px;
+}
+
+.champa-calendar .rdp-selected .rdp-day_button {
+  background-color: #972f12 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}

@@ -2,14 +2,9 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 
-<<<<<<< Updated upstream
 // Sửa lỗi icon mặc định của Leaflet trên React/Vite
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
-=======
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
->>>>>>> Stashed changes
 
 const DefaultIcon = L.icon({
   iconUrl: icon,
