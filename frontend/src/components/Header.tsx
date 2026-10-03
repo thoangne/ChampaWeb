@@ -12,7 +12,6 @@ interface HeaderProps {
 
 export default function Header({ onToggleAudio, isAudioPlaying = false }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const location = useLocation();
 
   return (
@@ -42,16 +41,33 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
         {/* 2. Desktop Navigation Links (nowrap, full width friendly) */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-8 shrink-0">
           {PC_NAV_LINKS.map((link) => {
-            const isRouteActive =
-              link.href === "/"
-                ? location.pathname === "/"
-                : location.pathname.startsWith(link.href);
+            // SỬA LỖI: Nhận diện chính xác Active cho cả link thường và link Hash (#)
+            let isRouteActive = false;
+            
+            if (link.href === "/") {
+              // Chỉ active trang chủ khi không có hash đi kèm
+              isRouteActive = location.pathname === "/" && !location.hash;
+            } else if (link.href.includes("#")) {
+              // Nếu là link neo (VD: /#ban-do), lấy phần #ban-do ra để so sánh
+              const hashPart = link.href.substring(link.href.indexOf("#"));
+              isRouteActive = location.hash === hashPart;
+            } else {
+              isRouteActive = location.pathname.startsWith(link.href);
+            }
+
+            // Class CSS khi Active: Màu primary, in đậm, gạch chân
+            const activeClass = "text-primary font-bold border-b-2 border-primary pb-1";
+            // Class CSS mặc định (Inactive)
+            const inactiveClass = "text-on-surface-variant hover:text-on-surface hover:text-primary border-b-2 border-transparent pb-1";
+            
+            // Xác định class áp dụng
+            const currentClass = isRouteActive ? activeClass : inactiveClass;
 
             return link.href.includes("#") ? (
               <a
                 key={link.href}
                 href={link.href}
-                className="font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 text-on-surface-variant hover:text-on-surface hover:text-primary"
+                className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${currentClass}`}
               >
                 {link.label}
               </a>
@@ -59,11 +75,7 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
               <Link
                 key={link.href}
                 to={link.href}
-                className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${
-                  isRouteActive
-                    ? "text-primary font-bold border-b-2 border-primary"
-                    : "text-on-surface-variant hover:text-on-surface hover:text-primary"
-                }`}
+                className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${currentClass}`}
               >
                 {link.label}
               </Link>
@@ -144,16 +156,42 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-surface-container-lowest border-t border-surface-container-high px-4 py-4 flex flex-col gap-2 shadow-xl">
-          {PC_NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="font-label-lg text-on-surface py-2.5 px-3 rounded-lg hover:bg-surface-container transition-colors whitespace-nowrap text-sm"
-            >
-              {link.label}
-            </a>
-          ))}
+          {PC_NAV_LINKS.map((link) => {
+            // SỬA LỖI: Đồng bộ logic active cho menu điện thoại
+            let isRouteActive = false;
+            if (link.href === "/") {
+              isRouteActive = location.pathname === "/" && !location.hash;
+            } else if (link.href.includes("#")) {
+              const hashPart = link.href.substring(link.href.indexOf("#"));
+              isRouteActive = location.hash === hashPart;
+            } else {
+              isRouteActive = location.pathname.startsWith(link.href);
+            }
+
+            const mobileClass = isRouteActive
+              ? "bg-primary-container text-on-primary-container font-bold"
+              : "text-on-surface hover:bg-surface-container";
+
+            return link.href.includes("#") ? (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`font-label-lg py-2.5 px-3 rounded-lg transition-colors whitespace-nowrap text-sm ${mobileClass}`}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`font-label-lg py-2.5 px-3 rounded-lg transition-colors whitespace-nowrap text-sm ${mobileClass}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <a
             href="#dat-tour"
             onClick={() => setMobileMenuOpen(false)}
