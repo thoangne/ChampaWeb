@@ -9,9 +9,6 @@ import TestimonialsSection from "../components/TestimonialsSection";
 import BottomNav from "../components/BottomNav";
 import Footer from "../components/Footer";
 import AudioPlayerBar from "../components/AudioPlayerBar";
-import HeritageMap from "../components/HeritageMap";
-import TripPlannerSection from "../components/TripPlannerSection";
-import GuideBanner from "../components/GuideBanner";
 
 export default function DanaHome() {
   // Quản lý trạm đang chọn để đồng bộ giữa WaypointsSection và HeritageMap
