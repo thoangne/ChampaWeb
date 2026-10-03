@@ -2,7 +2,7 @@ import { LOGO_URL, PC_NAV_LINKS } from "../data/champaData";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { AudioLines, Search, User, Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface HeaderProps {
@@ -14,13 +14,45 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // FIX LỖI 2 CLICK & CHUYỂN TRANG: Tự động cuộn đến phần tử khi URL có chứa Hash (#) từ trang khác chuyển về
+  useEffect(() => {
+    if (location.hash) {
+      // Delay 150ms để đợi DOM của trang mới render xong rồi mới cuộn tới
+      setTimeout(() => {
+        const id = location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+    }
+  }, [location.pathname, location.hash]);
+
+  // FIX LỖI ẤN TRANG CHỦ: Hàm xử lý click cuộn mượt mà ngay lập tức
+  const handleNavClick = (href: string) => {
+    setMobileMenuOpen(false); // Đóng menu mobile (nếu đang mở)
+
+    if (href === "/") {
+      // Nếu là trang chủ, ép cuộn lên đầu trang mượt mà
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (href.includes("#")) {
+      // Nếu là link neo, tìm ID và cuộn tới ngay lập tức (nếu đang ở cùng trang)
+      const hash = href.substring(href.indexOf("#"));
+      const id = hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_2px_12px_rgba(36,25,21,0.06)] border-b border-surface-container-high/40 transition-all">
       {/* Full-width container with responsive side padding */}
       <div className="w-full h-16 xl:h-20 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex items-center justify-between gap-4">
         {/* 1. Brand Logo (nowrap) */}
         <div className="flex items-center shrink-0">
-          <Link className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap" to="/">
+          <Link className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap" to="/" onClick={() => handleNavClick("/")}>
             <img
               alt="Logo Dana - Di sản & Văn hóa Chăm"
               className="h-10 sm:h-11 xl:h-12 w-auto object-contain transition-transform group-hover:scale-105 shrink-0"
@@ -41,40 +73,28 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
         {/* 2. Desktop Navigation Links (nowrap, full width friendly) */}
         <nav className="hidden lg:flex items-center gap-5 xl:gap-8 shrink-0">
           {PC_NAV_LINKS.map((link) => {
-            // SỬA LỖI: Nhận diện chính xác Active cho cả link thường và link Hash (#)
+            // Nhận diện trạng thái Active chuẩn xác
             let isRouteActive = false;
-            
             if (link.href === "/") {
-              // Chỉ active trang chủ khi không có hash đi kèm
               isRouteActive = location.pathname === "/" && !location.hash;
             } else if (link.href.includes("#")) {
-              // Nếu là link neo (VD: /#ban-do), lấy phần #ban-do ra để so sánh
               const hashPart = link.href.substring(link.href.indexOf("#"));
-              isRouteActive = location.hash === hashPart;
+              const pathPart = link.href.split("#")[0] || "/";
+              isRouteActive = location.pathname === pathPart && location.hash === hashPart;
             } else {
               isRouteActive = location.pathname.startsWith(link.href);
             }
 
-            // Class CSS khi Active: Màu primary, in đậm, gạch chân
             const activeClass = "text-primary font-bold border-b-2 border-primary pb-1";
-            // Class CSS mặc định (Inactive)
             const inactiveClass = "text-on-surface-variant hover:text-on-surface hover:text-primary border-b-2 border-transparent pb-1";
-            
-            // Xác định class áp dụng
             const currentClass = isRouteActive ? activeClass : inactiveClass;
 
-            return link.href.includes("#") ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${currentClass}`}
-              >
-                {link.label}
-              </a>
-            ) : (
+            // Xóa thẻ <a>, dùng chung thẻ <Link> của React Router cho mọi menu
+            return (
               <Link
                 key={link.href}
                 to={link.href}
+                onClick={() => handleNavClick(link.href)}
                 className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${currentClass}`}
               >
                 {link.label}
@@ -126,12 +146,13 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
           </button>
 
           {/* CTA Button */}
-          <a
+          <Link
+            to="/#dat-tour"
+            onClick={() => handleNavClick("/#dat-tour")}
             className="hidden sm:inline-flex items-center justify-center px-4 xl:px-5 py-2 xl:py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-lg text-sm rounded-xl shadow-sm hover:shadow transition-all font-semibold whitespace-nowrap shrink-0"
-            href="#dat-tour"
           >
             Đồng hành cùng Dana
-          </a>
+          </Link>
 
           {/* User Avatar */}
           <Avatar className="h-9 w-9 shrink-0">
@@ -157,13 +178,13 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
       {mobileMenuOpen && (
         <div className="lg:hidden bg-surface-container-lowest border-t border-surface-container-high px-4 py-4 flex flex-col gap-2 shadow-xl">
           {PC_NAV_LINKS.map((link) => {
-            // SỬA LỖI: Đồng bộ logic active cho menu điện thoại
             let isRouteActive = false;
             if (link.href === "/") {
               isRouteActive = location.pathname === "/" && !location.hash;
             } else if (link.href.includes("#")) {
               const hashPart = link.href.substring(link.href.indexOf("#"));
-              isRouteActive = location.hash === hashPart;
+              const pathPart = link.href.split("#")[0] || "/";
+              isRouteActive = location.pathname === pathPart && location.hash === hashPart;
             } else {
               isRouteActive = location.pathname.startsWith(link.href);
             }
@@ -172,33 +193,24 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
               ? "bg-primary-container text-on-primary-container font-bold"
               : "text-on-surface hover:bg-surface-container";
 
-            return link.href.includes("#") ? (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`font-label-lg py-2.5 px-3 rounded-lg transition-colors whitespace-nowrap text-sm ${mobileClass}`}
-              >
-                {link.label}
-              </a>
-            ) : (
+            return (
               <Link
                 key={link.href}
                 to={link.href}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => handleNavClick(link.href)}
                 className={`font-label-lg py-2.5 px-3 rounded-lg transition-colors whitespace-nowrap text-sm ${mobileClass}`}
               >
                 {link.label}
               </Link>
             );
           })}
-          <a
-            href="#dat-tour"
-            onClick={() => setMobileMenuOpen(false)}
+          <Link
+            to="/#dat-tour"
+            onClick={() => handleNavClick("/#dat-tour")}
             className="w-full text-center py-2.5 bg-primary text-on-primary rounded-lg font-label-lg font-semibold mt-2 whitespace-nowrap text-sm"
           >
             Đồng hành cùng Dana
-          </a>
+          </Link>
         </div>
       )}
     </header>
