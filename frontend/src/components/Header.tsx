@@ -24,7 +24,7 @@ export default function Header({ onToggleAudio, isAudioPlaying = false }: Header
           <Link className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap" to="/">
             <img
               alt="Logo Dana - Di sản & Văn hóa Chăm"
-              className="h-9 xl:h-10 w-auto object-contain transition-transform group-hover:scale-105 shrink-0"
+              className="h-10 sm:h-11 xl:h-12 w-auto object-contain transition-transform group-hover:scale-105 shrink-0"
               src={LOGO_URL}
               loading="eager"
             />

@@ -19,6 +19,14 @@ import {
   TRAVELER_OPTIONS,
 } from "../data/champaData";
 import { toast } from "./ui/sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { DatePicker } from "./ui/date-picker";
 
 interface HeroSectionProps {
   onToggleAudio?: () => void;
@@ -172,86 +180,92 @@ export default function HeroSection({
         {/* Integrated Trip Planner Bar (Desktop Horizontally Aligned Bar) */}
         <div
           id="dat-tour"
-          className="mt-space-lg xl:mt-space-xl p-space-md xl:p-space-lg rounded-2xl bg-surface-container-lowest shadow-xl border border-outline-variant/30"
+          className="mt-space-lg xl:mt-space-xl p-3 sm:p-4 xl:p-5 rounded-3xl bg-surface-container-lowest/95 backdrop-blur-xl shadow-2xl shadow-stone-900/10 border border-outline-variant/40 ring-1 ring-primary/5"
         >
           <form
             onSubmit={handleSearchTrip}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm xl:gap-space-md items-center"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 xl:gap-4 items-stretch"
           >
             {/* Field 1: Destination */}
-            <div className="flex flex-col gap-1 px-space-sm py-2 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
-              <label className="font-label-sm text-label-sm uppercase text-on-surface-variant font-semibold flex items-center gap-1">
-                <MapPin className="h-4 w-4 text-primary" /> Điểm đến / Làng nghề
+            <div className="flex flex-col justify-between p-3 rounded-2xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all border border-transparent hover:border-outline-variant/50 focus-within:border-primary/50 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/10 min-h-[74px]">
+              <label className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5 select-none">
+                <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Điểm đến / Làng nghề</span>
               </label>
-              <select
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="bg-transparent font-title-md text-sm xl:text-title-md text-on-surface focus:outline-none cursor-pointer truncate"
-              >
-                {DESTINATION_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+              <Select value={destination} onValueChange={setDestination}>
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                  <SelectValue placeholder="Chọn vùng di sản" />
+                </SelectTrigger>
+                <SelectContent>
+                  {DESTINATION_OPTIONS.map((opt) => (
+                    <SelectItem key={opt} value={opt}>
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Field 2: Date */}
-            <div className="flex flex-col gap-1 px-space-sm py-2 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
-              <label className="font-label-sm text-label-sm uppercase text-on-surface-variant font-semibold flex items-center gap-1">
-                <Calendar className="h-4 w-4 text-primary" /> Ngày khởi hành
+            <div className="flex flex-col justify-between p-3 rounded-2xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all border border-transparent hover:border-outline-variant/50 focus-within:border-primary/50 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/10 min-h-[74px]">
+              <label className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5 select-none">
+                <Calendar className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Ngày khởi hành</span>
               </label>
-              <input
-                type="date"
+              <DatePicker
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="bg-transparent font-title-md text-sm xl:text-title-md text-on-surface focus:outline-none cursor-pointer"
+                onChange={setDate}
+                placeholder="Chọn ngày khởi hành"
               />
             </div>
 
             {/* Field 3: Experience Type */}
-            <div className="flex flex-col gap-1 px-space-sm py-2 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
-              <label className="font-label-sm text-label-sm uppercase text-on-surface-variant font-semibold flex items-center gap-1">
-                <Sparkles className="h-4 w-4 text-primary" /> Trải nghiệm mong muốn
+            <div className="flex flex-col justify-between p-3 rounded-2xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all border border-transparent hover:border-outline-variant/50 focus-within:border-primary/50 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/10 min-h-[74px]">
+              <label className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5 select-none">
+                <Sparkles className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Trải nghiệm mong muốn</span>
               </label>
-              <select
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
-                className="bg-transparent font-title-md text-sm xl:text-title-md text-on-surface focus:outline-none cursor-pointer truncate"
-              >
-                {EXPERIENCE_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+              <Select value={experience} onValueChange={setExperience}>
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                  <SelectValue placeholder="Chọn trải nghiệm" />
+                </SelectTrigger>
+                <SelectContent>
+                  {EXPERIENCE_OPTIONS.map((opt) => (
+                    <SelectItem key={opt} value={opt}>
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Field 4: Guests */}
-            <div className="flex flex-col gap-1 px-space-sm py-2 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
-              <label className="font-label-sm text-label-sm uppercase text-on-surface-variant font-semibold flex items-center gap-1">
-                <Users className="h-4 w-4 text-primary" /> Số lượng lữ khách
+            <div className="flex flex-col justify-between p-3 rounded-2xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all border border-transparent hover:border-outline-variant/50 focus-within:border-primary/50 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/10 min-h-[74px]">
+              <label className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5 select-none">
+                <Users className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span>Số lượng lữ khách</span>
               </label>
-              <select
-                value={travelers}
-                onChange={(e) => setTravelers(e.target.value)}
-                className="bg-transparent font-title-md text-sm xl:text-title-md text-on-surface focus:outline-none cursor-pointer truncate"
-              >
-                {TRAVELER_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+              <Select value={travelers} onValueChange={setTravelers}>
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                  <SelectValue placeholder="Chọn số lượng khách" />
+                </SelectTrigger>
+                <SelectContent>
+                  {TRAVELER_OPTIONS.map((opt) => (
+                    <SelectItem key={opt} value={opt}>
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Submit Button */}
-            <div className="h-full flex items-center pt-1 md:pt-0">
+            <div className="flex items-center min-h-[74px]">
               <button
-                className="w-full h-full min-h-[50px] rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg tracking-wider flex items-center justify-center gap-space-xs shadow-md hover:shadow-lg transition-all font-semibold"
+                className="w-full h-full min-h-[60px] rounded-2xl bg-gradient-to-r from-primary to-primary-container hover:from-primary-container hover:to-primary text-on-primary font-semibold text-base tracking-wide flex items-center justify-center gap-2.5 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer group"
                 type="submit"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-5 w-5 transition-transform group-hover:scale-110" />
                 <span>Tìm Chuyến Đi</span>
               </button>
             </div>
