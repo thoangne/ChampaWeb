@@ -20,8 +20,8 @@ export default function BlogDetailComments() {
   const [comments, setComments] = useState<CommentItem[]>([
     {
       id: "c1",
-      initials: "NV",
-      name: "TS. Nguyễn Văn Tuấn",
+      initials: "A",
+      name: "Người dùng A",
       badge: "Nhà nghiên cứu kiến trúc cổ",
       badgeClass: "bg-primary-fixed text-on-primary-fixed-variant",
       timeAgo: "3 ngày trước",
@@ -31,8 +31,8 @@ export default function BlogDetailComments() {
     },
     {
       id: "c2",
-      initials: "IN",
-      name: "Inrasara Thạch Văn",
+      initials: "B",
+      name: "Người dùng B",
       badge: "Hậu duệ dòng họ Muk Đô Vinh",
       badgeClass: "bg-secondary-fixed text-on-secondary-fixed-variant",
       timeAgo: "1 ngày trước",

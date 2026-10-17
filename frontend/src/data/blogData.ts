@@ -1,8 +1,23 @@
+export type BlogMainCategoryType = 'all' | 'tin-tuc' | 'lich-su' | 'van-hoa';
+
 export interface BlogCategory {
   id: string;
   label: string;
   count: number;
 }
+
+export interface BlogMainCategoryItem {
+  id: BlogMainCategoryType;
+  label: string;
+  desc: string;
+}
+
+export const BLOG_MAIN_CATEGORIES: BlogMainCategoryItem[] = [
+  { id: 'all', label: 'Tất cả bài viết', desc: 'Toàn bộ kho tàng khảo cứu & ký ức' },
+  { id: 'tin-tuc', label: 'Tin tức & Sự kiện', desc: 'Bảo tồn, lễ hội mới nhất & nhịp sống bản địa' },
+  { id: 'lich-su', label: 'Tiến trình Lịch sử', desc: 'Vương triều, bi ký cổ & khảo cổ học Champa' },
+  { id: 'van-hoa', label: 'Văn hóa & Nghệ thuật', desc: 'Đền tháp, làng nghề gốm - dệt, âm nhạc & tín ngưỡng' },
+];
 
 export interface BlogPillar {
   id: string;
@@ -19,6 +34,7 @@ export interface BlogPillar {
 export interface BlogArticle {
   id: string;
   title: string;
+  mainCategory: 'tin-tuc' | 'lich-su' | 'van-hoa';
   category: string;
   badge: string;
   badgeClass: string;
@@ -31,12 +47,13 @@ export interface BlogArticle {
 }
 
 export const BLOG_CATEGORIES: BlogCategory[] = [
-  { id: 'all', label: 'Tất cả kho tàng', count: 28 },
+  { id: 'all', label: 'Tất cả chuyên đề', count: 32 },
   { id: 'kalan', label: 'Kiến trúc Đền tháp Kalan', count: 8 },
   { id: 'craft', label: 'Làng nghề Cổ truyền & UNESCO', count: 7 },
   { id: 'ritual', label: 'Phong tục & Mùa Lễ hội', count: 6 },
   { id: 'music', label: 'Âm nhạc cổ & Điệu múa thiêng', count: 4 },
   { id: 'cuisine', label: 'Ẩm thực & Dược thảo Paley', count: 3 },
+  { id: 'archaeology', label: 'Khảo cổ học & Bi ký', count: 4 },
 ];
 
 export const FEATURED_POST = {
@@ -105,7 +122,64 @@ export const BLOG_PILLARS: BlogPillar[] = [
 
 export const BLOG_ARTICLES: BlogArticle[] = [
   {
+    id: 'post-news-1',
+    mainCategory: 'tin-tuc',
+    category: 'ritual',
+    badge: 'Sự Kiện Di Sản 2025',
+    badgeClass: 'bg-primary text-on-primary',
+    fieldLocation: 'Tháp Po Klong Garai & Đồi Trầu',
+    readTime: '4 phút đọc',
+    author: 'Ban Quản lý Di tích',
+    title: 'Khai mạc Đại lễ Katê 2025: Sắc màu rực rỡ và tiếng trống Ginăng thức giấc ngàn năm',
+    desc: 'Hàng vạn đồng bào Chăm cùng du khách tề tựu về ngọn tháp cổ kính trong trang phục truyền thống rực rỡ, trang nghiêm tiến hành nghi thức mở cửa tháp và tắm tượng thần Shiva.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAp5oGIUVAeSJNWnmsriAoE7Rx-gdVHGigsy1epg2Fah3OzIXtn7INt9avN5y3DYyr_5mgSbawDhhdB6AVM-eYtjoRZfxrq27rRi1-chffHIx6soB1QRX5R3xTS8gl_eF19cPeH7hONAuA5dgaNxeEG4JYrWaLNmlFYWVg8fXjwigzILTDoZgUaOHe27pOw-PL1DfizD5qy-ARG-iBr0tq2l090mbglxQI-yq7RDH_u_9aIirJEjUmV9Q',
+    slug: 'khai-mac-dai-le-kate-2025',
+  },
+  {
+    id: 'post-news-2',
+    mainCategory: 'tin-tuc',
+    category: 'craft',
+    badge: 'UNESCO Bảo Tồn Khẩn Cấp',
+    badgeClass: 'bg-secondary text-white',
+    fieldLocation: 'Làng gốm Bàu Trúc',
+    readTime: '5 phút đọc',
+    author: 'Đỗ Hữu Trí',
+    title: 'Khánh thành Nhà trưng bày cộng đồng và Không gian thực hành gốm Bàu Trúc thế hệ mới',
+    desc: 'Không gian mở vừa khánh thành giúp các em nhỏ trong làng học phương thức "tay làm chân quay" cổ xưa và trực tiếp đón tiếp du khách quốc tế đến trải nghiệm.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAd_yrvnJ_UmdnGzLVXjm5HJfxWX-epAuAP73cohAxtCHVP56EKuM52m07N2hY1obT1_Wmh6lUgDS8Ye5va33Sp_Ih3JQB5vwCQfB9tHTZWaggCM2XqEUXoaNx_-AKFbm6o3Qlh0IJLDyt4WaVcS1eO4R7ER_r7FvmnriVoglYc2JHMEote5IwsaQ4KO5jEbpEvgMErIntFFp0iOdJghlh9P7kXsJrT1xrzKEBAkfFj9OWLDV8DTpPJsg',
+    slug: 'khanh-thanh-khong-gian-gom-bau-truc',
+  },
+  {
+    id: 'post-history-1',
+    mainCategory: 'lich-su',
+    category: 'archaeology',
+    badge: 'Tiến Trình Vương Triều',
+    badgeClass: 'bg-tertiary text-white',
+    fieldLocation: 'Đô Vinh - Panduranga',
+    readTime: '9 phút đọc',
+    author: 'TS. Bá Trung Phụ',
+    title: 'Huyền tích Vua Po Klong Garai: Từ cậu bé chăn bò đến bậc quân vương trị thủy vĩ đại',
+    desc: 'Lật mở những trang sử thi huyền thoại về vị vua có công lớn nhất trong việc đắp đập Nha Trinh, đào mương Champa mang nguồn nước ngọt nuôi sống đồng bằng Ninh Thuận khô hạn.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBWzz5wVWN2Rre_bf3lzTZ89szZW61A19gyuIM1D6eHB2bgjSvLJ2IjqYRR2_FvWNOaiuYH_mZKTaaCYHyrAo6Y-MHZRm5QMjTQqVYlWO-UTZpP7j-38TvaXGvTC0E43MbjaK6OcYizspkYPA97vZ7ux2qQedU074FLdyFMB7zxmwJM_GGaJUJxVOmC--t3UtTdUYuMj2PhxbPFLX9SyKZLF-p5BPhi_fHZpOUSInajqnNWFka72rYwew',
+    slug: 'huyen-tich-vua-po-klong-garai',
+  },
+  {
+    id: 'post-history-2',
+    mainCategory: 'lich-su',
+    category: 'archaeology',
+    badge: 'Giải Mã Cổ Vật & Bia Ký',
+    badgeClass: 'bg-primary text-on-primary',
+    fieldLocation: 'Tháp Po Rome - Hậu Sanh',
+    readTime: '12 phút đọc',
+    author: 'Viện Khảo Cổ Học',
+    title: 'Văn bia Tháp Po Rome và giai đoạn chuyển giao lịch sử thế kỷ XVII tại xứ Panduranga',
+    desc: 'Những dòng ký tự Chăm cổ khắc sâu trên phiến đá sa thạch làm sáng tỏ thời kỳ cai trị của Po Rome - vị vua cuối cùng được phong thần và dựng đền tháp độc lập.',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAzljZH7__gmKglHYhA2NZtHh2wp1_j6eufhB24fW5dLEg6Q3iVPhcklfXTyfQfftG0s3kkeFa45XwJi0fI0t965d-lV9hy3Bp86bWdiRgQjJMFwqoPZzvC1Puek_bg_vu8Hy90bDTysgtbAXLReE5kLRMopjTkjh5Fgl-uWE2PDhyzuKEA3B_xFsrORw9XqbKdNdrSvBBD0BLP1ezotbfBBmrZCZNeWb86lbUY2kjNCncvJkPSIpv7pA',
+    slug: 'van-bia-thap-po-rome-the-ky-17',
+  },
+  {
     id: 'post-1',
+    mainCategory: 'van-hoa',
     category: 'cuisine',
     badge: 'Ẩm Thực & Đời Sống',
     badgeClass: 'bg-secondary text-white',
@@ -119,6 +193,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'post-2',
+    mainCategory: 'van-hoa',
     category: 'kalan',
     badge: 'Mỹ Thuật & Điêu Khắc',
     badgeClass: 'bg-primary text-on-primary',
@@ -132,6 +207,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'post-3',
+    mainCategory: 'van-hoa',
     category: 'ritual',
     badge: 'Lễ Hội & Tín Ngưỡng',
     badgeClass: 'bg-tertiary text-white',
@@ -145,6 +221,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'post-4',
+    mainCategory: 'van-hoa',
     category: 'cuisine',
     badge: 'Dược Thảo & Y Học',
     badgeClass: 'bg-secondary text-white',
@@ -158,7 +235,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'post-5',
-    category: 'kalan',
+    mainCategory: 'lich-su',
+    category: 'archaeology',
     badge: 'Khảo Cổ Học Cảnh Quan',
     badgeClass: 'bg-tertiary text-white',
     fieldLocation: 'Hạ lưu sông Dinh',
@@ -171,6 +249,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     id: 'post-6',
+    mainCategory: 'van-hoa',
     category: 'craft',
     badge: 'Cẩm Nang Sưu Tầm',
     badgeClass: 'bg-primary text-on-primary',

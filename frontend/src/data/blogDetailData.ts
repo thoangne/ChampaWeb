@@ -74,7 +74,7 @@ export const DETAILED_ARTICLES: Record<string, BlogDetailArticle> = {
     fieldLocation: "Đồi Trầu - Phường Đô Vinh, TP. Phan Rang - Tháp Chàm",
     coverImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuA7XPGZZpV39JwKr39VX7oqm24fXTeq5cF10rpQpUdEKf_3urrVONYW10t2x1S_E3ovUJG7BkbVI6mVXvBpY6Y4rAwoU5II3UM01y4enAOS3rpjiYTgW5QikItO09gUNzYsBytXNWIIJZp_0sf2X6tqsMqd4rppHgK-rvfk1oieIk1ERb41Mj5l9NL09UZs_az1UGDnOmL6Z1F-st_-Bpa27b_T0YiH9400CjbcbfZQZeZk83gkVSD9eA",
     coverCaption: "Toàn cảnh cụm tháp Kalan Po Klong Garai ráng chiều hoàng hôn Đồi Trầu. Công trình xây dựng thế kỷ XIII, nơi từng khối gạch đỏ nung hòa hợp kỳ vĩ cùng sa thạch điêu khắc.",
-    coverSource: "Kho tư liệu Bảo tàng Điêu khắc Chăm & Dana Community",
+    coverSource: "Kho tư liệu Bảo tàng Điêu khắc Chăm & Dana Champa",
     audioTitle: "Thuyết minh Di sản: Bí ẩn gạch nung Po Klong Garai",
     audioDuration: "05:20",
     epigraphyQuote: {
@@ -417,7 +417,7 @@ export function getBlogDetailBySlug(slug?: string): BlogDetailArticle {
       fieldLocation: article.fieldLocation,
       coverImage: article.image,
       coverCaption: `Tư liệu điền dã chuyên sâu: ${article.title}`,
-      coverSource: "Kho tư liệu khảo sát thực địa Dana Community",
+      coverSource: "Kho tư liệu khảo sát thực địa Dana Champa",
       audioTitle: `Thuyết minh bản địa: ${article.title}`,
       audioDuration: "04:30",
       chapters: [
@@ -483,7 +483,7 @@ export function getBlogDetailBySlug(slug?: string): BlogDetailArticle {
       fieldLocation: pillar.village,
       coverImage: pillar.image,
       coverCaption: `Trụ cột di sản độc bản: ${pillar.title}`,
-      coverSource: "Kho hình ảnh văn hóa Dana Community Heritage",
+      coverSource: "Kho hình ảnh văn hóa Dana Champa Heritage",
       audioTitle: `Thanh âm di sản: ${pillar.title}`,
       audioDuration: "05:00",
       chapters: [

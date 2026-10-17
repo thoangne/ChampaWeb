@@ -2,9 +2,11 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom"; // Thêm useNavigate
 import {
   Calendar,
+  Camera,
   CheckCircle,
   ChevronRight,
   Clock,
+  FileText,
   Flame,
   HandMetal,
   HeartHandshake,
@@ -19,7 +21,6 @@ import {
   Share2,
   ShieldCheck,
   Shirt,
-  Sparkles,
   Star,
   Users,
   UtensilsCrossed,
@@ -171,10 +172,10 @@ export default function TourDetailPage() {
               <div className="text-secondary font-label-md text-xs uppercase tracking-widest font-semibold mb-1">
                 {tour.location}
               </div>
-              <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl text-on-surface tracking-tight leading-tight font-semibold">
+              <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-on-surface tracking-tight leading-tight font-semibold">
                 {tour.title}
               </h1>
-              <p className="font-body-lg text-base xl:text-lg text-on-surface-variant mt-2 max-w-3xl leading-relaxed">
+              <p className="font-body-md xl:font-body-lg text-sm sm:text-base xl:text-lg text-on-surface-variant mt-2 max-w-3xl leading-relaxed">
                 {tour.description}
               </p>
             </div>
@@ -327,7 +328,7 @@ export default function TourDetailPage() {
                   src={photos[4]?.url || tour.image}
                 />
                 <div className="absolute inset-0 bg-on-surface/60 group-hover:bg-on-surface/70 transition-colors flex flex-col items-center justify-center p-space-sm text-center">
-                  <Sparkles className="h-7 w-7 text-white mb-1" />
+                  <Camera className="h-7 w-7 text-white mb-1" />
                   <span className="text-white font-label-lg text-xs sm:text-sm font-semibold uppercase tracking-wider">
                     Xem Toàn Bộ 24 Ảnh
                   </span>
@@ -394,7 +395,7 @@ export default function TourDetailPage() {
                     "Tại Bàu Trúc (Paley Hamu Trok), không có chiếc bàn xoay cơ khí vô tri nào can thiệp. Đôi chân trần của người phụ nữ Chăm bước lùi uyển chuyển theo nhịp xoay tròn của vũ trụ, đôi bàn tay mềm dịu vuốt ve từng thớ đất sét dẻo quánh lấy từ triền sông Quao. Gốm không tráng men Tây, mà được tôi luyện trong làn khói rơm khô và tưới đẫm nước vỏ cây thị hoang dã để kết tinh những vệt khói lam hỏa biến độc bản không trùng lặp."
                   </p>
                   <div className="flex items-center gap-space-sm pt-space-xs text-on-surface-variant font-label-md text-xs sm:text-sm">
-                    <Sparkles className="h-4 w-4 text-secondary" />
+                    <FileText className="h-4 w-4 text-secondary" />
                     <span>Ghi chép từ Thuyết minh Văn hóa Dân gian Panduranga • Viện Nghiên cứu Văn hóa Chăm</span>
                   </div>
                 </div>

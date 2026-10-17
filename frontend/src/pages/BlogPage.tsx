@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BottomNav from "../components/BottomNav";
@@ -8,30 +9,60 @@ import BlogFeaturedPost from "../components/blog/BlogFeaturedPost";
 import BlogPillarsSection from "../components/blog/BlogPillarsSection";
 import BlogArticlesGrid from "../components/blog/BlogArticlesGrid";
 import BlogCTASection from "../components/blog/BlogCTASection";
-import { BLOG_ARTICLES } from "../data/blogData";
+import { BLOG_ARTICLES, type BlogMainCategoryType } from "../data/blogData";
 
 export default function BlogPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = (searchParams.get("category") as BlogMainCategoryType) || "all";
+
+  const [mainCategory, setMainCategory] = useState<BlogMainCategoryType>(
+    ["tin-tuc", "lich-su", "van-hoa"].includes(initialCategory) ? initialCategory : "all"
+  );
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
+
+  // Lắng nghe thay đổi trên URL để cập nhật category khi bấm từ Menu Header
+  useEffect(() => {
+    const cat = searchParams.get("category") as BlogMainCategoryType;
+    if (cat && ["tin-tuc", "lich-su", "van-hoa"].includes(cat)) {
+      setMainCategory(cat);
+      setSelectedCategory("all");
+    } else if (!cat) {
+      setMainCategory("all");
+    }
+  }, [searchParams]);
+
+  const handleSelectMainCategory = (cat: BlogMainCategoryType) => {
+    setMainCategory(cat);
+    setSelectedCategory("all");
+    if (cat === "all") {
+      searchParams.delete("category");
+      setSearchParams(searchParams);
+    } else {
+      setSearchParams({ category: cat });
+    }
+  };
 
   const toggleAudio = () => {
     setIsAudioPlaying((prev) => !prev);
   };
 
-  // Filter articles by category and search keyword
+  // Filter articles by main category, sub category and search keyword
   const filteredArticles = useMemo(() => {
     return BLOG_ARTICLES.filter((article) => {
-      const matchCategory =
+      const matchMainCategory =
+        mainCategory === "all" || article.mainCategory === mainCategory;
+      const matchSubCategory =
         selectedCategory === "all" || article.category === selectedCategory;
       const matchSearch =
         searchQuery.trim() === "" ||
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.author.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchCategory && matchSearch;
+      return matchMainCategory && matchSubCategory && matchSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [mainCategory, selectedCategory, searchQuery]);
 
   return (
     <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">
@@ -42,6 +73,8 @@ export default function BlogPage() {
       <main className="w-full pt-16 xl:pt-20 bg-surface min-h-[calc(100vh-80px)] flex flex-col">
         {/* Section 1: Hero Header & Filters */}
         <BlogHeroSection
+          mainCategory={mainCategory}
+          onSelectMainCategory={handleSelectMainCategory}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
           searchQuery={searchQuery}
