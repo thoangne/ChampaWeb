@@ -88,7 +88,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 Panduranga Heritage
               </span>
               <span className="font-serif text-base sm:text-lg xl:text-xl text-on-surface leading-tight group-hover:text-primary transition-colors font-bold whitespace-nowrap">
-                Dana Champa
+                Dana Community
               </span>
             </div>
           </Link>

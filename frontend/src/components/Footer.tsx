@@ -27,12 +27,12 @@ export default function Footer() {
             <div className="flex items-center gap-space-sm">
               <img
                 src={LOGO_URL}
-                alt="Logo Dana Champa"
+                alt="Logo Dana Community"
                 className="h-10 w-auto object-contain shrink-0"
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl font-bold text-primary leading-tight">
-                  Dana Champa
+                  Dana Community
                 </span>
                 <span className="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Panduranga Heritage
@@ -160,7 +160,7 @@ export default function Footer() {
                 <span>(+84) 259 388 9988</span>
                 <span className="mx-1">•</span>
                 <Mail className="h-3.5 w-3.5 text-secondary shrink-0" />
-                <span>contact@danachampa.heritage.vn</span>
+                <span>contact@danacommunity.heritage.vn</span>
               </p>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function Footer() {
         {/* Sub-footer / Copyright */}
         <div className="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm border-t border-surface-container-high/60 text-xs text-on-surface-variant">
           <div>
-            <span>© 2025 Dana Champa Heritage Foundation. Bảo lưu mọi quyền di sản.</span>
+            <span>© 2025 Dana Community Heritage Foundation. Bảo lưu mọi quyền di sản.</span>
           </div>
           <div className="flex flex-wrap items-center gap-space-md font-label-md">
             <span className="hover:text-primary transition-colors cursor-pointer">

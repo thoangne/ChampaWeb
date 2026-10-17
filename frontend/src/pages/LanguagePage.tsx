@@ -415,7 +415,7 @@ export default function LanguagePage() {
                   Lớp Truyền Dạy Chữ Chăm Akhar Thrah Miễn Phí
                 </h3>
                 <p className="text-xs sm:text-sm text-on-primary-container/80 mt-1 max-w-2xl">
-                  Được tài trợ bởi Quỹ Hoàn Lưu 70% Dana Champa, mở lớp thứ Bảy & Chủ Nhật hàng tuần tại Làng Bàu Trúc và Mỹ Nghiệp cho con em bản địa và du khách yêu mến di sản.
+                  Được tài trợ bởi Quỹ Hoàn Lưu 70% Dana Community, mở lớp thứ Bảy & Chủ Nhật hàng tuần tại Làng Bàu Trúc và Mỹ Nghiệp cho con em bản địa và du khách yêu mến di sản.
                 </p>
               </div>
             </div>

@@ -50,7 +50,7 @@ export default function BlogDetailHeader({
   };
 
   const handleCopyCitation = () => {
-    const citation = `"${article.title}". Tác giả: ${article.author}. Nguồn: Dana Champa Heritage Archives (${window.location.href}), truy cập ngày ${new Date().toLocaleDateString('vi-VN')}.`;
+    const citation = `"${article.title}". Tác giả: ${article.author}. Nguồn: Dana Community Heritage Archives (${window.location.href}), truy cập ngày ${new Date().toLocaleDateString('vi-VN')}.`;
     navigator.clipboard.writeText(citation);
     toast.success("Đã sao chép trích dẫn khoa học!", {
       description: "Định dạng trích dẫn chuẩn cho tài liệu học thuật và báo chí.",
