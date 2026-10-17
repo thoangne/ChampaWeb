@@ -20,8 +20,8 @@ export default function BlogDetailComments() {
   const [comments, setComments] = useState<CommentItem[]>([
     {
       id: "c1",
-      initials: "NV",
-      name: "TS. Nguyễn Văn Tuấn",
+      initials: "A",
+      name: "Người dùng A",
       badge: "Nhà nghiên cứu kiến trúc cổ",
       badgeClass: "bg-primary-fixed text-on-primary-fixed-variant",
       timeAgo: "3 ngày trước",
@@ -31,13 +31,13 @@ export default function BlogDetailComments() {
     },
     {
       id: "c2",
-      initials: "IN",
-      name: "Inrasara Thạch Văn",
+      initials: "B",
+      name: "Người dùng B",
       badge: "Hậu duệ dòng họ Muk Đô Vinh",
       badgeClass: "bg-secondary-fixed text-on-secondary-fixed-variant",
       timeAgo: "1 ngày trước",
       content:
-        "Cảm ơn nhóm khảo cứu Dana Champa. Trong ký ức người già làng Đô Vinh, nhựa cây bời lời còn được gọi là Bak Kalo, khi đi rừng các thợ cả xưa còn khấn xin thần rừng Yan Bri trước khi cạo vỏ. Kỹ thuật này là sự kết hợp tâm linh với tự nhiên, không chỉ là công nghệ thuần túy.",
+        "Cảm ơn nhóm khảo cứu Dana Community. Trong ký ức người già làng Đô Vinh, nhựa cây bời lời còn được gọi là Bak Kalo, khi đi rừng các thợ cả xưa còn khấn xin thần rừng Yan Bri trước khi cạo vỏ. Kỹ thuật này là sự kết hợp tâm linh với tự nhiên, không chỉ là công nghệ thuần túy.",
       likes: 12,
       isNested: true,
     },

@@ -6,7 +6,6 @@ import {
   Sun,
   Camera,
   ShoppingBag,
-  Sparkles,
 } from "lucide-react";
 import { WAYPOINTS } from "../data/champaData";
 import HeritageMap from "./HeritageMap";
@@ -86,7 +85,7 @@ export default function WaypointsSection({
                   <div className="mt-space-sm flex flex-wrap items-center gap-space-md text-[12px] font-label-sm text-secondary pt-1 border-t border-surface-container/60">
                     <span className="flex items-center gap-1">
                       {w.id === 1 && <Shirt className="h-3.5 w-3.5" />}
-                      {w.id === 2 && <Sparkles className="h-3.5 w-3.5" />}
+                      {w.id === 2 && <Compass className="h-3.5 w-3.5" />}
                       {w.id === 3 && <ShoppingBag className="h-3.5 w-3.5" />}
                       {w.id === 4 && <Info className="h-3.5 w-3.5" />}
                       {w.id === 5 && <Camera className="h-3.5 w-3.5" />}
