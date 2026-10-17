@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
 import { LOGO_URL } from "../data/champaData";
 import { toast } from "./ui/sonner";
@@ -91,29 +92,27 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Topics */}
+          {/* Column 3: Topics & Digital Modules */}
           <div className="lg:col-span-2 flex flex-col gap-space-sm">
             <h4 className="font-serif text-lg font-bold text-on-surface">
               Chuyên đề Di sản
             </h4>
             <ul className="flex flex-col gap-space-xs">
               {[
-                "Kiến trúc Kalan gạch nung",
-                "Hệ thống Thần thoại Champa",
-                "Đại lễ Katê & Lễ hội Rija Nưgar",
-                "Âm sắc Trống Ginăng - Kèn Saranai",
-                "Minh văn & Cổ vật Điêu khắc",
+                { label: "Tin tức & Sự kiện", href: "/bai-viet?category=tin-tuc" },
+                { label: "Lịch sử Vương triều", href: "/bai-viet?category=lich-su" },
+                { label: "Văn hóa & Đền tháp", href: "/bai-viet?category=van-hoa" },
+                { label: "Kho ảnh Văn hoá", href: "/so-hoa-di-san?tab=hinh-anh" },
+                { label: "Ngôn ngữ Akhar Thrah", href: "/so-hoa-di-san?tab=ngon-ngu" },
+                { label: "Giải mã Văn bia Cổ", href: "/so-hoa-di-san?tab=van-bia" },
               ].map((item) => (
-                <li
-                  key={item}
-                  onClick={() => {
-                    toast(item, {
-                      description: "Chuyên mục tư liệu khảo cứu chuyên sâu đang được cập nhật.",
-                    });
-                  }}
-                  className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer py-0.5"
-                >
-                  {item}
+                <li key={item.label} className="py-0.5">
+                  <Link
+                    to={item.href}
+                    className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-colors block"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>

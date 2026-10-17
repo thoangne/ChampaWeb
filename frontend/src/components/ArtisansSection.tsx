@@ -1,4 +1,4 @@
-import { ArrowRight, Leaf, Quote, Sparkles } from "lucide-react";
+import { ArrowRight, Leaf, Quote } from "lucide-react";
 import { ARTISANS } from "../data/champaData";
 import { toast } from "./ui/sonner";
 
@@ -100,7 +100,6 @@ export default function ArtisansSection() {
             </div>
             <div>
               <div className="flex items-center gap-1.5 mb-1">
-                <Sparkles className="h-4 w-4 text-secondary-fixed" />
                 <h4 className="font-serif text-xl xl:text-2xl font-bold">
                   Cam kết Du lịch Chữa lành & Tái tạo Xứ Chăm
                 </h4>

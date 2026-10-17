@@ -7,7 +7,6 @@ import {
   HeartHandshake,
   Search,
   ShieldCheck,
-  Sparkles,
   Star,
 } from "lucide-react";
 import Header from "../components/Header";
@@ -45,31 +44,47 @@ export default function TourListPage() {
         isAudioPlaying={isAudioPlaying}
       />
 
-      <main className="w-full pt-20 xl:pt-24 bg-surface flex-1">
+      <main className="w-full pt-16 xl:pt-20 bg-surface flex-1">
         {/* Hero Banner Section */}
-        <section className="relative w-full bg-gradient-to-b from-surface-container-low via-surface to-surface py-space-xl overflow-hidden border-b border-surface-container-high/60">
+        <section className="relative w-full bg-gradient-to-b from-surface-container-low via-surface to-surface py-space-lg sm:py-space-xl overflow-hidden border-b border-surface-container-high/60">
           <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
           <div className="absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
 
-          <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin text-center">
-            <div className="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit mb-space-sm shadow-sm mx-auto">
-              <Compass className="h-4 w-4 text-primary" />
-              <span className="font-label-sm text-[11px] uppercase tracking-widest text-primary font-bold">
-                Cung Đường Trải Nghiệm Độc Bản
-              </span>
+          <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
+            {/* Breadcrumb & Archival Tag */}
+            <div className="flex items-center justify-between text-on-surface-variant font-label-md text-xs sm:text-sm flex-wrap gap-2 mb-space-sm">
+              <nav className="flex items-center gap-space-xs tracking-wider uppercase text-xs">
+                <Link className="hover:text-primary transition-colors" to="/">
+                  Trang chủ
+                </Link>
+                <span className="text-outline/60">/</span>
+                <span className="text-primary font-bold">Hành trình Di sản</span>
+              </nav>
+              <div className="hidden sm:flex items-center gap-2 text-secondary font-label-sm text-xs uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full border border-outline-variant/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                <span>Panduranga Expeditions • Khám phá 2025</span>
+              </div>
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl text-on-surface font-semibold max-w-3xl mx-auto leading-tight">
-              Danh Sách Hành Trình Di Sản Panduranga
-            </h1>
-            <p className="font-body-lg text-base xl:text-lg text-on-surface-variant max-w-2xl mx-auto mt-space-sm leading-relaxed">
-              Mỗi chuyến đi là một cuộc đối thoại chân thực cùng nghệ nhân và
-              không gian văn hóa thiêng liêng. Nhóm nhỏ tối đa 8 khách để trọn vẹn
-              chiều sâu ký ức.
-            </p>
+            {/* Main Heading Lockup */}
+            <div className="flex flex-col gap-space-xs max-w-4xl">
+              <div className="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit shadow-sm">
+                <Compass className="h-4 w-4 text-primary" />
+                <span className="font-label-sm text-[11px] uppercase tracking-widest text-primary font-bold">
+                  Cung Đường Trải Nghiệm Độc Bản
+                </span>
+              </div>
+
+              <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-on-surface font-semibold leading-tight tracking-tight mt-1">
+                Danh Sách Hành Trình Di Sản Panduranga
+              </h1>
+              <p className="font-body-md xl:font-body-lg text-sm sm:text-base xl:text-lg text-on-surface-variant max-w-2xl leading-relaxed mt-1">
+                Mỗi chuyến đi là một cuộc đối thoại chân thực cùng nghệ nhân và không gian văn hóa thiêng liêng. Nhóm nhỏ tối đa 8 khách để trọn vẹn chiều sâu ký ức.
+              </p>
+            </div>
 
             {/* Search Bar & Filter Tabs */}
-            <div className="mt-space-lg max-w-2xl mx-auto flex flex-col gap-space-sm">
+            <div className="mt-space-md sm:mt-space-lg max-w-3xl flex flex-col gap-space-sm">
               <div className="relative flex items-center">
                 <Search className="absolute left-4 text-outline h-5 w-5 pointer-events-none" />
                 <input
@@ -77,17 +92,17 @@ export default function TourListPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Tìm hành trình, làng nghề, đền tháp..."
-                  className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-surface-container-lowest text-on-surface font-body-md text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary shadow-md border border-outline-variant/30"
+                  className="w-full pl-12 pr-4 py-3 sm:py-3.5 rounded-2xl bg-surface-container-lowest text-on-surface font-body-md text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary shadow-md border border-outline-variant/30"
                 />
               </div>
 
-              <div className="flex items-center justify-center gap-space-xs flex-wrap pt-1">
+              <div className="flex items-center gap-space-xs flex-wrap pt-1">
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
                     type="button"
-                    className={`px-space-md py-2 rounded-xl font-label-md text-xs sm:text-sm font-medium transition-all ${
+                    className={`px-3 sm:px-space-md py-1.5 sm:py-2 rounded-xl font-label-md text-xs sm:text-sm font-medium transition-all ${
                       activeCategory === cat.id
                         ? "bg-primary text-on-primary shadow-sm font-semibold"
                         : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
@@ -213,7 +228,7 @@ export default function TourListPage() {
             </div>
 
             <div className="flex items-center gap-space-md p-space-md bg-surface-container-lowest rounded-2xl border border-outline-variant/30">
-              <Sparkles className="h-10 w-10 text-tertiary shrink-0" />
+              <ShieldCheck className="h-10 w-10 text-tertiary shrink-0" />
               <div>
                 <h4 className="font-serif text-base font-semibold text-on-surface">Bảo Hiểm & Đưa Đón Tận Nơi</h4>
                 <p className="font-body-sm text-xs text-on-surface-variant mt-0.5">Xe đưa đón trọn gói từ TP. Phan Rang - Tháp Chàm.</p>

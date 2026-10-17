@@ -1,14 +1,8 @@
+import { Link } from "react-router-dom";
 import { ChevronRight, Landmark } from "lucide-react";
 import { BLOG_PILLARS } from "../../data/blogData";
-import { toast } from "../ui/sonner";
 
 export default function BlogPillarsSection() {
-  const handleOpenPillar = (title: string) => {
-    toast.info(`Khảo cứu chuyên đề: ${title}`, {
-      description: "Hồ sơ văn hóa và tư liệu hình ảnh độc quyền từ Dana Champa.",
-    });
-  };
-
   return (
     <section className="w-full bg-surface-container-low py-space-xl border-y border-surface-container-high/60">
       <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin flex flex-col gap-space-lg">
@@ -33,9 +27,9 @@ export default function BlogPillarsSection() {
         {/* 4-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
           {BLOG_PILLARS.map((pillar) => (
-            <article
+            <Link
               key={pillar.id}
-              onClick={() => handleOpenPillar(pillar.title)}
+              to={`/bai-viet/${pillar.slug}`}
               className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl flex flex-col hover:-translate-y-1.5 transition-all duration-300 group border border-outline-variant/30 cursor-pointer"
             >
               <div className="relative h-48 overflow-hidden bg-surface-container-high">
@@ -68,12 +62,12 @@ export default function BlogPillarsSection() {
                 <div className="pt-2 flex items-center justify-between text-outline text-xs border-t border-surface-container/60">
                   <span>{pillar.readTime}</span>
                   <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                    <span>Khám phá</span>
+                    <span>Đọc khảo cứu</span>
                     <ChevronRight className="h-4 w-4" />
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
