@@ -1,4 +1,4 @@
-import type { Artisan, NavItem, Testimonial, Tour, Waypoint } from '../types/heritage';
+import type { Artisan, NavItem, PcNavLink, Testimonial, Tour, Waypoint } from '../types/heritage';
 
 export const LOGO_URL = '/Logo.png';
 
@@ -266,11 +266,51 @@ export const NAV_ITEMS: NavItem[] = [
   { path: 'dat-tour-trai-nghiem', icon: 'calendar_month', label: 'Đặt tour' },
 ];
 
-export const PC_NAV_LINKS = [
-  { href: '/', label: 'Trang chủ', active: true },
-  { href: '/tour', label: 'Hành trình Độc bản' },
-  { href: '/blog', label: 'Di sản Kể chuyện' },
-  { href: '/#ban-do', label: 'Bản đồ Văn hóa' },
+export const PC_NAV_LINKS: PcNavLink[] = [
+  { href: '/', label: 'Trang chủ' },
+  { href: '/tour', label: 'Hành trình' },
+  {
+    href: '/bai-viet',
+    label: 'Bài Viết',
+    children: [
+      {
+        href: '/bai-viet?category=tin-tuc',
+        label: 'Tin tức',
+        desc: 'Sự kiện, bảo tồn & nhịp sống bản địa',
+      },
+      {
+        href: '/bai-viet?category=lich-su',
+        label: 'Lịch sử',
+        desc: 'Vương triều, khảo cổ học & di tích ngàn năm',
+      },
+      {
+        href: '/bai-viet?category=van-hoa',
+        label: 'Văn Hoá',
+        desc: 'Đền tháp, làng nghề gốm - dệt & lễ hội',
+      },
+    ],
+  },
+  {
+    href: '/so-hoa-di-san',
+    label: 'Số hoá di sản',
+    children: [
+      {
+        href: '/so-hoa-di-san?tab=hinh-anh',
+        label: 'Hình ảnh Văn hoá',
+        desc: 'Kho ảnh nghệ thuật điền dã & bảo tàng số',
+      },
+      {
+        href: '/so-hoa-di-san?tab=ngon-ngu',
+        label: 'Ngôn ngữ Chăm Akhar Thrah',
+        desc: 'Ký tự cổ tương tác, âm thanh & từ điển số',
+      },
+      {
+        href: '/so-hoa-di-san?tab=van-bia',
+        label: 'Giải mã Văn bia Cổ',
+        desc: 'Bản dập bia ký sa thạch Sanskrit - Chăm',
+      },
+    ],
+  },
 ];
 
 export const DESTINATION_OPTIONS = [

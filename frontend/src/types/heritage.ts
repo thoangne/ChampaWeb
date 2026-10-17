@@ -94,6 +94,20 @@ export interface Testimonial {
   content: string;
 }
 
+export interface NavSubLink {
+  href: string;
+  label: string;
+  desc?: string;
+  badge?: string;
+}
+
+export interface PcNavLink {
+  href: string;
+  label: string;
+  active?: boolean;
+  children?: NavSubLink[];
+}
+
 export interface NavItem {
   path: string;
   icon: string;

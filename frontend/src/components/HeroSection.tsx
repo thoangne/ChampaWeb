@@ -9,7 +9,6 @@ import {
   Landmark,
   MapPin,
   Search,
-  Sparkles,
   Users,
 } from "lucide-react";
 import {
@@ -52,33 +51,33 @@ export default function HeroSection({
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-surface-container-low/60 via-surface to-surface pb-space-xl pt-20 xl:pt-24">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-surface-container-low/60 via-surface to-surface pb-space-lg sm:pb-space-xl pt-16 sm:pt-20 xl:pt-24">
       {/* Atmospheric subtle decorative gradient blobs */}
       <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
       <div className="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin pt-space-md xl:pt-space-lg">
+      <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin pt-space-xs sm:pt-space-md xl:pt-space-lg">
         {/* Main 2-Column Hero Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center min-h-[auto] lg:min-h-[580px]">
           {/* Left Content */}
           <div className="lg:col-span-7 flex flex-col justify-center pr-0 lg:pr-space-md z-10">
             {/* Pill Badge */}
-            <div className="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit mb-space-md shadow-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
-              <span className="font-label-sm text-[11px] xl:text-label-sm uppercase tracking-widest text-primary font-bold">
+            <div className="inline-flex items-center gap-space-xs px-3 py-1 sm:px-space-sm sm:py-1.5 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit mb-space-sm sm:mb-space-md shadow-sm">
+              <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-primary animate-pulse"></span>
+              <span className="font-label-sm text-[10px] sm:text-[11px] xl:text-label-sm uppercase tracking-wider sm:tracking-widest text-primary font-bold">
                 Dana • Di sản Panduranga - Văn hóa sống ngàn năm
               </span>
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl text-on-surface mb-space-md leading-[1.15] font-semibold">
+            <h1 className="font-serif text-2xl sm:text-4xl xl:text-5xl 2xl:text-6xl text-on-surface mb-space-sm sm:mb-space-md leading-tight sm:leading-[1.15] font-semibold tracking-tight">
               Chạm vào{" "}
               <span className="italic text-primary font-normal">nhịp thở</span>{" "}
               ngàn năm xứ Panduranga
             </h1>
 
             {/* Description */}
-            <p className="font-body-md xl:font-body-lg text-on-surface-variant max-w-xl mb-space-xl leading-relaxed text-base xl:text-lg">
+            <p className="font-body-md xl:font-body-lg text-on-surface-variant max-w-xl mb-space-md sm:mb-space-xl leading-relaxed text-sm sm:text-base xl:text-lg">
               Không đơn thuần là chuyến du ngoạn. Đây là hành trình trở về để
               lắng nghe đất nung kể chuyện, thổ cẩm hát ca và tâm hồn người Chăm
               mở lối trân quý.
@@ -145,7 +144,7 @@ export default function HeroSection({
               {/* Floated Cultural Badge */}
               <div className="absolute top-space-md left-space-md bg-surface/90 backdrop-blur-md px-space-md py-space-xs rounded-lg shadow-md border border-white/20">
                 <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold flex items-center gap-1.5">
-                  <Sparkles className="h-4 w-4 text-secondary" />
+                  <Landmark className="h-4 w-4 text-secondary" />
                   Di sản Thế giới Khẩn cấp UNESCO
                 </span>
               </div>
@@ -222,7 +221,7 @@ export default function HeroSection({
             {/* Field 3: Experience Type */}
             <div className="flex flex-col justify-between p-3 rounded-2xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all border border-transparent hover:border-outline-variant/50 focus-within:border-primary/50 focus-within:bg-surface-container-lowest focus-within:ring-2 focus-within:ring-primary/10 min-h-[74px]">
               <label className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-semibold flex items-center gap-1.5 select-none">
-                <Sparkles className="h-3.5 w-3.5 text-primary shrink-0" />
+                <HeartHandshake className="h-3.5 w-3.5 text-primary shrink-0" />
                 <span>Trải nghiệm mong muốn</span>
               </label>
               <Select value={experience} onValueChange={setExperience}>
