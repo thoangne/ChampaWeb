@@ -85,10 +85,10 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             />
             <div className="flex flex-col text-left whitespace-nowrap">
               <span className="font-label-sm text-[9px] sm:text-[10px] xl:text-[11px] uppercase tracking-wider sm:tracking-widest text-secondary font-semibold whitespace-nowrap leading-tight">
-                Panduranga Heritage
+                Dana
               </span>
               <span className="font-serif text-base sm:text-lg xl:text-xl text-on-surface leading-tight group-hover:text-primary transition-colors font-bold whitespace-nowrap">
-                Dana Champa
+                Panduranga Heritage
               </span>
             </div>
           </Link>
