@@ -78,14 +78,13 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
         scrollToElement(hashPart);
       }
     } else if (location.pathname !== href) {
-      // Khi chuyển sang một trang hoàn toàn mới, đưa màn hình về đầu trang
+
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     }
   };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_2px_12px_rgba(36,25,21,0.06)] border-b border-surface-container-high/40">
-      {/* Đồng bộ khung max-w-7xl và padding với các section bên dưới để thẳng hàng trên PC */}
       <div className="max-w-7xl mx-auto h-16 xl:h-20 px-margin-mobile xl:px-margin relative flex items-center justify-between gap-2 sm:gap-4">
         
         {/* 1. Brand Logo (Cố định bên trái) */}
@@ -102,8 +101,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
               loading="eager"
             />
             <div className="flex flex-col text-left whitespace-nowrap">
-              <span className="font-label-sm text-[9px] sm:text-[10px] xl:text-[11px] uppercase tracking-wider sm:tracking-widest text-secondary font-semibold whitespace-nowrap leading-tight">
-                Dana
+              <span className="font-label-sm text-[9px] sm:text-[10px] xl:text-[17px] uppercase tracking-wider sm:tracking-widest text-secondary font-semibold whitespace-nowrap leading-tight">
+                Dana community
               </span>
               <span className="font-serif text-base sm:text-lg xl:text-xl text-on-surface leading-tight group-hover:text-primary transition-colors font-bold whitespace-nowrap">
                 Panduranga Heritage
@@ -113,7 +112,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
         </div>
 
         {/* 2. Desktop Navigation Links (Căn chính giữa tuyệt đối trên PC để không bị lệch) */}
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+      {/* 2. Desktop Navigation Links (Cỡ chữ 20px chuẩn) */}
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           {PC_NAV_LINKS.map((link) => {
             let isRouteActive = false;
             if (link.href === "/") {
@@ -136,8 +136,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             } else {
               isRouteActive = location.pathname.startsWith(link.href);
             }
-
-            // FIX NHẢY CHỮ: Giữ nguyên font-semibold cho cả 2 trạng thái để độ rộng chữ không bị phình ra khi active
+            
             const activeClass = "text-primary font-semibold border-b-2 border-primary pb-1";
             const inactiveClass =
               "text-on-surface-variant font-semibold hover:text-primary border-b-2 border-transparent pb-1";
@@ -149,10 +148,10 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                   <Link
                     to={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors flex items-center gap-1.5 ${currentClass}`}
+                    className={`font-label-lg text-[20px] whitespace-nowrap transition-colors flex items-center gap-1.5 ${currentClass}`}
                   >
                     <span>{link.label}</span>
-                    <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
+                    <ChevronDown className="h-5 w-5 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
                   </Link>
 
                   {/* Dropdown Menu Container */}
@@ -186,7 +185,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 key={link.href}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-label-lg text-sm xl:text-base whitespace-nowrap transition-colors py-1 ${currentClass}`}
+                className={`font-label-lg text-[20px] whitespace-nowrap transition-colors py-1 ${currentClass}`}
               >
                 {link.label}
               </Link>
@@ -292,7 +291,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             if (link.children && link.children.length > 0) {
               const isSubOpen = !!openMobileSubMenus[link.href];
               return (
-                <div key={link.href} className="flex flex-col gap-1">
+                <div key={link.href} className="flex flex-col gap-1.5">
                   <div className="flex items-center justify-between">
                     <Link
                       to={link.href}
