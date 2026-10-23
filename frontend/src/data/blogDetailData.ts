@@ -483,7 +483,7 @@ export function getBlogDetailBySlug(slug?: string): BlogDetailArticle {
       fieldLocation: pillar.village,
       coverImage: pillar.image,
       coverCaption: `Trụ cột di sản độc bản: ${pillar.title}`,
-      coverSource: "Kho hình ảnh văn hóa Dana Champa Heritage",
+      coverSource: "Kho hình ảnh văn hóa Dana Community Heritage",
       audioTitle: `Thanh âm di sản: ${pillar.title}`,
       audioDuration: "05:00",
       chapters: [
