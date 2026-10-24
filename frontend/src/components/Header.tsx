@@ -86,7 +86,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_2px_12px_rgba(36,25,21,0.06)] border-b border-surface-container-high/40">
       <div className="max-w-7xl mx-auto h-16 xl:h-20 px-margin-mobile xl:px-margin relative flex items-center justify-between gap-2 sm:gap-4">
-        
+
         {/* 1. Brand Logo (Cố định bên trái) */}
         <div className="flex items-center shrink-0 z-10">
           <Link
@@ -102,9 +102,9 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             />
             <div className="flex flex-col text-left whitespace-nowrap">
               <span className="font-label-sm text-[9px] sm:text-[10px] xl:text-[17px] uppercase tracking-wider sm:tracking-widest text-secondary font-semibold whitespace-nowrap leading-tight">
-                Dana community
+                Danacommunity
               </span>
-              <span className="font-serif text-base sm:text-lg xl:text-xl text-on-surface leading-tight group-hover:text-primary transition-colors font-bold whitespace-nowrap">
+              <span className="font-serif text-xs sm:text-sm xl:text-base text-on-surface leading-tight group-hover:text-primary transition-colors font-bold whitespace-nowrap">
                 Panduranga Heritage
               </span>
             </div>
@@ -112,7 +112,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
         </div>
 
         {/* 2. Desktop Navigation Links (Căn chính giữa tuyệt đối trên PC để không bị lệch) */}
-      {/* 2. Desktop Navigation Links (Cỡ chữ 20px chuẩn) */}
+        {/* 2. Desktop Navigation Links (Cỡ chữ 20px chuẩn) */}
         <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           {PC_NAV_LINKS.map((link) => {
             let isRouteActive = false;
@@ -136,7 +136,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             } else {
               isRouteActive = location.pathname.startsWith(link.href);
             }
-            
+
             const activeClass = "text-primary font-semibold border-b-2 border-primary pb-1";
             const inactiveClass =
               "text-on-surface-variant font-semibold hover:text-primary border-b-2 border-transparent pb-1";
@@ -198,11 +198,10 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
           {/* Audio Saranai Button: Cố định độ rộng tối thiểu trên màn lớn để khi đổi chữ không làm giật nút */}
           <button
             onClick={handleAudioToggle}
-            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 xl:min-w-[175px] rounded-xl border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-              currentIsPlaying
-                ? "bg-primary-container text-on-primary-container border-primary shadow-sm"
-                : "bg-surface-container hover:bg-surface-container-high text-on-surface border-transparent"
-            }`}
+            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 xl:min-w-[175px] rounded-xl border transition-colors whitespace-nowrap shrink-0 cursor-pointer ${currentIsPlaying
+              ? "bg-primary-container text-on-primary-container border-primary shadow-sm"
+              : "bg-surface-container hover:bg-surface-container-high text-on-surface border-transparent"
+              }`}
             title="Bật/tắt thanh âm nhạc cụ Chăm (Saranai - Paranưng)"
             type="button"
           >
@@ -211,15 +210,13 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
               )}
               <span
-                className={`relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 ${
-                  currentIsPlaying ? "bg-primary" : "bg-secondary"
-                }`}
+                className={`relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 ${currentIsPlaying ? "bg-primary" : "bg-secondary"
+                  }`}
               ></span>
             </span>
             <AudioLines
-              className={`h-4 w-4 shrink-0 ${
-                currentIsPlaying ? "text-primary animate-pulse" : "text-secondary"
-              }`}
+              className={`h-4 w-4 shrink-0 ${currentIsPlaying ? "text-primary animate-pulse" : "text-secondary"
+                }`}
             />
             <span className="font-label-sm text-xs uppercase hidden xl:inline tracking-wider text-on-surface-variant font-medium whitespace-nowrap">
               {currentIsPlaying ? "Đang phát Saranai" : "Thanh âm Saranai"}
@@ -307,9 +304,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                       aria-label="Thu phóng mục con"
                     >
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          isSubOpen ? "rotate-180" : ""
-                        }`}
+                        className={`h-4 w-4 transition-transform duration-200 ${isSubOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                   </div>
