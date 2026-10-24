@@ -5,7 +5,7 @@ import { toast } from '../components/ui/sonner';
 
 export default function GuideBanner() {
   const handleDownload = () => {
-    // TODO: thay bằng link PDF thật, ví dụ window.open('/guide.pdf')
+
     toast('Đang gửi cẩm nang về máy của bạn', {
       description: 'Ứng xử Văn hóa khi thăm viếng tháp cổ và làng Chăm Panduranga (PDF màu).',
     });

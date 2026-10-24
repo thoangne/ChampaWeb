@@ -32,7 +32,7 @@ export default function Footer() {
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl font-bold text-primary leading-tight">
-                  Dana Community
+                  Champa Community
                 </span>
                 <span className="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Panduranga Heritage
