@@ -115,17 +115,14 @@ export default function ToursSection() {
                   </div>
                 </div>
 
-                {/* Card Footer: Price & CTA */}
+                {/* Card Footer: Heritage Direct Contact & CTA */}
                 <div className="pt-space-md mt-space-md flex items-center justify-between border-t border-surface-container-high/60">
                   <div>
-                    <span className="font-label-sm text-label-sm text-on-surface-variant block text-xs">
-                      Chi phí bảo tồn:
+                    <span className="font-label-sm text-secondary font-semibold uppercase tracking-wider block text-[11px]">
+                      Trải nghiệm độc bản
                     </span>
-                    <span className="font-serif text-xl xl:text-2xl text-primary font-bold">
-                      {tour.price}{" "}
-                      <span className="font-sans text-[13px] font-normal text-on-surface-variant">
-                        /khách
-                      </span>
+                    <span className="font-serif text-base xl:text-lg text-primary font-bold">
+                      Tư vấn trực tiếp
                     </span>
                   </div>
 
@@ -133,7 +130,7 @@ export default function ToursSection() {
                     to={`/tour/${tour.slug}`}
                     className="px-space-md py-2.5 rounded-xl bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5 font-semibold group/btn"
                   >
-                    <span>Chi tiết</span>
+                    <span>Chi tiết & Tư vấn</span>
                     <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-0.5 transition-transform" />
                   </Link>
                 </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Search, X } from "lucide-react";
 import {
   BLOG_CATEGORIES,
   BLOG_MAIN_CATEGORIES,
@@ -11,6 +11,8 @@ interface BlogHeroSectionProps {
   onSelectMainCategory: (cat: BlogMainCategoryType) => void;
   selectedCategory: string;
   onSelectCategory: (id: string) => void;
+  searchQuery?: string;
+  onSearchQueryChange?: (q: string) => void;
 }
 
 export default function BlogHeroSection({
@@ -18,6 +20,8 @@ export default function BlogHeroSection({
   onSelectMainCategory,
   selectedCategory,
   onSelectCategory,
+  searchQuery = "",
+  onSearchQueryChange,
 }: BlogHeroSectionProps) {
   return (
     <section className="w-full bg-surface-container-low/60 pt-space-md sm:pt-space-lg pb-space-lg sm:pb-space-xl border-b border-surface-container-high/60">
@@ -55,9 +59,35 @@ export default function BlogHeroSection({
 
         {/* Tầng 1: 3 Trụ cột chính (Tin tức - Lịch sử - Văn hóa) */}
         <div className="pt-space-md border-t border-surface-container-high/60 flex flex-col gap-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary">
-            <BookOpen className="h-3.5 w-3.5" />
-            <span>Phân loại chủ đề trọng tâm:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary">
+              <BookOpen className="h-3.5 w-3.5" />
+              <span>Phân loại chủ đề trọng tâm:</span>
+            </div>
+
+            {/* Live Search Input */}
+            {onSearchQueryChange && (
+              <div className="relative w-full sm:w-72">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-outline pointer-events-none" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => onSearchQueryChange(e.target.value)}
+                  placeholder="Tìm kiếm bài khảo cứu..."
+                  className="w-full pl-9 pr-8 py-1.5 rounded-xl bg-surface-container-lowest text-on-surface text-xs placeholder:text-outline/70 border border-outline-variant/40 focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => onSearchQueryChange("")}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-outline hover:text-on-surface rounded-full cursor-pointer"
+                    aria-label="Xóa từ khóa tìm kiếm"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">

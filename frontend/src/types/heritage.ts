@@ -40,7 +40,7 @@ export interface Tour {
   badgeClass: string;
   duration: string;
   location: string;
-  price: string;
+  price?: string;
   adultPrice?: number;
   childPrice?: number;
   title: string;

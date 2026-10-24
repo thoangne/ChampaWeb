@@ -192,7 +192,7 @@ export default function HeroSection({
                 <span>Điểm đến / Làng nghề</span>
               </label>
               <Select value={destination} onValueChange={setDestination}>
-                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-base sm:text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
                   <SelectValue placeholder="Chọn vùng di sản" />
                 </SelectTrigger>
                 <SelectContent>
@@ -225,7 +225,7 @@ export default function HeroSection({
                 <span>Trải nghiệm mong muốn</span>
               </label>
               <Select value={experience} onValueChange={setExperience}>
-                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-base sm:text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
                   <SelectValue placeholder="Chọn trải nghiệm" />
                 </SelectTrigger>
                 <SelectContent>
@@ -245,7 +245,7 @@ export default function HeroSection({
                 <span>Số lượng lữ khách</span>
               </label>
               <Select value={travelers} onValueChange={setTravelers}>
-                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
+                <SelectTrigger className="h-auto p-0 border-none bg-transparent shadow-none hover:bg-transparent focus:ring-0 text-base sm:text-sm xl:text-[15px] font-semibold text-on-surface mt-1">
                   <SelectValue placeholder="Chọn số lượng khách" />
                 </SelectTrigger>
                 <SelectContent>

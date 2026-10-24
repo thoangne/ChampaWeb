@@ -111,9 +111,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
           </Link>
         </div>
 
-        {/* 2. Desktop Navigation Links (Căn chính giữa tuyệt đối trên PC để không bị lệch) */}
-      {/* 2. Desktop Navigation Links (Cỡ chữ 20px chuẩn) */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+        {/* 2. Desktop Navigation Links (Căn giữa tương đối/tuyệt đối không bị đè logo trên màn 1024px) */}
+        <nav className="hidden lg:flex items-center gap-2 xl:gap-5 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
           {PC_NAV_LINKS.map((link) => {
             let isRouteActive = false;
             if (link.href === "/") {
@@ -133,13 +132,17 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 location.pathname.startsWith("/hinh-anh") ||
                 location.pathname.startsWith("/ngon-ngu") ||
                 location.pathname.startsWith("/ban-do");
+            } else if (link.href === "/san-pham") {
+              isRouteActive =
+                location.pathname.startsWith("/san-pham") ||
+                location.pathname.startsWith("/luu-niem");
             } else {
               isRouteActive = location.pathname.startsWith(link.href);
             }
             
             const activeClass = "text-primary font-semibold border-b-2 border-primary pb-1";
             const inactiveClass =
-              "text-on-surface-variant font-semibold hover:text-primary border-b-2 border-transparent pb-1";
+              "text-on-surface-variant font-medium hover:text-primary border-b-2 border-transparent pb-1";
             const currentClass = isRouteActive ? activeClass : inactiveClass;
 
             if (link.children && link.children.length > 0) {
@@ -148,10 +151,10 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                   <Link
                     to={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`font-label-lg text-[20px] whitespace-nowrap transition-colors flex items-center gap-1.5 ${currentClass}`}
+                    className={`text-[15px] xl:text-[18px] whitespace-nowrap transition-colors flex items-center gap-1 ${currentClass}`}
                   >
                     <span>{link.label}</span>
-                    <ChevronDown className="h-5 w-5 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
+                    <ChevronDown className="h-4 w-4 xl:h-5 xl:w-5 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
                   </Link>
 
                   {/* Dropdown Menu Container */}
@@ -185,7 +188,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 key={link.href}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-label-lg text-[20px] whitespace-nowrap transition-colors py-1 ${currentClass}`}
+                className={`text-[15px] xl:text-[18px] whitespace-nowrap transition-colors py-1 ${currentClass}`}
               >
                 {link.label}
               </Link>
@@ -247,7 +250,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden h-9 w-9 rounded-xl shrink-0 text-on-surface hover:bg-surface-container"
+            className="lg:hidden h-10 w-10 min-w-[40px] min-h-[40px] rounded-xl shrink-0 text-on-surface hover:bg-surface-container"
             aria-label={mobileMenuOpen ? "Đóng danh mục" : "Mở danh mục"}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -256,9 +259,15 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu with Backdrop Overlay */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-surface-container-lowest/98 backdrop-blur-xl border-t border-surface-container-high px-4 py-3 flex flex-col gap-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <>
+          <div
+            className="fixed inset-0 top-16 xl:top-20 bg-black/30 backdrop-blur-xs z-40 lg:hidden animate-in fade-in duration-200"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="relative z-50 lg:hidden bg-surface-container-lowest/98 backdrop-blur-xl border-t border-surface-container-high px-4 py-3 flex flex-col gap-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
           <div className="flex items-center justify-between pb-2 mb-1 border-b border-surface-container-high/60">
             <span className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-bold">
               Danh mục khám phá di sản
@@ -343,7 +352,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
               </Link>
             );
           })}
-        </div>
+          </div>
+        </>
       )}
     </header>
   );

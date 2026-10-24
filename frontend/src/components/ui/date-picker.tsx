@@ -48,7 +48,7 @@ export function DatePicker({
         <button
           type="button"
           className={cn(
-            "flex items-center justify-between gap-2 w-full text-left font-semibold text-sm xl:text-[15px] text-on-surface focus:outline-none cursor-pointer mt-1 group",
+            "flex items-center justify-between gap-2 w-full text-left font-semibold text-base sm:text-sm xl:text-[15px] text-on-surface focus:outline-none cursor-pointer mt-1 group",
             className
           )}
         >

@@ -77,6 +77,8 @@ export default function BlogPage() {
           onSelectMainCategory={handleSelectMainCategory}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
+          searchQuery={searchQuery}
+          onSearchQueryChange={setSearchQuery}
         />
 
         {/* Section 2: Featured Archival Story */}

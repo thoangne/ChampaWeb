@@ -5,6 +5,7 @@ import {
   Clock,
   Compass,
   HeartHandshake,
+  Phone,
   Search,
   ShieldCheck,
   Star,
@@ -113,6 +114,40 @@ export default function TourListPage() {
                 ))}
               </div>
             </div>
+
+            {/* Cultural Consultation Notice */}
+            <div className="mt-space-md p-space-md rounded-2xl bg-surface-container-low border border-outline-variant/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+              <div className="flex items-start gap-space-sm">
+                <div className="w-10 h-10 rounded-xl bg-primary-container/40 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                  <HeartHandshake className="h-5 w-5" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-sm sm:text-base font-semibold text-on-surface">
+                    Hành Trình Di Sản Phi Thương Mại Hóa
+                  </h4>
+                  <p className="font-body-sm text-xs text-on-surface-variant max-w-2xl leading-relaxed mt-0.5">
+                    Chúng tôi không niêm yết giá bán thương mại đại trà. Mọi hành trình được thiết kế cá nhân hóa theo quy mô nhóm nhỏ (tối đa 8 khách), kết nối và hoàn lưu 100% sinh kế trực tiếp cho gia đình nghệ nhân bản địa Chăm.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-space-xs shrink-0 w-full md:w-auto">
+                <a
+                  href="tel:0918388998"
+                  className="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-on-primary font-label-md text-xs font-semibold hover:bg-primary-container transition-colors shadow-sm"
+                >
+                  <Phone className="h-3.5 w-3.5" />
+                  <span>Hotline: 0918.388.998</span>
+                </a>
+                <a
+                  href="https://zalo.me/0918388998"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-xs font-semibold transition-colors"
+                >
+                  <span>Chat Zalo</span>
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -183,14 +218,11 @@ export default function TourListPage() {
 
                   <div className="pt-space-md mt-space-md flex items-center justify-between border-t border-surface-container-high/60">
                     <div>
-                      <span className="font-label-sm text-xs text-on-surface-variant block">
-                        Chi phí bảo tồn:
+                      <span className="font-label-sm text-xs text-secondary font-semibold uppercase tracking-wider block">
+                        Đồng hành nghệ nhân
                       </span>
-                      <span className="font-serif text-xl text-primary font-bold">
-                        {tour.price}{" "}
-                        <span className="font-sans text-xs font-normal text-on-surface-variant">
-                          /khách
-                        </span>
+                      <span className="font-serif text-base text-primary font-bold">
+                        Tư vấn lịch trình riêng
                       </span>
                     </div>
 
@@ -198,7 +230,7 @@ export default function TourListPage() {
                       to={`/tour/${tour.slug}`}
                       className="px-space-md py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-xs sm:text-sm transition-colors flex items-center gap-1.5 font-semibold group/btn shadow-sm"
                     >
-                      <span>Xem Chi Tiết</span>
+                      <span>Chi Tiết & Liên Hệ</span>
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-0.5 transition-transform" />
                     </Link>
                   </div>

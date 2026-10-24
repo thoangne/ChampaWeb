@@ -101,22 +101,27 @@ export default function TourDetailPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isLightboxOpen, handleNextPhoto, handlePrevPhoto]);
 
-  // Giá tính toán
-  const adultPrice = tour.adultPrice ?? 650000;
-  const childPrice = tour.childPrice ?? 450000;
-  const totalPrice = adults * adultPrice + children * childPrice;
+  // State liên hệ tư vấn lịch trình
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [specialRequest, setSpecialRequest] = useState("");
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Đặt giữ chỗ thành công!", {
-      description: `${tour.title} • ${adults} người lớn, ${children} trẻ em • Ngày ${selectedDate}. Điều phối viên Dana sẽ liên hệ qua Zalo/Điện thoại ngay.`,
+    const guestName = fullName.trim() || "Quý lữ khách";
+    toast.success("Đã gửi thông tin liên hệ thành công!", {
+      description: `Cảm ơn ${guestName}! Điều phối viên bản địa Dana sẽ liên hệ qua ${phone ? `SĐT/Zalo ${phone}` : "Zalo/Điện thoại"} để tư vấn lịch trình chi tiết và đón tiếp chu đáo.`,
     });
+    setFullName("");
+    setPhone("");
+    setSpecialRequest("");
   };
 
   const handleContactZalo = () => {
     toast.info("Kết nối Zalo tư vấn", {
-      description: "Đang mở cửa sổ hỗ trợ viên bản địa Trượng Văn Hải (Hotline: 0918.388.998).",
+      description: "Đang mở cửa sổ hỗ trợ viên bản địa Trượng Văn Hải (Hotline/Zalo: 0918.388.998).",
     });
+    window.open("https://zalo.me/0918388998", "_blank");
   };
 
   const relatedTours = TOURS.filter((t) => t.id !== tour.id);
@@ -813,38 +818,33 @@ export default function TourDetailPage() {
             <aside className="lg:col-span-4 w-full lg:sticky lg:top-36 flex flex-col gap-space-md">
               {/* Main Booking Card */}
               <div className="p-space-lg rounded-2xl bg-surface-container-lowest shadow-xl flex flex-col gap-space-md border border-outline-variant/30">
-                {/* Pricing Header */}
-                <div className="flex items-baseline justify-between">
-                  <div>
-                    <span className="font-label-sm text-xs uppercase tracking-widest text-on-surface-variant block">
-                      Giá trọn gói 1 ngày
+                {/* Consultation Header - No commercial price, pure cultural engagement */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-semibold uppercase tracking-wider">
+                      Đồng Hành Nghệ Nhân
                     </span>
-                    <div className="flex items-baseline gap-1 mt-1">
-                      <span className="font-serif text-3xl text-primary font-bold">
-                        {adultPrice.toLocaleString("vi-VN")}đ
-                      </span>
-                      <span className="font-body-sm text-xs text-on-surface-variant">/ khách lớn</span>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <span className="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-xs font-semibold uppercase">
-                      Nhóm Nhỏ
-                    </span>
-                    <span className="font-body-sm text-xs text-on-surface-variant block mt-1">
-                      Trẻ em: {childPrice.toLocaleString("vi-VN")}đ
+                    <span className="font-label-sm text-[11px] text-primary font-bold uppercase tracking-wider">
+                      Nhóm Nhỏ Tối Đa 8 Khách
                     </span>
                   </div>
+                  <h3 className="font-serif text-xl text-on-surface font-bold mt-1">
+                    Đăng Ký Tư Vấn & Đặt Lịch
+                  </h3>
+                  <p className="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                    Hành trình không niêm yết giá thương mại. Toàn bộ chi phí được điều phối minh bạch, hoàn lưu 100% cho gia đình nghệ nhân bản địa và quỹ bảo tồn làng nghề.
+                  </p>
                 </div>
 
                 <div className="w-full h-px bg-surface-variant/60"></div>
 
-                {/* Booking Form */}
+                {/* Consultation & Booking Form */}
                 <form className="flex flex-col gap-space-sm" onSubmit={handleBooking}>
                   {/* Date Picker */}
                   <div className="flex flex-col gap-1">
                     <label className="font-label-md text-xs text-on-surface font-semibold flex items-center justify-between">
-                      <span>Chọn Ngày Khởi Hành</span>
-                      <span className="text-secondary font-label-sm text-[11px]">Hàng ngày</span>
+                      <span>Dự Kiến Ngày Khởi Hành</span>
+                      <span className="text-secondary font-label-sm text-[11px]">Linh hoạt</span>
                     </label>
                     <div className="relative flex items-center">
                       <Calendar className="absolute left-3 text-outline h-4 w-4 pointer-events-none" />
@@ -917,59 +917,98 @@ export default function TourDetailPage() {
                     </div>
                   </div>
 
-                  {/* Price Breakdown Summary */}
-                  <div className="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-1 text-on-surface-variant font-body-sm text-xs mt-1 border border-outline-variant/20">
-                    <div className="flex justify-between">
-                      <span>
-                        Người lớn ({adults} khách × {adultPrice.toLocaleString("vi-VN")}đ)
-                      </span>
-                      <span className="text-on-surface font-medium">
-                        {(adults * adultPrice).toLocaleString("vi-VN")}đ
-                      </span>
+                  {/* Contact Fields */}
+                  <div className="flex flex-col gap-1">
+                    <label className="font-label-md text-xs text-on-surface font-semibold">
+                      Họ và tên của bạn <span className="text-primary">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Ví dụ: Nguyễn Thị Lan"
+                      className="w-full px-3 py-2 rounded-xl bg-surface text-on-surface font-body-md text-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm border border-outline-variant/30"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="font-label-md text-xs text-on-surface font-semibold">
+                      Số điện thoại / Zalo <span className="text-primary">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="Ví dụ: 0912 345 678"
+                      className="w-full px-3 py-2 rounded-xl bg-surface text-on-surface font-body-md text-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm border border-outline-variant/30"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="font-label-md text-xs text-on-surface font-semibold">
+                      Yêu cầu đặc biệt (tuỳ chọn)
+                    </label>
+                    <input
+                      type="text"
+                      value={specialRequest}
+                      onChange={(e) => setSpecialRequest(e.target.value)}
+                      placeholder="Ăn chay, khảo cứu văn hóa, chụp ảnh..."
+                      className="w-full px-3 py-2 rounded-xl bg-surface text-on-surface font-body-md text-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm border border-outline-variant/30"
+                    />
+                  </div>
+
+                  {/* Included Cultural Inclusions Summary */}
+                  <div className="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-1.5 text-on-surface-variant font-body-sm text-xs mt-1 border border-outline-variant/20">
+                    <span className="font-label-sm text-xs text-on-surface font-semibold block">
+                      Đặc quyền di sản đi kèm:
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle className="h-3.5 w-3.5 text-secondary shrink-0" />
+                      <span>Hướng dẫn viên bản địa Chăm đồng hành suốt tuyến</span>
                     </div>
-                    {children > 0 && (
-                      <div className="flex justify-between">
-                        <span>
-                          Trẻ em ({children} khách × {childPrice.toLocaleString("vi-VN")}đ)
-                        </span>
-                        <span className="text-on-surface font-medium">
-                          {(children * childPrice).toLocaleString("vi-VN")}đ
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex justify-between">
-                      <span>Workshop gốm & tác phẩm mang về</span>
-                      <span className="text-secondary font-medium">Đã bao gồm</span>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle className="h-3.5 w-3.5 text-secondary shrink-0" />
+                      <span>Workshop nghệ nhân & tặng phẩm tác phẩm hoàn chỉnh</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Bữa trưa gia đình Chăm 6 món</span>
-                      <span className="text-secondary font-medium">Đã bao gồm</span>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle className="h-3.5 w-3.5 text-secondary shrink-0" />
+                      <span>Bữa trưa ẩm thực Chăm cổ truyền chuẩn bản địa</span>
                     </div>
-                    <div className="w-full h-px bg-surface-variant/60 my-1"></div>
-                    <div className="flex justify-between font-serif text-base text-on-surface font-bold">
-                      <span>Tổng chi phí:</span>
-                      <span className="text-primary text-lg">{totalPrice.toLocaleString("vi-VN")}đ</span>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle className="h-3.5 w-3.5 text-secondary shrink-0" />
+                      <span>Xe ô tô máy lạnh đưa đón tận nơi từ TP. Phan Rang</span>
                     </div>
                   </div>
 
-                  {/* Primary Booking CTA */}
+                  {/* Primary CTA */}
                   <button
                     className="w-full mt-2 py-3.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-sm uppercase tracking-wider font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                     type="submit"
                   >
                     <CheckCircle className="h-4 w-4" />
-                    <span>Đặt Giữ Chỗ Ngay</span>
+                    <span>Gửi Yêu Cầu Tư Vấn Lịch Trình</span>
                   </button>
 
-                  {/* Secondary Contact CTA */}
-                  <button
-                    onClick={handleContactZalo}
-                    className="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-semibold transition-colors flex items-center justify-center gap-2"
-                    type="button"
-                  >
-                    <Phone className="h-4 w-4 text-secondary" />
-                    <span>Tư Vấn Nhanh Qua Zalo / Hotline Di Sản</span>
-                  </button>
+                  {/* Direct Contact Buttons */}
+                  <div className="grid grid-cols-2 gap-space-xs mt-1">
+                    <a
+                      href="tel:0918388998"
+                      className="py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 text-center"
+                    >
+                      <Phone className="h-3.5 w-3.5 text-primary" />
+                      <span>Gọi 0918.388.998</span>
+                    </a>
+                    <button
+                      onClick={handleContactZalo}
+                      className="py-2.5 rounded-xl bg-secondary-container/30 hover:bg-secondary-container/50 text-secondary font-label-md text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                      type="button"
+                    >
+                      <MessageSquare className="h-3.5 w-3.5 text-secondary" />
+                      <span>Chat Zalo</span>
+                    </button>
+                  </div>
                 </form>
 
                 {/* Reassurance Checklist */}
@@ -992,7 +1031,7 @@ export default function TourDetailPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-secondary shrink-0" />
-                    <span>Bảo hiểm du lịch trọn gói mức 50.000.000đ</span>
+                    <span>Bảo hiểm du lịch trọn gói chuẩn quốc tế cho mọi lữ khách</span>
                   </div>
                 </div>
               </div>
@@ -1093,9 +1132,14 @@ export default function TourDetailPage() {
                       </p>
                     </div>
                     <div className="mt-space-sm pt-space-xs flex items-center justify-between border-t border-surface-container/60">
-                      <span className="font-serif text-lg text-primary font-bold">
-                        {rTour.price} <span className="font-sans text-xs text-on-surface-variant font-normal">/ khách</span>
-                      </span>
+                      <div>
+                        <span className="font-label-sm text-[11px] text-secondary font-semibold uppercase tracking-wider block">
+                          Đồng hành nghệ nhân
+                        </span>
+                        <span className="font-serif text-base text-primary font-bold">
+                          Tư vấn lịch trình riêng
+                        </span>
+                      </div>
                       <span className="text-secondary font-label-md text-xs font-semibold hover:underline">
                         Chi tiết →
                       </span>

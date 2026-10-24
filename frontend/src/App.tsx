@@ -5,6 +5,7 @@ import TourDetailPage from "./pages/TourDetailPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import DigitalHeritagePage from "./pages/DigitalHeritagePage";
+import SouvenirPage from "./pages/SouvenirPage";
 import { Toaster } from "./components/ui/sonner";
 import { AudioProvider } from "./lib/AudioContext";
 
@@ -30,6 +31,10 @@ export default function App() {
         {/* Chi tiết bài viết khảo cứu: /blog/:articleSlug hoặc /bai-viet/:articleSlug */}
         <Route path="/blog/:articleSlug" element={<BlogDetailPage />} />
         <Route path="/bai-viet/:articleSlug" element={<BlogDetailPage />} />
+
+        {/* Phân hệ Lưu niệm & Thủ công mỹ nghệ Champa */}
+        <Route path="/san-pham" element={<SouvenirPage />} />
+        <Route path="/luu-niem" element={<SouvenirPage />} />
 
         {/* Chuyển hướng các đường dẫn cũ vào phân hệ Số hoá di sản */}
         <Route path="/ngon-ngu" element={<Navigate to="/so-hoa-di-san?tab=ngon-ngu" replace />} />

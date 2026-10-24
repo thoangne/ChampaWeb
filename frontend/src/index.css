@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 @tailwind base;
@@ -6,28 +6,44 @@
 @tailwind utilities;
 
 @layer base {
-  *, ::before, ::after {
-    font-family: "Times New Roman", Times, serif !important;
+  :root {
+    --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Playfair Display', 'Times New Roman', serif;
   }
 
-  html,
-  body {
-    width: 100vw;
+  html {
+    width: 100%;
     margin: 0;
     padding: 0;
     background-color: #fff8f6;
-    font-family: "Times New Roman", Times, serif !important;
+    color: #241915;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
-    overscroll-behavior: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fff8f6;
+    color: #241915;
+    font-family: var(--font-sans);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
-    min-height: max(884px, 100dvh);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Refined typography */
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  /* Safe Area Inset utilities */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
@@ -36,11 +52,17 @@
     padding-top: env(safe-area-inset-top, 0px);
   }
 
-  main> :first-child {
+  /* Focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid #972f12;
+    outline-offset: 2px;
+  }
+
+  main > :first-child {
     margin-top: 0 !important;
   }
 
-  main> :last-child {
+  main > :last-child {
     margin-bottom: 0 !important;
   }
 }
@@ -55,8 +77,32 @@
   line-height: 1;
 }
 
+/* Custom subtle scrollbar */
 ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff1ec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dfc0b8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a73a1d;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Champa Cultural Calendar Theme */
@@ -96,4 +142,4 @@
   background-color: #972f12 !important;
   color: #ffffff !important;
   font-weight: 700;
-}
+}

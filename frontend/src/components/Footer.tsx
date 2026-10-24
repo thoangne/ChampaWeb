@@ -105,6 +105,7 @@ export default function Footer() {
                 { label: "Kho ảnh Văn hoá", href: "/so-hoa-di-san?tab=hinh-anh" },
                 { label: "Ngôn ngữ Akhar Thrah", href: "/so-hoa-di-san?tab=ngon-ngu" },
                 { label: "Giải mã Văn bia Cổ", href: "/so-hoa-di-san?tab=van-bia" },
+                { label: "Lưu niệm Champa Độc bản", href: "/san-pham" },
               ].map((item) => (
                 <li key={item.label} className="py-0.5">
                   <Link
