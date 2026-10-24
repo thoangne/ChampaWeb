@@ -22,7 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 # Playwright artifacts
 test-results/
 playwright-report/
+=======
+.env
+.env.local
+>>>>>>> c0cf69867a91185ee891313ecd59d52351b7d765
