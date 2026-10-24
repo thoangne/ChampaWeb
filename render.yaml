@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: champa-frontend
+    runtime: docker
+    dockerContext: ./frontend
+    dockerfilePath: ./frontend/Dockerfile
+    envVars:
+      - key: PORT
+        value: 3000
