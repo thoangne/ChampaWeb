@@ -110,10 +110,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             </div>
           </Link>
         </div>
-
-        {/* 2. Desktop Navigation Links (Căn chính giữa tuyệt đối trên PC để không bị lệch) */}
-        {/* 2. Desktop Navigation Links (Cỡ chữ 20px chuẩn) */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+        {/* 2. Desktop Navigation Links (Căn giữa tuyệt đối & đồng bộ trục chuẩn) */}
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 shrink-0 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full">
           {PC_NAV_LINKS.map((link) => {
             let isRouteActive = false;
             if (link.href === "/") {
@@ -137,25 +135,27 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
               isRouteActive = location.pathname.startsWith(link.href);
             }
 
-            const activeClass = "text-primary font-semibold border-b-2 border-primary pb-1";
-            const inactiveClass =
-              "text-on-surface-variant font-semibold hover:text-primary border-b-2 border-transparent pb-1";
-            const currentClass = isRouteActive ? activeClass : inactiveClass;
+            // Đồng bộ chiều cao h-10, padding và đường border-b-2
+            const baseClass =
+              "inline-flex items-center justify-center font-label-lg text-[20px] whitespace-nowrap transition-colors border-b-2 h-10 px-1";
+            const currentClass = isRouteActive
+              ? `${baseClass} text-primary font-bold border-primary`
+              : `${baseClass} text-on-surface-variant font-semibold hover:text-primary border-transparent`;
 
             if (link.children && link.children.length > 0) {
               return (
-                <div key={link.href} className="relative group py-1">
+                <div key={link.href} className="relative group flex items-center h-full">
                   <Link
                     to={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className={`font-label-lg text-[20px] whitespace-nowrap transition-colors flex items-center gap-1.5 ${currentClass}`}
+                    className={`${currentClass} gap-1.5`}
                   >
                     <span>{link.label}</span>
-                    <ChevronDown className="h-5 w-5 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
+                    <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-hover:rotate-180 duration-200 text-outline group-hover:text-primary" />
                   </Link>
 
                   {/* Dropdown Menu Container */}
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover:block z-50">
+                  <div className="absolute top-[calc(100%-8px)] left-1/2 -translate-x-1/2 pt-2 hidden group-hover:block z-50">
                     <div className="w-64 bg-surface-container-lowest/95 backdrop-blur-xl rounded-2xl shadow-[0_10px_30px_rgba(36,25,21,0.12)] border border-surface-container-high/60 p-2 flex flex-col gap-1 animate-in fade-in slide-in-from-top-1 duration-150">
                       {link.children.map((sub) => (
                         <Link
@@ -185,7 +185,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                 key={link.href}
                 to={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`font-label-lg text-[20px] whitespace-nowrap transition-colors py-1 ${currentClass}`}
+                className={currentClass}
               >
                 {link.label}
               </Link>
