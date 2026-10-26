@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Sparkles, MapPin, SunMedium } from "lucide-react";
+import { ChevronLeft, ChevronRight,MapPin, SunMedium } from "lucide-react";
 
 interface LifeSlide {
   id: number;

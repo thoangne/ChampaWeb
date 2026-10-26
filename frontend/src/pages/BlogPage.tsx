@@ -19,7 +19,7 @@ export default function BlogPage() {
     ["tin-tuc", "lich-su", "van-hoa"].includes(initialCategory) ? initialCategory : "all"
   );
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery] = useState<string>("");
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
 
   // Lắng nghe thay đổi trên URL để cập nhật category khi bấm từ Menu Header
