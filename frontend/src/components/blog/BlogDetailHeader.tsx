@@ -70,7 +70,7 @@ export default function BlogDetailHeader({
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-outline" />
           <Link className="hover:text-primary transition-colors" to="/bai-viet">
-            Bài Viết
+            Bài viết
           </Link>
           <ChevronRight className="h-3.5 w-3.5 text-outline" />
           <Link
