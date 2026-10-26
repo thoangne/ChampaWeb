@@ -20,28 +20,22 @@ export default function DanaHome() {
   };
 
   return (
-    <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">
-      {/* 1. Header */}
-      <Header
-        onToggleAudio={toggleAudio}
-        isAudioPlaying={isAudioPlaying}
-      />
+    <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen">
+      {/* 1. Header (Navbar cố định trên cùng) */}
+      <Header onToggleAudio={toggleAudio} isAudioPlaying={isAudioPlaying} />
 
       {/* 2. Main Content Stream */}
-      <main className="w-full bg-surface min-h-[calc(100vh-80px)] flex flex-col">
-        {/* Section 1: Hero Section */}
-        <HeroSection
-          onToggleAudio={toggleAudio}
-          isAudioPlaying={isAudioPlaying}
-        />
-
-        {/* Section 2: Triết lý Di sản & 4 Thẻ chỉ số tác động xã hội */}
-        <ManifestoSection />
-
-        {/* MỚI: Nhịp Sống Đời Thường Làng Dana (Sunlit Heritage Carousel) */}
+      <main className="w-full pt-16 xl:pt-20 bg-surface flex flex-col">
+        {/* BANNER SLIDER FULL-WIDTH NẰM NGAY ĐẦU TRANG */}
         <DanaLifeCarousel />
 
-        {/* Section 3: Hành trình Độc bản (Bộ lọc Tabs & Lưới 3 Tour) */}
+        {/* Section 1: Hero / Tìm kiếm chuyến đi */}
+        <HeroSection onToggleAudio={toggleAudio} isAudioPlaying={isAudioPlaying} />
+
+        {/* Section 2: Triết lý Di sản */}
+        <ManifestoSection />
+
+        {/* Section 3: Hành trình Độc bản */}
         <ToursSection />
 
         {/* Section 4: Bản đồ Tuyến Khảo Cổ & Văn Hóa */}
@@ -50,23 +44,15 @@ export default function DanaHome() {
           onSelectStation={setActiveStation}
         />
 
-        {/* Section 5: Góc Nghệ Nhân Giữ Lửa */}
+        {/* Section 5: Nghệ nhân */}
         <ArtisansSection />
 
-        {/* Section 6: Lắng nghe Lữ khách & Banner Tải Cẩm nang */}
+        {/* Section 6: Cảm nhận lữ khách */}
         <TestimonialsSection />
       </main>
 
-      {/* 3. Footer */}
       <Footer />
-
-      {/* 4. Audio Saranai Floating Bar */}
-      <AudioPlayerBar
-        isOpen={isAudioPlaying}
-        onClose={() => setIsAudioPlaying(false)}
-      />
-
-      {/* 5. Mobile Bottom Nav */}
+      <AudioPlayerBar isOpen={isAudioPlaying} onClose={() => setIsAudioPlaying(false)} />
       <BottomNav />
     </div>
   );
