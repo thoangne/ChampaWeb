@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import ManifestoSection from "../components/ManifestoSection";
-import LifeCarouselSection from "../components/LifeCarouselSection"; // Import component mới
+import DanaLifeCarousel from "../components/DanaLifeCarousel"; // Tích hợp component mới
 import ToursSection from "../components/ToursSection";
 import WaypointsSection from "../components/WaypointsSection";
 import ArtisansSection from "../components/ArtisansSection";
@@ -21,11 +21,13 @@ export default function DanaHome() {
 
   return (
     <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+      {/* 1. Header */}
       <Header
         onToggleAudio={toggleAudio}
         isAudioPlaying={isAudioPlaying}
       />
 
+      {/* 2. Main Content Stream */}
       <main className="w-full bg-surface min-h-[calc(100vh-80px)] flex flex-col">
         {/* Section 1: Hero Section */}
         <HeroSection
@@ -37,7 +39,7 @@ export default function DanaHome() {
         <ManifestoSection />
 
         {/* MỚI: Nhịp Sống Đời Thường Làng Dana (Sunlit Heritage Carousel) */}
-        <LifeCarouselSection />
+        <DanaLifeCarousel />
 
         {/* Section 3: Hành trình Độc bản (Bộ lọc Tabs & Lưới 3 Tour) */}
         <ToursSection />
@@ -55,13 +57,16 @@ export default function DanaHome() {
         <TestimonialsSection />
       </main>
 
+      {/* 3. Footer */}
       <Footer />
 
+      {/* 4. Audio Saranai Floating Bar */}
       <AudioPlayerBar
         isOpen={isAudioPlaying}
         onClose={() => setIsAudioPlaying(false)}
       />
 
+      {/* 5. Mobile Bottom Nav */}
       <BottomNav />
     </div>
   );
