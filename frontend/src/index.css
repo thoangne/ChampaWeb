@@ -96,4 +96,38 @@
   background-color: #972f12 !important;
   color: #ffffff !important;
   font-weight: 700;
+}
+
+/* Infinite Marquee Animations for 3-row Image Showcase */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-row-1 {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 50s linear infinite;
+}
+
+.animate-marquee-row-2 {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 62s linear infinite;
+}
+
+.animate-marquee-row-3 {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 44s linear infinite;
+}
+
+.hover-pause-marquee:hover .animate-marquee-row-1,
+.hover-pause-marquee:hover .animate-marquee-row-2,
+.hover-pause-marquee:hover .animate-marquee-row-3 {
+  animation-play-state: paused;
 }

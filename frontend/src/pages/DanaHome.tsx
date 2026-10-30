@@ -6,6 +6,7 @@ import DanaLifeCarousel from "../components/DanaLifeCarousel"; // Tích hợp co
 import ToursSection from "../components/ToursSection";
 import WaypointsSection from "../components/WaypointsSection";
 import ArtisansSection from "../components/ArtisansSection";
+import ChampaCommunityGallery from "../components/ChampaCommunityGallery";
 import TestimonialsSection from "../components/TestimonialsSection";
 import BottomNav from "../components/BottomNav";
 import Footer from "../components/Footer";
@@ -47,7 +48,10 @@ export default function DanaHome() {
         {/* Section 5: Nghệ nhân */}
         <ArtisansSection />
 
-        {/* Section 6: Cảm nhận lữ khách */}
+        {/* Section 6: Các hình ảnh của Champa Community (3 hàng chạy xen kẽ từ phải sang trái) */}
+        <ChampaCommunityGallery />
+
+        {/* Section 7: Cảm nhận lữ khách */}
         <TestimonialsSection />
       </main>
 
