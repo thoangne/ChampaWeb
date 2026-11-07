@@ -11,15 +11,87 @@ import BlogDetailContent from "../components/blog/BlogDetailContent";
 import BlogDetailSidebar from "../components/blog/BlogDetailSidebar";
 import BlogDetailRelated from "../components/blog/BlogDetailRelated";
 import BlogDetailComments from "../components/blog/BlogDetailComments";
-import { getBlogDetailBySlug } from "../data/blogDetailData";
+import { getBlogDetailBySlug, type BlogDetailArticle } from "../data/blogDetailData";
+
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export default function BlogDetailPage() {
   const { articleSlug } = useParams<{ articleSlug: string }>();
+  const [apiArticle, setApiArticle] = useState<BlogDetailArticle | null>(null);
 
-  // Lấy dữ liệu chi tiết bài viết dựa theo slug
-  const article = useMemo(() => {
-    return getBlogDetailBySlug(articleSlug);
+  // Tải chi tiết bài viết từ API backend nếu có
+  useEffect(() => {
+    if (articleSlug) {
+      fetch(`${API_BASE}/posts/detail/${articleSlug}`)
+        .then((res) => res.json())
+        .then((resData) => {
+          if (resData.success && resData.data) {
+            const raw = resData.data;
+            const chapters = raw.content
+              ? raw.content.split("\n\n## ").map((section: string, idx: number) => {
+                const lines = section.split("\n\n");
+                const heading =
+                  idx === 0 && !section.startsWith("## ")
+                    ? "Tổng quan nghiên cứu di sản"
+                    : lines[0].replace("## ", "").trim();
+                const textLines =
+                  idx === 0 && !section.startsWith("## ") ? lines : lines.slice(1);
+                return {
+                  id: `chuong-${idx + 1}`,
+                  number: `0${idx + 1}`,
+                  categoryTag: raw.category || "Khảo cứu thực địa",
+                  title: heading,
+                  content: textLines,
+                };
+              })
+              : [];
+
+            const converted: BlogDetailArticle = {
+              id: raw.id,
+              slug: raw.slug,
+              title: raw.title,
+              subtitle: raw.excerpt || "",
+              mainCategory: raw.mainCategory || "van-hoa",
+              categoryLabel:
+                raw.mainCategory === "tin-tuc"
+                  ? "Tin tức & Sự kiện"
+                  : raw.mainCategory === "lich-su"
+                    ? "Tiến trình Lịch sử"
+                    : "Văn hóa & Nghệ thuật",
+              code: "PNDR-" + (raw.id || "0000").slice(-4),
+              badge: raw.badge || "Khảo Cứu Di Sản",
+              badgeClass: raw.badgeClass || "bg-primary/10 text-primary border-primary/20",
+              readTime: raw.readTime || "5 phút đọc",
+              date: new Date(raw.publishedAt || raw.createdAt).toLocaleDateString("vi-VN"),
+              author: raw.authorName || "Ban Quản Trị Di Sản",
+              authorRole: "Nghiên cứu viên Di sản Champa",
+              authorInitials: (raw.authorName || "AD").slice(0, 2).toUpperCase(),
+              fieldLocation: raw.fieldLocation || "Panduranga - Ninh Thuận",
+              coverImage: raw.coverImage,
+              coverCaption: raw.title,
+              coverSource: "Kho tư liệu khảo cứu Panduranga",
+              audioTitle: "Thanh âm kèn Saranai & Lễ hội",
+              audioDuration: "03:45",
+              chapters,
+              keyTakeaways: [
+                `Địa điểm khảo cứu thực tế: ${raw.fieldLocation || "Ninh Thuận"}.`,
+                "Di sản đặc thù lưu giữ tri thức bản địa người Chăm.",
+                "Được bảo tồn và lưu truyền nguyên bản qua nhiều thế hệ.",
+              ],
+              relatedSlugs: ["po-klong-garai-brick", "det-my-nghiep", "lang-gom-bau-truc"],
+            };
+            setApiArticle(converted);
+          }
+        })
+        .catch(() => { });
+    }
   }, [articleSlug]);
+
+  // Lấy dữ liệu chi tiết bài viết dựa theo slug (ưu tiên dữ liệu động từ API)
+  const article = useMemo(() => {
+    if (apiArticle) return apiArticle;
+    return getBlogDetailBySlug(articleSlug);
+  }, [apiArticle, articleSlug]);
 
   // Tiến trình đọc bài viết
   const [scrollProgress, setScrollProgress] = useState(0);

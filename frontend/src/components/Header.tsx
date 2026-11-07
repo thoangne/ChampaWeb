@@ -3,7 +3,6 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
   AudioLines,
-  User,
   Menu,
   ChevronDown,
   X,
@@ -15,10 +14,16 @@ import {
   BookOpen,
   Scroll,
   HelpCircle,
+  LogIn,
+  LogOut,
+  Compass,
+  FileText,
+  Plus,
 } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAudio } from "../lib/AudioContext";
+import { useAuth } from "../context/AuthContext";
 import { toast } from "./ui/sonner";
 
 interface HeaderProps {
@@ -28,9 +33,9 @@ interface HeaderProps {
 
 // Từ điển đa ngữ cho Navigation Header (Tiếng Việt & Tiếng Anh)
 const NAV_LABELS: Record<string, { vi: string; en: string }> = {
-  "/tour": { vi: "Dana Tour", en: "Dana Tours" },
+  "/tour": { vi: "Dana Tour", en: "Dana Tour" },
   "/san-pham": { vi: "Sản phẩm", en: "Crafts & Products" },
-  "/nghe-nhan": { vi: "Nghệ nhân", en: "Artisans" },
+  "/nghe-nhan": { vi: "Chân dung nghệ nhân", en: "Master Artisans" },
   "/bai-viet": { vi: "Bài Viết", en: "Articles" },
   "/so-hoa-di-san": { vi: "Số hoá di sản", en: "Digital Heritage" },
 };
@@ -132,6 +137,20 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
     return saved === "en" ? "en" : "vi";
   });
 
+  const { user, isAdmin, openAuthModal, logout } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const location = useLocation();
 
   const handleLanguageChange = (lang: "vi" | "en") => {
@@ -198,7 +217,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
   const activeNavLinks = PC_NAV_LINKS.filter((link) => link.href !== "/");
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-surface/95 backdrop-blur-xl shadow-[0_2px_14px_rgba(36,25,21,0.06)] border-b border-surface-container-high/60 transition-all">
+    <header className="fixed top-0 left-0 w-full z-[90] bg-surface/95 backdrop-blur-xl shadow-[0_2px_14px_rgba(36,25,21,0.06)] border-b border-surface-container-high/60 transition-all">
       <div className="w-full h-16 xl:h-20 px-2.5 sm:px-3.5 xl:px-4 flex items-center justify-between gap-2.5 sm:gap-4">
 
         {/* ========================================================
@@ -283,8 +302,8 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                     </Link>
 
                     {/* Dropdown Menu Container */}
-                    <div className="absolute top-[calc(100%-4px)] right-0 pt-2 hidden group-hover:block z-50">
-                      <div className="w-72 xl:w-80 bg-surface-container-lowest/98 backdrop-blur-2xl rounded-2xl shadow-[0_12px_36px_rgba(36,25,21,0.12)] border border-surface-container-high/80 p-2 flex flex-col gap-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                    <div className="absolute top-[calc(100%-4px)] right-0 pt-2 hidden group-hover:block z-[100]">
+                      <div className="w-72 xl:w-80 bg-white rounded-2xl shadow-[0_20px_50px_rgba(36,25,21,0.22)] border border-[#dfc0b8]/80 p-2.5 flex flex-col gap-1.5 animate-in fade-in slide-in-from-top-1 duration-150 ring-1 ring-black/5">
                         {link.children.map((sub) => {
                           const itemConfig = SUB_MENU_ICONS[sub.href] || {
                             icon: HelpCircle,
@@ -380,12 +399,99 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
             </span>
           </button>
 
-          {/* 2.3 User Avatar */}
-          <Avatar className="hidden sm:inline-flex h-9 w-9 shrink-0">
-            <AvatarFallback className="bg-primary text-on-primary font-medium text-xs">
-              <User className="h-4 w-4" />
-            </AvatarFallback>
-          </Avatar>
+          {/* 2.3 User Authentication & Profile Menu */}
+          {!user ? (
+            <button
+              type="button"
+              onClick={() => openAuthModal("login")}
+              className="hidden sm:inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl bg-amber-700/10 text-amber-800 hover:bg-amber-700 hover:text-white font-semibold text-xs border border-amber-700/20 shadow-2xs transition-all cursor-pointer shrink-0"
+            >
+              <LogIn className="h-3.5 w-3.5" />
+              <span>{language === "vi" ? "Đăng nhập" : "Sign In"}</span>
+            </button>
+          ) : (
+            <div className="relative hidden sm:inline-block shrink-0" ref={userMenuRef}>
+              <button
+                type="button"
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="flex items-center gap-1.5 p-1 rounded-full hover:bg-stone-100 transition-all cursor-pointer focus:outline-none"
+                aria-label="Tài khoản cá nhân"
+              >
+                <Avatar className="h-9 w-9 ring-2 ring-amber-700/30 shrink-0">
+                  {user.avatarUrl ? (
+                    <img src={user.avatarUrl} alt={user.fullName} className="h-full w-full object-cover" />
+                  ) : (
+                    <AvatarFallback className="bg-amber-700 text-white font-bold text-xs uppercase">
+                      {user.fullName ? user.fullName.charAt(0) : "U"}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <ChevronDown className="h-3.5 w-3.5 text-stone-500" />
+              </button>
+
+              {/* Dropdown Menu */}
+              {userMenuOpen && (
+                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-white shadow-xl border border-stone-200/90 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="px-4 py-2.5 border-b border-stone-100">
+                    <p className="text-xs font-bold text-stone-900 truncate">{user.fullName}</p>
+                    <p className="text-[11px] text-stone-500 truncate">{user.email}</p>
+                    <span className="inline-block mt-1 text-[9px] font-semibold uppercase px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
+                      {user.provider === "google" ? "Google Account" : user.provider === "facebook" ? "Facebook Account" : "Champa Account"}
+                    </span>
+                  </div>
+
+                  <div className="py-1">
+                    <Link
+                      to="/tour"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-900 transition-colors"
+                    >
+                      <Compass className="h-4 w-4 text-amber-700" />
+                      <span>{language === "vi" ? "Đơn đặt tour & Trải nghiệm" : "My Bookings & Tours"}</span>
+                    </Link>
+                  </div>
+
+                  {isAdmin && (
+                    <div className="py-1 border-t border-stone-100 bg-[#fff1ec]/40">
+                      <div className="px-4 py-1 text-[9px] font-bold uppercase tracking-wider text-secondary">
+                        Quản trị Hệ thống
+                      </div>
+                      <Link
+                        to="/admin/blog/quan-ly"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs text-stone-800 hover:bg-[#fff1ec] font-semibold transition-colors"
+                      >
+                        <FileText className="h-4 w-4 text-primary" />
+                        <span>{language === "vi" ? "Quản lý bài viết Blog" : "Manage Blog Posts"}</span>
+                      </Link>
+                      <Link
+                        to="/admin/blog/editor"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs text-stone-800 hover:bg-[#fff1ec] font-semibold transition-colors"
+                      >
+                        <Plus className="h-4 w-4 text-secondary" />
+                        <span>{language === "vi" ? "Viết bài blog mới" : "Write New Post"}</span>
+                      </Link>
+                    </div>
+                  )}
+
+                  <div className="border-t border-stone-100 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setUserMenuOpen(false);
+                        logout();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors text-left cursor-pointer"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span>{language === "vi" ? "Đăng xuất" : "Sign Out"}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* 2.4 Mobile Menu Toggle button */}
           <Button
@@ -430,7 +536,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
           3. Mobile Drawer Menu (Đã loại bỏ Trang chủ & Tìm kiếm)
       ======================================================== */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-surface-container-lowest/98 backdrop-blur-xl border-t border-surface-container-high px-4 py-3 flex flex-col gap-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="lg:hidden bg-white border-t border-surface-container-high px-4 py-3 flex flex-col gap-2 shadow-2xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="flex items-center justify-between pb-2 mb-1 border-b border-surface-container-high/60">
             <span className="font-label-sm text-[11px] uppercase tracking-wider text-secondary font-bold">
               {language === "vi" ? "Danh mục khám phá di sản" : "Heritage Discovery Menu"}
@@ -446,7 +552,7 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
           </div>
 
           {/* Bộ chọn ngôn ngữ hiển thị rõ ràng trên mobile */}
-          <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-surface-container-low border border-outline-variant/30 mb-1">
+          <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-surface-container-low border border-outline-variant/30 mb-2">
             <div className="flex items-center gap-2 text-xs font-semibold text-on-surface">
               <Globe className="h-4 w-4 text-secondary" />
               <span>{language === "vi" ? "Ngôn ngữ / Language" : "Language / Ngôn ngữ"}</span>
@@ -474,6 +580,50 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
               </button>
             </div>
           </div>
+
+          {/* Mobile User Authentication / Profile Section */}
+          {!user ? (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openAuthModal("login");
+              }}
+              className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-700 text-white font-semibold text-xs shadow-sm mb-2 cursor-pointer transition-all hover:bg-amber-800"
+            >
+              <LogIn className="h-4 w-4" />
+              <span>{language === "vi" ? "Đăng nhập / Đăng ký" : "Sign In / Register"}</span>
+            </button>
+          ) : (
+            <div className="flex items-center justify-between p-3 rounded-xl bg-amber-50/90 border border-amber-200/70 mb-2">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <Avatar className="h-9 w-9 ring-1 ring-amber-600/30 shrink-0">
+                  {user.avatarUrl ? (
+                    <img src={user.avatarUrl} alt={user.fullName} className="h-full w-full object-cover" />
+                  ) : (
+                    <AvatarFallback className="bg-amber-700 text-white font-bold text-xs uppercase">
+                      {user.fullName ? user.fullName.charAt(0) : "U"}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <div className="min-w-0">
+                  <p className="text-xs font-bold text-stone-900 truncate">{user.fullName}</p>
+                  <p className="text-[10px] text-stone-500 truncate">{user.email}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  logout();
+                }}
+                className="p-1.5 text-red-600 hover:bg-red-100 rounded-lg transition-colors cursor-pointer"
+                title="Đăng xuất"
+              >
+                <LogOut className="h-4 w-4" />
+              </button>
+            </div>
+          )}
 
 
 

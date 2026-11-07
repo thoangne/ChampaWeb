@@ -58,7 +58,7 @@ export default function WaypointsSection({
                   className={`p-space-md rounded-2xl shadow-sm cursor-pointer transition-all duration-300 hover:translate-x-1 border ${
                     isActive
                       ? "border-l-4 border-l-primary border-primary/20 bg-surface-container-lowest shadow-md ring-1 ring-primary/10"
-                      : "border-outline-variant/30 bg-surface-container-lowest/80 hover:bg-surface-container-lowest"
+                      : "border-outline-variant/30 bg-white/80 hover:bg-white"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">

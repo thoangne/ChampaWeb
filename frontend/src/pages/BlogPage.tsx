@@ -9,7 +9,9 @@ import BlogFeaturedPost from "../components/blog/BlogFeaturedPost";
 import BlogPillarsSection from "../components/blog/BlogPillarsSection";
 import BlogArticlesGrid from "../components/blog/BlogArticlesGrid";
 import BlogCTASection from "../components/blog/BlogCTASection";
-import { BLOG_ARTICLES, type BlogMainCategoryType } from "../data/blogData";
+import { BLOG_ARTICLES, type BlogArticle, type BlogMainCategoryType } from "../data/blogData";
+
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 export default function BlogPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,6 +23,37 @@ export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery] = useState<string>("");
   const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
+  const [apiArticles, setApiArticles] = useState<BlogArticle[]>([]);
+
+  // Tải danh sách bài viết động từ Backend API (bao gồm các bài mới do Admin đăng)
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/posts?limit=50`);
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) {
+          const mapped: BlogArticle[] = json.data.map((item: any) => ({
+            id: item.id,
+            title: item.title,
+            mainCategory: item.mainCategory || "van-hoa",
+            category: item.category || "craft",
+            badge: item.badge || "Khảo Cứu Di Sản",
+            badgeClass: item.badgeClass || "bg-primary/10 text-primary border-primary/20",
+            fieldLocation: item.fieldLocation || "Panduranga",
+            readTime: item.readTime || "5 phút đọc",
+            author: item.authorName || "Ban Quản Trị Di Sản",
+            desc: item.excerpt || item.title,
+            image: item.coverImage,
+            slug: item.slug,
+          }));
+          setApiArticles(mapped);
+        }
+      } catch (err) {
+        console.log("Dùng bài viết tĩnh fallback:", err);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   // Lắng nghe thay đổi trên URL để cập nhật category khi bấm từ Menu Header
   useEffect(() => {
@@ -50,7 +83,15 @@ export default function BlogPage() {
 
   // Filter articles by main category, sub category and search keyword
   const filteredArticles = useMemo(() => {
-    return BLOG_ARTICLES.filter((article) => {
+    // Kết hợp bài từ API (mới nhất từ Admin) lên đầu, tiếp đến là bài viết tĩnh mẫu
+    const combined = [...apiArticles];
+    BLOG_ARTICLES.forEach((staticItem) => {
+      if (!combined.some((item) => item.slug === staticItem.slug)) {
+        combined.push(staticItem);
+      }
+    });
+
+    return combined.filter((article) => {
       const matchMainCategory =
         mainCategory === "all" || article.mainCategory === mainCategory;
       const matchSubCategory =
@@ -62,7 +103,7 @@ export default function BlogPage() {
         article.author.toLowerCase().includes(searchQuery.toLowerCase());
       return matchMainCategory && matchSubCategory && matchSearch;
     });
-  }, [mainCategory, selectedCategory, searchQuery]);
+  }, [apiArticles, mainCategory, selectedCategory, searchQuery]);
 
   return (
     <div className="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary-container">

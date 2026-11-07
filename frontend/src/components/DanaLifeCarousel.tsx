@@ -28,51 +28,66 @@ export interface PhotoSlide {
 const PHOTO_SLIDES: PhotoSlide[] = [
   {
     id: 1,
-    image: "/images/dana-life/IMG_9898.JPG",
-    category: "Làng Nghề Cổ UNESCO",
-    title: "Nắng Sớm Trút Đầy Ngõ Làng Đất Nung",
-    subtitle: "Ký sự Bàu Trúc - Kỹ nghệ gốm tay ngàn năm",
-    location: "Làng gốm Bàu Trúc, Ninh Phước",
-    date: "Tháng 10, 2024",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBWzz5wVWN2Rre_bf3lzTZ89szZW61A19gyuIM1D6eHB2bgjSvLJ2IjqYRR2_FvWNOaiuYH_mZKTaaCYHyrAo6Y-MHZRm5QMjTQqVYlWO-UTZpP7j-38TvaXGvTC0E43MbjaK6OcYizspkYPA97vZ7ux2qQedU074FLdyFMB7zxmwJM_GGaJUJxVOmC--t3UtTdUYuMj2PhxbPFLX9SyKZLF-p5BPhi_fHZpOUSInajqnNWFka72rYwew",
+    category: "Kiến Trúc Đền Tháp Kỳ Vĩ",
+    title: "Tháp Cổ Po Klong Garai - Đỉnh Cao Nghệ Thuật Champa",
+    subtitle: "Quần thể đền tháp gạch nung thế kỷ XIII - Di tích Quốc gia đặc biệt",
+    location: "Đồi Trầu, Phường Đô Vinh, TP. Phan Rang - Tháp Chàm (Cách trung tâm 7km)",
+    date: "Xây dựng TK XIII - XIV",
     description:
-      "Từng tia nắng ban mai rọi sáng những lối ngõ đất nung trầm mặc. Nơi đây, người phụ nữ Chăm 'tay làm chân quay', nhào nặn hồn đất phù sa sông Quao thành những tác phẩm gốm mộc độc bản.",
-    author: "Ký sự điền dã Dana",
+      "Biểu tượng kiêu hãnh của xứ Panduranga với 3 tòa tháp Kalan chính, Gopura cổng và Kosagrha lửa. Nơi lưu giữ tượng Yoni - Linga thần Po Klong Garai cùng bia ký Sanskrit cổ ca ngợi công đức dẫn nước ngọt tưới mát đồng bằng.",
+    author: "Điểm đến Di sản Số 1",
   },
   {
     id: 2,
-    image: "/images/dana-life/IMG_9901.JPG",
-    category: "Chân Dung & Con Người",
-    title: "Nụ Cười Trầm Tích Của Vùng Đất Panduranga",
-    subtitle: "Linh hồn lưu giữ tri thức bản địa",
-    location: "Xóm Chăm Phước Dân, Ninh Thuận",
-    date: "Tháng 10, 2024",
+    image: "/images/dana-life/IMG_9911.JPG",
+    category: "Di Sản Văn Hóa Nhân Loại UNESCO",
+    title: "Làng Gốm Bàu Trúc - Kỹ Nghệ Đất Nung Không Bàn Xoay",
+    subtitle: "Làng gốm cổ xưa nhất Đông Nam Á vẫn đỏ lửa nung lộ thiên",
+    location: "Thị trấn Phước Dân, Huyện Ninh Phước (Cách Phan Rang 10km)",
+    date: "Di sản UNESCO 2022",
     description:
-      "Ánh mắt hiền hậu và nụ cười đôn hậu của bậc cao niên trong làng. Đằng sau những nếp nhăn thời gian là cả một kho tàng sử thi, làn điệu dân ca Aday và ký ức đền tháp sống động.",
-    author: "Chân dung nghệ nhân",
+      "Tận mắt chiêm ngưỡng phương thức 'tay làm chân quay, đi giật lùi' độc nhất vô nhị của phụ nữ Chăm. Gốm nung củi và rơm rạ ngoài trời tạo nên những vệt khói loang độc bản hòa quyện cùng nước thảo mộc trâm bầu.",
+    author: "Làng nghề truyền thống",
   },
   {
     id: 3,
-    image: "/images/dana-life/IMG_9911.JPG",
-    category: "Kiến Trúc & Không Gian Sống",
-    title: "Khoảng Trời Xanh Bên Nếp Nhà Truyền Thống",
-    subtitle: "Hài hòa giữa con người và thiên nhiên xứ cát",
-    location: "Làng dệt Mỹ Nghiệp, Ninh Phước",
-    date: "Tháng 10, 2024",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDXDHM6yk37AcZTWKD2kHI9jPGZKP1I4JY5yxSnfX4BbftErgSz5JHk80zz2TUzC_obO4A9NMXDFx8yx6BPBGmoGhCEaCXQvDZl1oXbqVoWkpJ3biH8-ERIAfE760E73pitqQdKh1Cszx9wZVscKNWrs_AhSvA-Knlo8t0FpNAlnZWyKlwoQFLeUtM0rrVeqUM5MhUYT5g8PyjacjFmVVYeo1XjeHE7PUh2mJzLoBrzGxvfV-vafEjkXA",
+    category: "Nghệ Thuật Sợi Dệt Cung Đình",
+    title: "Làng Dệt Thổ Cẩm Mỹ Nghiệp - Sợi Chỉ Vàng Katê",
+    subtitle: "Phục dựng hơn 20 mẫu hoa văn hoàng gia Champa thế kỷ XVII",
+    location: "Thôn Mỹ Nghiệp, Huyện Ninh Phước (Cách làng gốm Bàu Trúc 2km)",
+    date: "Bảo tồn làng nghề cổ",
     description:
-      "Mái hiên nhà rợp bóng cây xanh mát rượi, nơi nhịp khung cửi thổ cẩm lách cách đều đặn mỗi sớm chiều. Không gian sống mộc mạc gìn giữ vẹn nguyên phong tục hiếu khách Chăm cổ truyền.",
-    author: "Kiến trúc bản địa",
+      "Bên những khung cửi gỗ rộn rã nhịp thoi đưa, từng sợi chỉ nhuộm từ vỏ trâm bầu, củ nâu rừng được đan cài thành đồ án chim thần Garuda, thần Shiva và hoa sen phục vụ cho các đại lễ Katê thiêng liêng.",
+    author: "Làng dệt thủ công",
   },
   {
     id: 4,
-    image: "/images/dana-life/IMG_3237.JPG",
-    category: "Nhịp Thở Đồng Quê",
-    title: "Hoàng Hôn Trên Cánh Đồng Bán Sa Mạc",
-    subtitle: "Bình yên thảo nguyên cừu An Hải",
-    location: "Đồng cừu An Hải, Ninh Thuận",
-    date: "Tháng 09, 2024",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAzljZH7__gmKglHYhA2NZtHh2wp1_j6eufhB24fW5dLEg6Q3iVPhcklfXTyfQfftG0s3kkeFa45XwJi0fI0t965d-lV9hy3Bp86bWdiRgQjJMFwqoPZzvC1Puek_bg_vu8Hy90bDTysgtbAXLReE5kLRMopjTkjh5Fgl-uWE2PDhyzuKEA3B_xFsrORw9XqbKdNdrSvBBD0BLP1ezotbfBBmrZCZNeWb86lbUY2kjNCncvJkPSIpv7pA",
+    category: "Thánh Địa Huyền Bí",
+    title: "Đền Tháp Po Rome - Vị Vua Cuối Cùng Trên Đồi Đá",
+    subtitle: "Ngôi đền tháp xây dựng trên đỉnh đồi đá biệt lập giữa thảo nguyên",
+    location: "Làng Hậu Sanh, Xã Phước Hữu, Huyện Ninh Phước",
+    date: "Thế kỷ XVII",
     description:
-      "Khi mặt trời lặn sau rặng tháp Po Klong Garai, đàn cừu thong dong nối đuôi nhau về chuồng. Khung cảnh thơ mộng gợi nhắc nhịp thở bình dị ngàn năm của miền cát trắng Panduranga.",
-    author: "Phong cảnh điền dã",
+      "Nằm uy nghi giữa miền đất bán sa mạc, tháp Po Rome là nơi thờ phụng vị vua anh minh cuối cùng được phong thánh trong tâm thức Chăm. Nơi đây lưu giữ bức tượng vua tạc theo phong cách bán diện và bệ thờ linh thiêng.",
+    author: "Di tích lịch sử Champa",
+  },
+  {
+    id: 5,
+    image: "/images/dana-life/IMG_3237.JPG",
+    category: "Cảnh Sắc Bản Địa Thơ Mộng",
+    title: "Đồng Cừu An Hải & Đồi Cát Nam Cương Trầm Mặc",
+    subtitle: "Bình yên thảo nguyên bán sa mạc và đồi cát chuyển mình theo gió",
+    location: "Xã An Hải, Huyện Ninh Phước, Tỉnh Ninh Thuận",
+    date: "Điểm đến sinh thái",
+    description:
+      "Mỗi chiều buông xuống, hàng trăm chú cừu thong dong gặm cỏ dưới chân đồi cát lộng gió. Không gian khoáng đạt của miền cát sa mạc Panduranga đưa lữ khách trở về với sự tĩnh tại nguyên sơ của thiên nhiên.",
+    author: "Thiên nhiên Panduranga",
   },
 ];
 
@@ -84,7 +99,7 @@ export default function DanaLifeCarousel() {
   const [showInfo, setShowInfo] = useState(true);
   const touchStartX = useRef<number | null>(null);
 
-  const SLIDE_DURATION = 5500; // 5.5 giây cho mỗi ảnh
+  const SLIDE_DURATION = 4000; // 4.0 giây cho mỗi ảnh (theo chuẩn trải nghiệm du lịch)
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === PHOTO_SLIDES.length - 1 ? 0 : prev + 1));
@@ -163,7 +178,7 @@ export default function DanaLifeCarousel() {
               )}
             </span>
             <span className="font-label-sm text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-              Không Gian Triển Lãm & Trình Chiếu Ảnh Bản Địa
+              Điểm Đến Du Lịch & Danh Thắng Champa Panduranga
             </span>
           </div>
 

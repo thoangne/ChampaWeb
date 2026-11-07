@@ -11,6 +11,7 @@ import {
   Flame,
   RotateCcw,
   Compass,
+  Phone,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -218,6 +219,29 @@ export default function ProductListPage() {
                       Làng nghề lưu giữ
                     </span>
                   </div>
+                </div>
+
+                {/* Thông tin liên hệ tư vấn & đặt tác phẩm trực tiếp */}
+                <div className="mt-space-md p-3.5 rounded-2xl bg-surface-container-lowest border border-outline-variant/40 shadow-xs flex flex-wrap items-center justify-between gap-3 max-w-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center shrink-0 shadow-xs">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-secondary tracking-wider block">
+                        Hotline Tư Vấn Đặt Tác Phẩm & Giao Tận Nơi
+                      </span>
+                      <a
+                        href="tel:0918388998"
+                        className="font-serif text-sm font-bold text-on-surface hover:text-primary transition-colors block"
+                      >
+                        0918.388.998 • Zalo Nghệ Nhân Chăm
+                      </a>
+                    </div>
+                  </div>
+                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold">
+                    Trực tiếp từ xưởng làng nghề
+                  </span>
                 </div>
               </div>
 
@@ -446,7 +470,7 @@ export default function ProductListPage() {
 
                       {/* Badge trên ảnh */}
                       <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-surface-container-lowest/95 backdrop-blur-md text-primary shadow-xs border border-outline-variant/20">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-white/95 backdrop-blur-md text-primary shadow-xs border border-outline-variant/20">
                           {product.categoryLabel}
                         </span>
                         <span className="px-2 py-0.5 rounded-md text-[9px] font-semibold bg-secondary/90 text-white shadow-xs">
@@ -458,7 +482,7 @@ export default function ProductListPage() {
                       <div className="absolute bottom-2.5 right-2.5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
                         <button
                           onClick={() => handleOpenPreview(product)}
-                          className="p-2 rounded-xl bg-surface-container-lowest/95 backdrop-blur-md text-on-surface hover:text-primary shadow-md hover:scale-105 transition-all"
+                          className="p-2 rounded-xl bg-white/95 backdrop-blur-md text-on-surface hover:text-primary shadow-md hover:scale-105 transition-all"
                           type="button"
                           title="Xem nhanh chi tiết"
                         >
@@ -523,8 +547,11 @@ export default function ProductListPage() {
                             <span className="text-[10px] text-on-surface-variant block">
                               Giá tham khảo:
                             </span>
-                            <span className="font-serif text-sm font-bold text-primary">
+                            <span className="font-serif text-sm font-bold text-primary block">
                               {product.priceEstimate}
+                            </span>
+                            <span className="text-[10px] text-secondary font-medium flex items-center gap-1 mt-0.5">
+                              <Phone className="w-2.5 h-2.5 text-primary" /> Hotline: 0918.388.998
                             </span>
                           </div>
 
@@ -823,6 +850,22 @@ export default function ProductListPage() {
                         </div>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Thông tin liên hệ nhanh trực tiếp */}
+                  <div className="mt-4 p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-primary shrink-0" />
+                      <div>
+                        <span className="text-[10px] text-on-surface-variant block font-medium">Hotline / Zalo liên hệ nghệ nhân:</span>
+                        <a href="tel:0918388998" className="font-serif text-xs font-bold text-primary hover:underline">
+                          0918.388.998 (Trượng Văn Hải - Làng Nghề)
+                        </a>
+                      </div>
+                    </div>
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-surface-container text-secondary font-bold">
+                      Hỗ trợ 24/7
+                    </span>
                   </div>
                 </div>
 

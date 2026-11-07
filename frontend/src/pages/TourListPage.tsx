@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Clock,
-  Compass,
   HeartHandshake,
-  Search,
   ShieldCheck,
   Star,
+  MapPin,
+  Sparkles,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -15,27 +15,9 @@ import BottomNav from "../components/BottomNav";
 import AudioPlayerBar from "../components/AudioPlayerBar";
 import { TOURS } from "../data/champaData";
 
-const CATEGORIES = [
-  { id: "all", label: "Tất cả hành trình" },
-  { id: "craft", label: "Làng nghề gốm & dệt" },
-  { id: "architecture", label: "Kiến trúc Đền tháp" },
-  { id: "ritual", label: "Nghi lễ & Đêm Katê" },
-];
-
 export default function TourListPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
-  const filteredTours = TOURS.filter((tour) => {
-    const matchesCat =
-      activeCategory === "all" || tour.category === activeCategory;
-    const matchesSearch =
-      tour.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tour.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      tour.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCat && matchesSearch;
-  });
+  const danaTour = TOURS[0];
 
   return (
     <div className="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
@@ -47,8 +29,8 @@ export default function TourListPage() {
       <main className="w-full pt-16 xl:pt-20 bg-surface flex-1">
         {/* Hero Banner Section */}
         <section className="relative w-full bg-gradient-to-b from-surface-container-low via-surface to-surface py-space-lg sm:py-space-xl overflow-hidden border-b border-surface-container-high/60">
-          <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
-          <div className="absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none"></div>
+          <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none" />
+          <div className="absolute top-1/2 -right-24 w-80 h-80 rounded-full bg-primary-fixed/20 blur-3xl pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
             {/* Breadcrumb & Archival Tag */}
@@ -58,153 +40,225 @@ export default function TourListPage() {
                   Trang chủ
                 </Link>
                 <span className="text-outline/60">/</span>
-                <span className="text-primary font-bold">Hành trình Di sản</span>
+                <span className="text-primary font-bold">Dana Tour</span>
               </nav>
               <div className="hidden sm:flex items-center gap-2 text-secondary font-label-sm text-xs uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full border border-outline-variant/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                <span>Panduranga Expeditions • Khám phá 2025</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                <span>Hành Trình Di Sản Độc Bản Duy Nhất • 2025</span>
               </div>
             </div>
 
             {/* Main Heading Lockup */}
             <div className="flex flex-col gap-space-xs max-w-4xl">
               <div className="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/30 w-fit shadow-sm">
-                <Compass className="h-4 w-4 text-primary" />
+                <Sparkles className="h-4 w-4 text-primary" />
                 <span className="font-label-sm text-[11px] uppercase tracking-widest text-primary font-bold">
-                  Cung Đường Trải Nghiệm Độc Bản
+                  Sản Phẩm Trải Nghiệm Cốt Lõi
                 </span>
               </div>
 
               <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl xl:text-5xl text-on-surface font-semibold leading-tight tracking-tight mt-1">
-                Danh Sách Hành Trình Di Sản Panduranga
+                Dana Tour: Hành Trình Khám Phá Di Sản Panduranga
               </h1>
-              <p className="font-body-md xl:font-body-lg text-sm sm:text-base xl:text-lg text-on-surface-variant max-w-2xl leading-relaxed mt-1">
-                Mỗi chuyến đi là một cuộc đối thoại chân thực cùng nghệ nhân và không gian văn hóa thiêng liêng. Nhóm nhỏ tối đa 8 khách để trọn vẹn chiều sâu ký ức.
+              <p className="font-body-md xl:font-body-lg text-sm sm:text-base xl:text-lg text-on-surface-variant max-w-3xl leading-relaxed mt-1">
+                Gom trọn vẹn tinh hoa đất thiêng trong 1 ngày duy nhất: Đón bình minh tại Tháp Po Klong Garai,
+                tự tay nắn gốm Bàu Trúc cùng Muk Phan, dùng bữa trưa canh Um Bơk và học dệt thổ cẩm Mỹ Nghiệp.
               </p>
-            </div>
-
-            {/* Search Bar & Filter Tabs */}
-            <div className="mt-space-md sm:mt-space-lg max-w-3xl flex flex-col gap-space-sm">
-              <div className="relative flex items-center">
-                <Search className="absolute left-4 text-outline h-5 w-5 pointer-events-none" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Tìm hành trình, làng nghề, đền tháp..."
-                  className="w-full pl-12 pr-4 py-3 sm:py-3.5 rounded-2xl bg-surface-container-lowest text-on-surface font-body-md text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary shadow-md border border-outline-variant/30"
-                />
-              </div>
-
-              <div className="flex items-center gap-space-xs flex-wrap pt-1">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    type="button"
-                    className={`px-3 sm:px-space-md py-1.5 sm:py-2 rounded-xl font-label-md text-xs sm:text-sm font-medium transition-all ${
-                      activeCategory === cat.id
-                        ? "bg-primary text-on-primary shadow-sm font-semibold"
-                        : "bg-surface-container hover:bg-surface-container-high text-on-surface-variant"
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Tours Grid Section */}
+        {/* Single Tour Showcase Detail Section */}
         <section className="w-full max-w-7xl mx-auto px-margin-mobile xl:px-margin py-space-xl">
-          <div className="flex items-center justify-between mb-space-lg">
-            <span className="font-label-md text-sm text-on-surface-variant">
-              Hiển thị <strong>{filteredTours.length}</strong> hành trình đặc sắc
-            </span>
-          </div>
+          <div className="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-lg border border-outline-variant/40">
+            <div className="grid grid-cols-1 lg:grid-cols-12">
+              {/* Cột trái: Ảnh chính & Thông số */}
+              <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-full overflow-hidden bg-surface-container">
+                <img
+                  src={danaTour.image}
+                  alt={danaTour.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-            {filteredTours.map((tour) => (
-              <div
-                key={tour.id}
-                className="flex flex-col bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group border border-outline-variant/30"
-              >
-                {/* Image & Badges */}
-                <div className="relative h-64 overflow-hidden bg-surface-container">
-                  <img
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    alt={tour.title}
-                    src={tour.image}
-                  />
-                  <div className="absolute top-space-md left-space-md">
-                    <span
-                      className={`px-3 py-1 rounded-full font-label-sm text-[11px] uppercase font-bold tracking-wider shadow-sm ${tour.badgeClass}`}
-                    >
-                      {tour.badge}
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
+                  <span className="px-3.5 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wider shadow-md">
+                    {danaTour.badge}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold border border-white/20">
+                    Khởi hành mỗi ngày tại Phan Rang
+                  </span>
+                </div>
+
+                <div className="absolute bottom-5 left-5 right-5 text-white">
+                  <div className="flex items-center gap-3 text-xs mb-2">
+                    <span className="flex items-center gap-1 text-amber-300 font-bold">
+                      <Star className="h-4 w-4 fill-current" />
+                      5.0 (186 đánh giá thực tế)
+                    </span>
+                    <span className="flex items-center gap-1 text-white/90">
+                      <Clock className="h-3.5 w-3.5" />
+                      {danaTour.duration}
                     </span>
                   </div>
-                  <div className="absolute bottom-space-sm right-space-sm bg-inverse-surface/85 backdrop-blur-sm text-inverse-on-surface px-space-sm py-1 rounded-md font-label-md text-xs flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-secondary-fixed" />
-                    <span>{tour.duration}</span>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-space-lg flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between text-on-surface-variant font-label-sm text-xs mb-space-xs">
-                      <span>{tour.location}</span>
-                      <span className="flex items-center gap-1 text-secondary font-semibold">
-                        <Star className="h-3.5 w-3.5 fill-current text-secondary" />
-                        {tour.rating ?? "4.98"} ({tour.reviewsCount ?? "68"})
-                      </span>
-                    </div>
-
-                    <h3 className="font-serif text-xl text-on-surface group-hover:text-primary transition-colors font-semibold mt-1">
-                      <Link to={`/tour/${tour.slug}`}>{tour.title}</Link>
-                    </h3>
-
-                    <p className="font-body-sm text-sm text-on-surface-variant mt-space-sm leading-relaxed line-clamp-3">
-                      {tour.description}
-                    </p>
-
-                    <div className="mt-space-md flex flex-wrap gap-space-xs">
-                      {tour.chips.map((chip) => (
-                        <span
-                          key={chip.label}
-                          className="px-2.5 py-1 rounded-md bg-surface-container text-on-surface-variant font-body-sm text-[12px]"
-                        >
-                          {chip.label}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="pt-space-md mt-space-md flex items-center justify-between border-t border-surface-container-high/60">
-                    <div>
-                      <span className="font-label-sm text-xs text-on-surface-variant block">
-                        Chi phí bảo tồn:
-                      </span>
-                      <span className="font-serif text-xl text-primary font-bold">
-                        {tour.price}{" "}
-                        <span className="font-sans text-xs font-normal text-on-surface-variant">
-                          /khách
-                        </span>
-                      </span>
-                    </div>
-
-                    <Link
-                      to={`/tour/${tour.slug}`}
-                      className="px-space-md py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-xs sm:text-sm transition-colors flex items-center gap-1.5 font-semibold group/btn shadow-sm"
-                    >
-                      <span>Xem Chi Tiết</span>
-                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+                  <h3 className="font-serif text-xl font-bold leading-snug">
+                    Kết nối 3 không gian di sản tiêu biểu nhất của người Chăm
+                  </h3>
                 </div>
               </div>
-            ))}
+
+              {/* Cột phải: Lịch trình & Giá vé & Đặt tour */}
+              <div className="lg:col-span-7 p-space-md sm:p-space-lg xl:p-space-xl flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="flex items-center gap-1 font-semibold text-secondary">
+                      <MapPin className="h-4 w-4" />
+                      {danaTour.location}
+                    </span>
+                    <span className="text-[11px] px-2.5 py-1 rounded-full bg-surface-container font-semibold text-on-surface">
+                      Đoàn nhỏ tối đa 12 khách
+                    </span>
+                  </div>
+
+                  <h2 className="font-serif text-2xl sm:text-3xl font-bold text-on-surface">
+                    {danaTour.title}
+                  </h2>
+
+                  <p className="font-body-md text-xs sm:text-sm text-on-surface-variant mt-2.5 leading-relaxed">
+                    {danaTour.description}
+                  </p>
+
+                  {/* Chi tiết lịch trình 1 ngày */}
+                  <div className="mt-5 pt-4 border-t border-outline-variant/30">
+                    <span className="font-label-md text-xs font-bold text-on-surface uppercase tracking-wider block mb-3">
+                      Lịch trình chi tiết trong ngày:
+                    </span>
+                    <div className="space-y-2.5 text-xs">
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          07:30
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Đón khách tại khách sạn TP. Phan Rang - Tháp Chàm
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Xe du lịch máy lạnh đưa đón tận nơi, gặp gỡ hướng dẫn viên bản địa Chăm.
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          08:00
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Tháp Po Klong Garai - Giải mã Văn bia & Kiến trúc Tháp Cổ
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Đón ánh bình minh trên Đồi Trầu, giải mã văn bia cổ Sanskrit và nghe hòa tấu kèn Saranai.
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          10:00
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Làng Gốm Bàu Trúc - Kỹ nghệ nắn gốm không bàn xoay
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Trò chuyện cùng Muk Đàng Thị Phan, trải nghiệm đi giật lùi nặn đất sông Quao và nung củi.
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          12:00
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Bữa trưa Ẩm thực Chăm Bản Địa
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Thưởng thức canh bồi Um Bơk, bánh tét Katê và nước thảo mộc truyền thống dưới giàn cây mát rượi.
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          14:00
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Làng Dệt Thổ Cẩm Mỹ Nghiệp - Luồn con thoi cổ hoàng cung
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Ngồi vào khung dệt cổ cùng nghệ nhân Phú Thị Mỡ, học phân biệt hoa văn chim công Katê.
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+                        <span className="px-2 py-1 rounded bg-primary text-white font-mono font-bold text-[11px] shrink-0">
+                          16:30
+                        </span>
+                        <div>
+                          <span className="font-bold text-on-surface block">
+                            Đồi Cát Nam Cương & Trở về khách sạn
+                          </span>
+                          <span className="text-[11px] text-on-surface-variant">
+                            Ngắm hoàng hôn trên đồi cát chuyển mình theo gió trước khi xe đưa quý khách về lại điểm hẹn.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Highlights chips */}
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {danaTour.chips.map((chip) => (
+                      <span
+                        key={chip.label}
+                        className={`px-2.5 py-1 rounded-lg text-xs ${chip.className}`}
+                      >
+                        ✓ {chip.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Price Table & CTA Button */}
+                <div className="mt-6 pt-4 border-t border-outline-variant/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <span className="text-xs text-on-surface-variant block">
+                      Chi phí trọn gói bảo tồn & trải nghiệm:
+                    </span>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="font-serif text-3xl font-bold text-primary">
+                        {danaTour.price}
+                      </span>
+                      <span className="text-xs text-on-surface-variant">
+                        / Người lớn • Trẻ em: 550.000đ
+                      </span>
+                    </div>
+                  </div>
+
+                  <Link
+                    to={`/tour/${danaTour.slug}`}
+                    className="px-6 py-3 rounded-xl bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-md"
+                  >
+                    <span>Xem trang đặt tour & giữ chỗ</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -239,11 +293,8 @@ export default function TourListPage() {
       </main>
 
       <Footer />
-      <AudioPlayerBar
-        isOpen={isAudioPlaying}
-        onClose={() => setIsAudioPlaying(false)}
-      />
       <BottomNav />
+      <AudioPlayerBar />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Plus, ShieldCheck } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 import {
   BLOG_CATEGORIES,
   BLOG_MAIN_CATEGORIES,
@@ -19,6 +20,8 @@ export default function BlogHeroSection({
   selectedCategory,
   onSelectCategory,
 }: BlogHeroSectionProps) {
+  const { isAdmin } = useAuth();
+
   return (
     <section className="w-full bg-surface-container-low/60 pt-space-md sm:pt-space-lg pb-space-lg sm:pb-space-xl border-b border-surface-container-high/60">
       <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin flex flex-col gap-space-md sm:gap-space-lg">
@@ -31,9 +34,34 @@ export default function BlogHeroSection({
             <span className="text-outline/60">/</span>
             <span className="text-primary font-bold">Bài Viết & Khảo Cứu</span>
           </nav>
-          <div className="hidden sm:flex items-center gap-2 text-secondary font-label-sm text-xs uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full border border-outline-variant/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-            <span>Panduranga Archives • Bản ghi số di sản 2025</span>
+
+          <div className="flex items-center gap-2">
+            {isAdmin && (
+              <div className="flex items-center gap-2 bg-[#fff1ec] px-3 py-1 rounded-full border border-primary/30 shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[11px] font-bold text-primary uppercase">Admin Mode</span>
+                <span className="text-outline/40">•</span>
+                <Link
+                  to="/admin/blog/editor"
+                  className="text-xs font-bold text-secondary hover:text-primary flex items-center gap-1 transition-colors"
+                >
+                  <Plus className="w-3 h-3" />
+                  <span>Viết bài mới</span>
+                </Link>
+                <span className="text-outline/40">•</span>
+                <Link
+                  to="/admin/blog/quan-ly"
+                  className="text-xs font-medium text-on-surface hover:text-primary transition-colors"
+                >
+                  Quản lý
+                </Link>
+              </div>
+            )}
+
+            <div className="hidden sm:flex items-center gap-2 text-secondary font-label-sm text-xs uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full border border-outline-variant/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              <span>Panduranga Archives • Bản ghi số di sản 2025</span>
+            </div>
           </div>
         </div>
 
@@ -68,21 +96,19 @@ export default function BlogHeroSection({
                   key={mCat.id}
                   onClick={() => onSelectMainCategory(mCat.id)}
                   type="button"
-                  className={`flex flex-col text-left p-3 rounded-2xl transition-all cursor-pointer border ${
-                    isMainActive
+                  className={`flex flex-col text-left p-3 rounded-2xl transition-all cursor-pointer border ${isMainActive
                       ? "bg-primary text-on-primary border-primary shadow-md ring-2 ring-primary/20 -translate-y-0.5"
                       : "bg-surface-container-lowest hover:bg-surface-container text-on-surface border-outline-variant/30"
-                  }`}
+                    }`}
                 >
                   <span className="font-title-sm text-sm font-bold">
                     {mCat.label}
                   </span>
                   <span
-                    className={`font-body-sm text-[11px] mt-0.5 line-clamp-1 ${
-                      isMainActive
+                    className={`font-body-sm text-[11px] mt-0.5 line-clamp-1 ${isMainActive
                         ? "text-on-primary/80"
                         : "text-on-surface-variant"
-                    }`}
+                      }`}
                   >
                     {mCat.desc}
                   </span>
@@ -104,20 +130,18 @@ export default function BlogHeroSection({
                   <button
                     key={cat.id}
                     onClick={() => onSelectCategory(cat.id)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all cursor-pointer shadow-sm ${
-                      isActive
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide transition-all cursor-pointer shadow-sm ${isActive
                         ? "bg-secondary text-white ring-2 ring-secondary/20 shadow-sm"
                         : "bg-surface-container-lowest hover:bg-surface-container text-on-surface border border-outline-variant/30"
-                    }`}
+                      }`}
                     type="button"
                   >
                     <span>{cat.label}</span>
                     <span
-                      className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
-                        isActive
+                      className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${isActive
                           ? "bg-white/20 text-white"
                           : "bg-surface-container-high text-on-surface-variant"
-                      }`}
+                        }`}
                     >
                       {cat.count}
                     </span>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom"; // Thêm useNavigate
+import { Link, useParams } from "react-router-dom";
 import {
   Calendar,
   Camera,
@@ -36,7 +36,6 @@ import { toast } from "../components/ui/sonner";
 
 export default function TourDetailPage() {
   const { tourSlug } = useParams<{ tourSlug: string }>();
-  const navigate = useNavigate(); // Khởi tạo useNavigate
 
   // Tìm tour theo slug hoặc mặc định tour 1
   const tour = TOURS.find((t) => t.slug === tourSlug) ?? TOURS[0];
@@ -118,8 +117,6 @@ export default function TourDetailPage() {
       description: "Đang mở cửa sổ hỗ trợ viên bản địa Trượng Văn Hải (Hotline: 0918.388.998).",
     });
   };
-
-  const relatedTours = TOURS.filter((t) => t.id !== tour.id);
 
   return (
     <div className="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
@@ -1049,60 +1046,90 @@ export default function TourDetailPage() {
                   Khám Phá Tiếp Theo
                 </span>
                 <h2 className="font-serif text-2xl sm:text-3xl text-on-surface mt-1 font-semibold">
-                  Các hành trình di sản Panduranga độc bản
+                  Sản phẩm thủ công & Nghệ nhân đồng hành
                 </h2>
               </div>
               <Link
-                to="/tour"
+                to="/san-pham"
                 className="font-label-lg text-sm text-primary font-semibold hover:underline flex items-center gap-1"
               >
-                <span>Xem tất cả hành trình</span>
+                <span>Xem tất cả sản phẩm</span>
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
-              {relatedTours.map((rTour) => (
-                <div
-                  key={rTour.id}
-                  onClick={() => navigate(`/tour/${rTour.slug}`)} // Click bất kỳ đâu trên thẻ đều chuyển trang
-                  className="rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row border border-outline-variant/30 cursor-pointer"
-                >
-                  <div className="w-full sm:w-48 h-48 sm:h-auto overflow-hidden shrink-0">
-                    <img
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      alt={rTour.title}
-                      src={rTour.image}
-                    />
+              <Link
+                to="/san-pham"
+                className="rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row border border-outline-variant/30 group"
+              >
+                <div className="w-full sm:w-48 h-48 sm:h-auto overflow-hidden shrink-0">
+                  <img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt="Sản phẩm thủ công Chăm"
+                    src="/images/dana-life/IMG_9911.JPG"
+                  />
+                </div>
+                <div className="p-space-md flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 rounded-full font-label-sm text-[11px] font-semibold uppercase bg-primary/10 text-primary">
+                        Gốm & Thổ Cẩm
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-base sm:text-lg text-on-surface font-semibold group-hover:text-primary transition-colors">
+                      Tác Phẩm Gốm Bàu Trúc & Thổ Cẩm Mỹ Nghiệp
+                    </h4>
+                    <p className="font-body-sm text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
+                      Các tác phẩm thủ công độc bản được nung củi lộ thiên và dệt tay cổ truyền có thể mua hoặc đặt chế tác riêng.
+                    </p>
                   </div>
-                  <div className="p-space-md flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className={`px-2 py-0.5 rounded-full font-label-sm text-[11px] font-semibold uppercase ${rTour.badgeClass}`}>
-                          {rTour.badge}
-                        </span>
-                        <span className="font-body-sm text-xs text-on-surface-variant">
-                          {rTour.duration}
-                        </span>
-                      </div>
-                      <h4 className="font-serif text-base sm:text-lg text-on-surface font-semibold hover:text-primary transition-colors">
-                        {rTour.title}
-                      </h4>
-                      <p className="font-body-sm text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
-                        {rTour.description}
-                      </p>
-                    </div>
-                    <div className="mt-space-sm pt-space-xs flex items-center justify-between border-t border-surface-container/60">
-                      <span className="font-serif text-lg text-primary font-bold">
-                        {rTour.price} <span className="font-sans text-xs text-on-surface-variant font-normal">/ khách</span>
-                      </span>
-                      <span className="text-secondary font-label-md text-xs font-semibold hover:underline">
-                        Chi tiết →
-                      </span>
-                    </div>
+                  <div className="mt-space-sm pt-space-xs flex items-center justify-between border-t border-surface-container/60">
+                    <span className="font-serif text-lg text-primary font-bold">
+                      Từ 950.000đ <span className="font-sans text-xs text-on-surface-variant font-normal">/ tác phẩm</span>
+                    </span>
+                    <span className="text-secondary font-label-md text-xs font-semibold group-hover:underline">
+                      Khám phá →
+                    </span>
                   </div>
                 </div>
-              ))}
+              </Link>
+
+              <Link
+                to="/nghe-nhan"
+                className="rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col sm:flex-row border border-outline-variant/30 group"
+              >
+                <div className="w-full sm:w-48 h-48 sm:h-auto overflow-hidden shrink-0">
+                  <img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    alt="Chân dung nghệ nhân"
+                    src="/images/dana-life/IMG_9901.JPG"
+                  />
+                </div>
+                <div className="p-space-md flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="px-2 py-0.5 rounded-full font-label-sm text-[11px] font-semibold uppercase bg-secondary/10 text-secondary">
+                        Báu Vật Nhân Văn
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-base sm:text-lg text-on-surface font-semibold group-hover:text-primary transition-colors">
+                      Gặp Gỡ Những Người Giữ Lửa Ngàn Năm
+                    </h4>
+                    <p className="font-body-sm text-xs text-on-surface-variant mt-1 line-clamp-2 leading-relaxed">
+                      Lắng nghe câu chuyện đời nghề của Muk Đàng Thị Phan, nghệ nhân Phú Thị Mỡ và nghệ nhân Đàng Xem.
+                    </p>
+                  </div>
+                  <div className="mt-space-sm pt-space-xs flex items-center justify-between border-t border-surface-container/60">
+                    <span className="font-serif text-lg text-primary font-bold">
+                      4+ Nghệ nhân <span className="font-sans text-xs text-on-surface-variant font-normal">tiêu biểu</span>
+                    </span>
+                    <span className="text-secondary font-label-md text-xs font-semibold group-hover:underline">
+                      Xem chi tiết →
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </section>

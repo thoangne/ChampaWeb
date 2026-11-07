@@ -150,7 +150,7 @@ export default function HeroSection({
               </div>
 
               {/* Bottom Caption Card Overlay */}
-              <div className="absolute bottom-space-md left-space-md right-space-md bg-surface-container-lowest/95 backdrop-blur-md p-space-md rounded-xl shadow-lg border border-outline-variant/30">
+              <div className="absolute bottom-space-md left-space-md right-space-md bg-white/95 backdrop-blur-md p-space-md rounded-xl shadow-lg border border-outline-variant/30">
                 <div className="flex items-start justify-between gap-space-sm">
                   <div>
                     <span className="font-label-sm text-label-sm uppercase text-primary tracking-widest font-semibold block">
@@ -179,7 +179,7 @@ export default function HeroSection({
         {/* Integrated Trip Planner Bar (Desktop Horizontally Aligned Bar) */}
         <div
           id="dat-tour"
-          className="mt-space-lg xl:mt-space-xl p-3 sm:p-4 xl:p-5 rounded-3xl bg-surface-container-lowest/95 backdrop-blur-xl shadow-2xl shadow-stone-900/10 border border-outline-variant/40 ring-1 ring-primary/5"
+          className="mt-space-lg xl:mt-space-xl p-3 sm:p-4 xl:p-5 rounded-3xl bg-white/95 backdrop-blur-xl shadow-2xl shadow-stone-900/10 border border-outline-variant/40 ring-1 ring-primary/5"
         >
           <form
             onSubmit={handleSearchTrip}
