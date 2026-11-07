@@ -349,3 +349,67 @@ ORDER BY view_date DESC, total_views DESC;
 ALTER TABLE public.view_logs ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Anyone can record a view log" ON public.view_logs FOR INSERT WITH CHECK (true);
 
+
+
+-- 6. ADMIN CMS MANAGEMENT (MIGRATION 2026110706)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'active';
+
+ALTER TABLE public.blog_articles 
+    ADD COLUMN IF NOT EXISTS seo_title VARCHAR(255),
+    ADD COLUMN IF NOT EXISTS seo_description TEXT,
+    ADD COLUMN IF NOT EXISTS scheduled_at TIMESTAMPTZ,
+    ADD COLUMN IF NOT EXISTS tags TEXT[] DEFAULT ARRAY[]::TEXT[],
+    ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'published';
+
+CREATE TABLE IF NOT EXISTS public.media_files (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    filename VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) NOT NULL,
+    mime_type VARCHAR(100) NOT NULL,
+    size BIGINT NOT NULL,
+    dimensions VARCHAR(50),
+    url TEXT NOT NULL,
+    uploader_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_media_files_created_at ON public.media_files(created_at DESC);
+
+CREATE TABLE IF NOT EXISTS public.tags (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.article_tags (
+    article_id UUID REFERENCES public.blog_articles(id) ON DELETE CASCADE,
+    tag_id INT REFERENCES public.tags(id) ON DELETE CASCADE,
+    PRIMARY KEY (article_id, tag_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.site_settings (
+    key VARCHAR(100) PRIMARY KEY,
+    value JSONB NOT NULL DEFAULT '{}'::jsonb,
+    description TEXT,
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS public.activity_logs (
+    id BIGSERIAL PRIMARY KEY,
+    actor_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    actor_name VARCHAR(150) NOT NULL,
+    actor_email VARCHAR(255) NOT NULL,
+    action VARCHAR(100) NOT NULL,
+    target_type VARCHAR(50) NOT NULL,
+    target_id VARCHAR(100),
+    target_title VARCHAR(255),
+    details JSONB DEFAULT '{}'::jsonb,
+    ip_address VARCHAR(45),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_activity_logs_created_at ON public.activity_logs(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_activity_logs_action ON public.activity_logs(action);
+CREATE INDEX IF NOT EXISTS idx_activity_logs_target ON public.activity_logs(target_type, target_id);

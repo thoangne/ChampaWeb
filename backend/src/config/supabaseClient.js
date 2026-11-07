@@ -9,14 +9,31 @@ if (!process.env.SUPABASE_URL || (!process.env.SUPABASE_SERVICE_ROLE_KEY && !pro
   console.warn("ℹ️ Server vẫn khởi chạy bình thường ở chế độ dev (Health check: http://localhost:5000/api/health).");
 }
 
+// Cung cấp WebSocket implementation cho môi trường Node.js <= 20
+// để tránh lỗi "@supabase/realtime-js: Node.js detected but native WebSocket not found"
+let WebSocketImpl = globalThis.WebSocket;
+if (!WebSocketImpl) {
+  try {
+    WebSocketImpl = require("ws");
+  } catch {
+    // Fallback dummy class nếu ws chưa cài đặt
+    WebSocketImpl = class DummyWebSocket {
+      constructor() {}
+      addEventListener() {}
+      removeEventListener() {}
+      send() {}
+      close() {}
+    };
+  }
+}
+
 let supabase = null;
 
 try {
   supabase = createClient(supabaseUrl, supabaseKey, {
     auth: { persistSession: false, autoRefreshToken: false },
     realtime: {
-      // Tránh crash trên Node.js <= 20 thiếu native WebSocket
-      transport: typeof WebSocket !== "undefined" ? WebSocket : undefined,
+      transport: WebSocketImpl,
     },
   });
 } catch (err) {

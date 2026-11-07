@@ -5,6 +5,7 @@ const bookingRoutes = require("./bookingRoutes");
 const newsletterRoutes = require("./newsletterRoutes");
 const authRoutes = require("./authRoutes");
 const postRoutes = require("./postRoute");
+const adminRoutes = require("./adminRoutes");
 const { testConnection } = require("../config/db");
 const { NODE_ENV } = require("../config/env");
 
@@ -12,6 +13,7 @@ router.use("/auth", authRoutes);
 router.use("/bookings", bookingRoutes);
 router.use("/newsletter", newsletterRoutes);
 router.use("/posts", postRoutes);
+router.use("/admin", adminRoutes);
 
 /**
  * Health check endpoint.

@@ -476,23 +476,23 @@ export default function Header({ onToggleAudio, isAudioPlaying }: HeaderProps) {
                   {isAdmin && (
                     <div className="py-1 border-t border-[#DEDAD2]/60 bg-[#FAF4EF]/40">
                       <div className="px-4 py-1 text-[9px] font-bold uppercase tracking-wider text-[#972F12]">
-                        Quản trị Hệ thống
+                        Hệ thống Quản trị (CMS)
                       </div>
                       <Link
-                        to="/admin/blog/quan-ly"
+                        to="/admin"
                         onClick={() => setUserMenuOpen(false)}
                         className="flex items-center gap-2.5 px-4 py-2 text-xs text-[#24231F] hover:bg-white font-semibold transition-colors"
                       >
                         <FileText className="h-4 w-4 text-[#8F4E00]" />
-                        <span>{language === "vi" ? "Quản lý bài viết Blog" : "Manage Blog Posts"}</span>
+                        <span>{language === "vi" ? "Bảng điều khiển CMS" : "Admin Dashboard"}</span>
                       </Link>
                       <Link
-                        to="/admin/blog/editor"
+                        to="/admin/articles/create"
                         onClick={() => setUserMenuOpen(false)}
                         className="flex items-center gap-2.5 px-4 py-2 text-xs text-[#24231F] hover:bg-white font-semibold transition-colors"
                       >
                         <Plus className="h-4 w-4 text-[#972F12]" />
-                        <span>{language === "vi" ? "Viết bài blog mới" : "Write New Post"}</span>
+                        <span>{language === "vi" ? "Soạn bài viết mới" : "Write New Article"}</span>
                       </Link>
                     </div>
                   )}
