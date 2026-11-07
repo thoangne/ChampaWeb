@@ -1,10 +1,7 @@
-const knex = require("knex");
-const knexConfig = require("../knexfile");
-
-const environment = process.env.NODE_ENV || "development";
-const config = knexConfig[environment] || knexConfig.development;
-
-const db = knex(config);
+/**
+ * Centralized Knex instance re-export.
+ * Ensures the entire application and Knex migrations share the same singleton connection pool.
+ */
+const db = require("../src/config/db");
 
 module.exports = db;
-

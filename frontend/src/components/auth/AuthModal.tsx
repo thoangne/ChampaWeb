@@ -150,12 +150,12 @@ export default function AuthModal() {
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       {/* 1. Backdrop mờ tối sang trọng */}
       <div
-        className="fixed inset-0 bg-stone-950/75 backdrop-blur-md transition-opacity duration-300"
+        className="fixed inset-0 bg-stone-950/60 backdrop-blur-sm transition-opacity duration-300"
         onClick={closeAuthModal}
       />
 
-      {/* 2. Container Modal Split-Screen 2 cột chuẩn SaaS (Linear / Stripe style) */}
-      <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-[0_24px_70px_rgba(23,19,17,0.35)] border border-amber-900/15 overflow-hidden z-10 transition-all transform animate-in fade-in zoom-in-95 duration-200 flex flex-col md:flex-row my-auto">
+      {/* 2. Container Modal Split-Screen 2 cột chuẩn SaaS (Không viền trắng thừa, màu sắc ấm áp, logo sắc nét) */}
+      <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-[0_20px_60px_rgba(36,25,21,0.2)] border border-[#dfc0b8]/60 overflow-hidden z-10 transition-all transform animate-in fade-in zoom-in-95 duration-200 flex flex-col md:flex-row my-auto outline-none ring-0">
         {/* Nút đóng modal ở góc trên phải */}
         <button
           type="button"
@@ -168,69 +168,70 @@ export default function AuthModal() {
 
         {/* ========================================================
             CỘT TRÁI: BRAND EXPERIENCE (45% DESKTOP & TABLET)
-            Phong cách Obsidian huyền bí, tối giản, sang trọng
+            Bảng màu Refined Warm Sandstone & Heritage Terracotta
+            Tươi sáng, ấm cúng, hài hòa 100% với form đăng nhập bên phải
         ======================================================== */}
-        <div className="hidden md:flex md:w-5/12 bg-[#171311] text-white p-8 lg:p-10 flex-col justify-between relative overflow-hidden select-none">
-          {/* Subtle Ambient Radial Glow */}
-          <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-amber-700/20 blur-[80px] pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full bg-orange-950/30 blur-[90px] pointer-events-none" />
+        <div className="hidden md:flex md:w-5/12 bg-gradient-to-br from-[#faf4ef] via-[#f6ebe1] to-[#eeddd2] text-stone-900 border-r border-[#e8d5cb]/80 p-8 lg:p-10 flex-col justify-between relative overflow-hidden select-none">
+          {/* Subtle Ambient Warm Glow ở góc dưới phải (Xa khu vực Logo ở góc trên trái) */}
+          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-amber-500/10 blur-[60px] pointer-events-none" />
 
-          {/* Delicate Dot Matrix Pattern */}
-          <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
+          {/* Delicate Dot Matrix Pattern (Độ mờ nhẹ nhàng, không gây nhiễu) */}
+          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#8f4e00_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
 
-          {/* Top Brand Identity */}
-          <div className="relative z-10 flex items-center gap-3">
+          {/* Top Brand Identity: Logo được đặt ở lớp z-20 riêng biệt, không bị bất kỳ phần tử nào chồng lấn */}
+          <div className="relative z-20 flex items-center gap-3">
             <img
               src={LOGO_URL}
               alt="Logo Dana"
-              className="h-9 w-auto object-contain"
+              className="h-10 sm:h-11 w-auto object-contain shrink-0 drop-shadow-xs"
             />
             <div className="flex flex-col text-left">
-              <span className="font-label-sm text-[10px] uppercase tracking-wider text-amber-400 font-bold leading-tight">
+              <span className="text-[11px] uppercase tracking-wider text-primary font-bold whitespace-nowrap leading-tight">
                 Dana Community Tourism
               </span>
-              <span className="font-serif text-sm text-stone-100 font-bold leading-tight">
+              <span className="font-serif text-sm sm:text-base text-stone-800 leading-tight font-normal whitespace-nowrap mt-0.5">
                 Panduranga Heritage
               </span>
             </div>
           </div>
 
-          {/* Center Content: Headline & Glassmorphism Card */}
+          {/* Center Content: Headline & Testimonial Card */}
           <div className="relative z-10 my-auto py-8">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[10px] font-semibold tracking-wide mb-4">
-              <Sparkles className="w-3 h-3 text-amber-400" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold tracking-wide mb-4">
+              <Sparkles className="w-3 h-3 text-primary" />
               <span>Nền tảng Du lịch Di sản Bản địa</span>
             </div>
 
-            <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white leading-snug tracking-tight">
+            <h3 className="font-serif text-2xl lg:text-3xl font-bold text-stone-900 leading-snug tracking-tight">
               Nơi trầm tích ngàn năm hòa cùng nhịp sống đương đại.
             </h3>
 
-            <p className="mt-3 text-xs text-stone-300/80 leading-relaxed font-light">
+            <p className="mt-3 text-xs text-stone-600 leading-relaxed font-light">
               Kết nối các tuyến tour điền dã, báu vật cổ vật, nghệ nhân gốm Bàu Trúc & thổ cẩm Mỹ Nghiệp.
             </p>
 
-            {/* Glassmorphism Testimonial Card */}
-            <div className="mt-6 p-4 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-xl relative">
-              <Quote className="w-5 h-5 text-amber-400/30 absolute top-3 right-3" />
-              <p className="text-xs italic text-stone-200 leading-relaxed font-serif pr-4">
+            {/* Testimonial Card mộc mạc cao cấp */}
+            <div className="mt-6 p-4 rounded-2xl bg-white/85 backdrop-blur-md border border-[#dfc0b8]/60 shadow-xs relative">
+              <Quote className="w-5 h-5 text-primary/25 absolute top-3 right-3" />
+              <p className="text-xs italic text-stone-800 leading-relaxed font-serif pr-4">
                 "Mỗi bước chân chạm vào đất nung là một lần lắng nghe hơi thở ngàn năm..."
               </p>
-              <div className="mt-2.5 flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-amber-700/40 border border-amber-400/30 flex items-center justify-center text-amber-200 font-serif font-bold text-[10px]">
+              <div className="mt-3 flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-serif font-bold text-xs">
                   M
                 </div>
                 <div>
-                  <h4 className="text-[11px] font-semibold text-white">Muk Đàng Thị Phan</h4>
-                  <p className="text-[9px] text-amber-300/70">Nghệ nhân Ưu tú Bàu Trúc</p>
+                  <h4 className="text-xs font-bold text-stone-900">Muk Đàng Thị Phan</h4>
+                  <p className="text-[10px] text-primary font-medium">Nghệ nhân Ưu tú Làng gốm Bàu Trúc</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Bottom Footer Meta */}
-          <div className="relative z-10 text-[10px] text-stone-500 border-t border-white/5 pt-3">
-            <span>© 2026 Dana Heritage. Bảo tồn bền vững.</span>
+          <div className="relative z-10 text-[10px] text-stone-500 border-t border-[#e8d5cb]/70 pt-3 flex items-center justify-between">
+            <span>© 2026 Dana Heritage.</span>
+            <span>Bảo tồn bền vững</span>
           </div>
         </div>
 

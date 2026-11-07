@@ -22,8 +22,22 @@ exports.up = async function (knex) {
     table.timestamp("updated_at").defaultTo(knex.fn.now());
   });
 
-  // 2. Trigger đồng bộ tự động với Supabase auth.users & RLS policies
+  // 2. Đảm bảo schema auth và bảng auth.users tồn tại cho local PostgreSQL (Supabase đã có sẵn)
   await knex.raw(`
+    CREATE SCHEMA IF NOT EXISTS auth;
+    CREATE TABLE IF NOT EXISTS auth.users (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      email VARCHAR(255) UNIQUE,
+      raw_user_meta_data JSONB DEFAULT '{}'::jsonb,
+      raw_app_meta_data JSONB DEFAULT '{}'::jsonb,
+      created_at TIMESTAMPTZ DEFAULT NOW(),
+      updated_at TIMESTAMPTZ DEFAULT NOW()
+    );
+
+    CREATE OR REPLACE FUNCTION auth.uid() RETURNS UUID AS $$
+      SELECT NULL::UUID;
+    $$ LANGUAGE sql STABLE;
+
     CREATE OR REPLACE FUNCTION public.handle_new_user()
     RETURNS TRIGGER AS $$
     BEGIN
@@ -54,7 +68,7 @@ exports.up = async function (knex) {
 
     DROP POLICY IF EXISTS "Users can update their own profile" ON public.profiles;
     CREATE POLICY "Users can update their own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
-  `).catch(() => {});
+  `);
 };
 
 /**
@@ -69,4 +83,3 @@ exports.down = async function (knex) {
 
   await knex.schema.dropTableIfExists("profiles");
 };
-

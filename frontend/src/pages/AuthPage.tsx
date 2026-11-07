@@ -117,19 +117,18 @@ export default function AuthPage({ initialMode = "login" }: AuthPageProps) {
     <div className="min-h-screen w-full bg-white flex flex-col lg:flex-row antialiased selection:bg-amber-100 selection:text-amber-900">
       {/* ========================================================
           LEFT SECTION – BRAND EXPERIENCE (45–50% DESKTOP)
-          Lấy cảm hứng từ Linear & Stripe: Tối giản, chiều sâu di sản,
-          đậm chất văn minh Panduranga nhưng hiện đại và tinh tế.
+          Bảng màu Refined Warm Sandstone & Heritage Terracotta
+          Tươi sáng, ấm cúng, hài hòa với form đăng nhập bên phải
       ======================================================== */}
-      <section className="hidden lg:flex lg:w-5/12 xl:w-1/2 bg-[#171311] text-white flex-col justify-between p-10 xl:p-14 relative overflow-hidden select-none">
-        {/* Subtle Ambient Radial Glow */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-amber-700/20 blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-orange-950/30 blur-[120px] pointer-events-none" />
+      <section className="hidden lg:flex lg:w-5/12 xl:w-1/2 bg-gradient-to-br from-[#faf4ef] via-[#f6ebe1] to-[#eeddd2] text-stone-900 flex-col justify-between p-10 xl:p-14 relative overflow-hidden select-none border-r border-[#e8d5cb]/80">
+        {/* Subtle Ambient Radial Glow ở góc dưới phải (xa logo) */}
+        <div className="absolute -bottom-16 -right-16 w-80 h-80 rounded-full bg-amber-500/10 blur-[80px] pointer-events-none" />
 
         {/* Delicate Dot Matrix Pattern */}
-        <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#8f4e00_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
-        {/* Top Header: Brand Identity */}
-        <div className="relative z-10 flex items-center justify-between">
+        {/* Top Header: Brand Identity (z-20 không bị che lấp) */}
+        <div className="relative z-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img
               src={LOGO_URL}
@@ -137,10 +136,10 @@ export default function AuthPage({ initialMode = "login" }: AuthPageProps) {
               className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <div className="flex flex-col text-left">
-              <span className="font-label-sm text-[10px] uppercase tracking-wider text-amber-400 font-bold leading-tight">
+              <span className="text-[11px] uppercase tracking-wider text-primary font-bold leading-tight">
                 Dana Community Tourism
               </span>
-              <span className="font-serif text-sm text-stone-100 font-bold leading-tight">
+              <span className="font-serif text-sm text-stone-800 leading-tight font-normal">
                 Panduranga Heritage
               </span>
             </div>
@@ -148,7 +147,7 @@ export default function AuthPage({ initialMode = "login" }: AuthPageProps) {
 
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-xs text-stone-400 hover:text-white transition-colors py-1.5 px-3 rounded-full hover:bg-white/5 border border-white/5 hover:border-white/10"
+            className="inline-flex items-center gap-1.5 text-xs text-stone-600 hover:text-stone-900 transition-colors py-1.5 px-3 rounded-full hover:bg-stone-200/50 border border-stone-300/50"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Trang chủ</span>
@@ -157,40 +156,40 @@ export default function AuthPage({ initialMode = "login" }: AuthPageProps) {
 
         {/* Center: Brand Manifesto & Core Value */}
         <div className="relative z-10 max-w-lg my-auto py-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[11px] font-semibold tracking-wide mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-semibold tracking-wide mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
             <span>Nền tảng Du lịch Di sản Bản địa</span>
           </div>
 
-          <h1 className="font-serif text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white leading-tight tracking-tight">
+          <h1 className="font-serif text-3xl xl:text-4xl 2xl:text-5xl font-bold text-stone-900 leading-tight tracking-tight">
             Nơi trầm tích ngàn năm hòa cùng nhịp sống đương đại.
           </h1>
 
-          <p className="mt-4 text-sm xl:text-base text-stone-300/80 leading-relaxed font-light">
+          <p className="mt-4 text-sm xl:text-base text-stone-600 leading-relaxed font-light">
             Kết nối trọn vẹn các tuyến tour khảo cứu Kalan Po Klong Garai, làng gốm Bàu Trúc,
             dệt thổ cẩm Mỹ Nghiệp và tri thức trao truyền từ các Nghệ nhân Ưu tú.
           </p>
 
           {/* SaaS-Style Glass Testimonial Card */}
-          <div className="mt-8 p-5 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/10 shadow-2xl relative">
-            <Quote className="w-6 h-6 text-amber-400/40 absolute top-4 right-4" />
-            <p className="text-xs xl:text-sm italic text-stone-200 leading-relaxed font-serif">
+          <div className="mt-8 p-5 rounded-2xl bg-white/85 backdrop-blur-xl border border-[#dfc0b8]/60 shadow-xs relative">
+            <Quote className="w-6 h-6 text-primary/25 absolute top-4 right-4" />
+            <p className="text-xs xl:text-sm italic text-stone-800 leading-relaxed font-serif pr-4">
               "Mỗi bước chân chạm vào đất nung là một lần lắng nghe hơi thở của tổ tiên qua ngàn năm..."
             </p>
             <div className="mt-3 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-amber-700/40 border border-amber-400/30 flex items-center justify-center text-amber-200 font-serif font-bold text-xs">
+              <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-serif font-bold text-xs">
                 M
               </div>
               <div>
-                <h4 className="text-xs font-semibold text-white">Muk Đàng Thị Phan</h4>
-                <p className="text-[11px] text-amber-300/70">Nghệ nhân Ưu tú Làng gốm Bàu Trúc</p>
+                <h4 className="text-xs font-semibold text-stone-900">Muk Đàng Thị Phan</h4>
+                <p className="text-[11px] text-primary font-medium">Nghệ nhân Ưu tú Làng gốm Bàu Trúc</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Footer Meta */}
-        <div className="relative z-10 text-[11px] text-stone-500 flex items-center justify-between border-t border-white/5 pt-4">
+        <div className="relative z-10 text-[11px] text-stone-500 flex items-center justify-between border-t border-[#e8d5cb]/70 pt-4">
           <span>© 2026 Dana Heritage. All rights reserved.</span>
           <span className="hidden xl:inline">Bảo tồn & Phát triển Di sản Bền vững</span>
         </div>
@@ -440,24 +439,20 @@ export default function AuthPage({ initialMode = "login" }: AuthPageProps) {
                     </div>
                     <div className="grid grid-cols-4 gap-1.5 h-1.5 w-full bg-stone-100 rounded-full overflow-hidden">
                       <div
-                        className={`h-full transition-all ${
-                          passwordStrength >= 1 ? strengthLabel.color : "bg-transparent"
-                        }`}
+                        className={`h-full transition-all ${passwordStrength >= 1 ? strengthLabel.color : "bg-transparent"
+                          }`}
                       />
                       <div
-                        className={`h-full transition-all ${
-                          passwordStrength >= 2 ? strengthLabel.color : "bg-transparent"
-                        }`}
+                        className={`h-full transition-all ${passwordStrength >= 2 ? strengthLabel.color : "bg-transparent"
+                          }`}
                       />
                       <div
-                        className={`h-full transition-all ${
-                          passwordStrength >= 3 ? strengthLabel.color : "bg-transparent"
-                        }`}
+                        className={`h-full transition-all ${passwordStrength >= 3 ? strengthLabel.color : "bg-transparent"
+                          }`}
                       />
                       <div
-                        className={`h-full transition-all ${
-                          passwordStrength >= 4 ? strengthLabel.color : "bg-transparent"
-                        }`}
+                        className={`h-full transition-all ${passwordStrength >= 4 ? strengthLabel.color : "bg-transparent"
+                          }`}
                       />
                     </div>
                   </div>
