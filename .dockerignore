@@ -6,6 +6,7 @@ frontend/dist
 .env
 backend/.env
 frontend/.env
+env.yaml
 *.log
 .agents
 
