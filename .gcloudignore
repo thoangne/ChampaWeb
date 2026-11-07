@@ -1,0 +1,25 @@
+.gcloudignore
+.git
+.gitignore
+
+# Không upload node_modules local lên Cloud Build
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Không upload file build local
+frontend/dist/
+dist/
+
+# Không upload biến môi trường nhạy cảm local
+.env
+.env.*
+backend/.env
+frontend/.env
+
+# Báo cáo test & cache
+*.log
+coverage/
+.nyc_output/
+.agents/
+

@@ -1,26 +1,35 @@
 import { ArrowRight, Quote } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ARTISANS } from "../data/champaData";
-import { toast } from "./ui/sonner";
 
 export default function ArtisansSection() {
   return (
     <section id="nghe-nhan" className="w-full bg-surface py-space-xl">
       <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
         {/* Section Header */}
-        <div className="max-w-3xl mb-space-xl">
-          <span className="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold block mb-space-xs">
-            Người Giữ Lửa Ngàn Năm
-          </span>
-          <h2 className="font-serif text-3xl xl:text-4xl text-on-surface font-semibold">
-            Góc Nghệ Nhân: Ký ức trong đôi bàn tay
-          </h2>
-          <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs">
-            Họ không chỉ làm nghề để mưu sinh. Từng đường vuốt đất, từng lượt
-            thoi dệt là hành trình gìn giữ danh dự và linh hồn của cả một dân tộc.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-space-xl">
+          <div className="max-w-3xl">
+            <span className="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold block mb-space-xs">
+              Người Giữ Lửa Ngàn Năm
+            </span>
+            <h2 className="font-serif text-3xl xl:text-4xl text-on-surface font-semibold">
+              Góc Nghệ Nhân: Ký ức trong đôi bàn tay
+            </h2>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+              Họ không chỉ làm nghề để mưu sinh. Từng đường vuốt đất, từng lượt
+              thoi dệt là hành trình gìn giữ danh dự và linh hồn của cả một dân tộc.
+            </p>
+          </div>
+          <Link
+            to="/nghe-nhan"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container-high hover:bg-surface-container-highest text-primary font-bold text-xs shrink-0 transition-colors shadow-xs"
+          >
+            <span>Tất cả nghệ nhân</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
 
-        {/* Feature Split Section: Spotlight 2 Master Artisans */}
+        {/* Feature Split Section: Spotlight Master Artisans */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
           {ARTISANS.map((artisan) => (
             <div
@@ -69,18 +78,13 @@ export default function ArtisansSection() {
                 <span className="font-body-sm text-xs text-on-surface-variant font-medium">
                   {artisan.schedule}
                 </span>
-                <button
-                  onClick={() =>
-                    toast(`Câu chuyện về ${artisan.name}`, {
-                      description: `Đang kết nối trang tư liệu phóng sự độc bản về ${artisan.village}.`,
-                    })
-                  }
+                <Link
+                  to={`/nghe-nhan#artisan-${artisan.id}`}
                   className="font-label-md text-xs text-primary font-bold hover:underline flex items-center gap-1"
-                  type="button"
                 >
-                  <span>Đọc câu chuyện</span>
+                  <span>Xem chân dung chi tiết</span>
                   <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+                </Link>
               </div>
             </div>
           ))}

@@ -3,7 +3,7 @@ const app = require("./app");
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Dana Champa Backend Server đang chạy tại http://localhost:${PORT}`);
-  console.log(`📡 API Endpoints sẵn sàng tại http://localhost:${PORT}/api`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Dana Champa Server đang chạy tại cổng ${PORT}`);
+  console.log(`📡 API Endpoints sẵn sàng tại /api`);
 });

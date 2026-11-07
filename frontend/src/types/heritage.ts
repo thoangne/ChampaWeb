@@ -75,9 +75,16 @@ export interface Waypoint {
 export interface Artisan {
   id: number;
   name: string;
+  slug?: string;
   title: string;
   experience: string;
   village: string;
+  specialty?: string;
+  yearsOfDedication?: number;
+  achievements?: string[];
+  workshopLocation?: string;
+  handsImage?: string;
+  featuredProductIds?: string[];
   quote: string;
   bio: string;
   schedule: string;

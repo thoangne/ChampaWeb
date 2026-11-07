@@ -1,5 +1,5 @@
 # backend/Dockerfile
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm install
 # Sao chép toàn bộ mã nguồn backend
 COPY . .
 
-# Mở cổng 5000 cho backend API
+# Mở cổng cho backend API (hỗ trợ cả biến PORT của Cloud Run)
 EXPOSE 5000
 
 # Khởi chạy server

@@ -5,6 +5,8 @@ import TourDetailPage from "./pages/TourDetailPage";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import DigitalHeritagePage from "./pages/DigitalHeritagePage";
+import ProductListPage from "./pages/ProductListPage";
+import ArtisansPage from "./pages/ArtisansPage";
 import { Toaster } from "./components/ui/sonner";
 import { AudioProvider } from "./lib/AudioContext";
 
@@ -21,6 +23,10 @@ export default function App() {
 
         {/* Chi tiết từng tour: /tour/:tourSlug */}
         <Route path="/tour/:tourSlug" element={<TourDetailPage />} />
+
+        {/* Phân hệ Sản phẩm & Chân dung nghệ nhân */}
+        <Route path="/san-pham" element={<ProductListPage />} />
+        <Route path="/nghe-nhan" element={<ArtisansPage />} />
 
         {/* Phân hệ Bài Viết (Tin tức, Lịch sử, Văn hóa) */}
         <Route path="/bai-viet" element={<BlogPage />} />

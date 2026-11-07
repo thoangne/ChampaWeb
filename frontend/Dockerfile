@@ -1,5 +1,5 @@
 # Bước 1: Môi trường Build
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 
 # Khai báo build arguments cho Vite
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Bước 2: Môi trường Chạy (Production)
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
 
 RUN npm install -g serve

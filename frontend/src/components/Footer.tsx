@@ -82,6 +82,8 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-space-xs">
               {[
+                { label: "Tác phẩm Thủ công", href: "/san-pham" },
+                { label: "Chân dung Nghệ nhân", href: "/nghe-nhan" },
                 { label: "Tin tức & Sự kiện", href: "/bai-viet?category=tin-tuc" },
                 { label: "Lịch sử Vương triều", href: "/bai-viet?category=lich-su" },
                 { label: "Văn hóa & Đền tháp", href: "/bai-viet?category=van-hoa" },
