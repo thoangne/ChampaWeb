@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { LOGO_URL } from "../data/champaData";
 import { toast } from "./ui/sonner";
 
@@ -27,12 +27,12 @@ export default function Footer() {
             <div className="flex items-center gap-space-sm">
               <img
                 src={LOGO_URL}
-                alt="Logo Dana Community"
+                alt="Logo Dana Community Tourism"
                 className="h-10 w-auto object-contain shrink-0"
               />
               <div className="flex flex-col">
                 <span className="font-serif text-2xl font-bold text-primary leading-tight">
-                  Dana Community
+                  Dana Community Tourism
                 </span>
                 <span className="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">
                   Panduranga Heritage
@@ -46,29 +46,12 @@ export default function Footer() {
               Nghiệp và kết nối lữ khách cùng di sản sống của vùng đất Panduranga
               huyền thoại.
             </p>
-
-            {/* 70% Commitment Highlight Card */}
-            <div className="p-space-md rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
-              <div className="flex items-start gap-space-sm">
-                <CheckCircle2 className="h-6 w-6 text-secondary shrink-0 mt-0.5" />
-                <div>
-                  <h5 className="font-title-md text-sm font-bold text-on-surface">
-                    Cam kết Hoàn lưu Sinh kế 70%
-                  </h5>
-                  <p className="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">
-                    70% doanh thu từ mỗi hành trình và tác phẩm được hoàn lưu trực
-                    tiếp đến gia đình nghệ nhân Chăm và quỹ trùng tu di tích cộng
-                    đồng.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Column 2: Journeys */}
           <div className="lg:col-span-2 flex flex-col gap-space-sm">
             <h4 className="font-serif text-lg font-bold text-on-surface">
-              Hành trình
+              Dana Tour
             </h4>
             <ul className="flex flex-col gap-space-xs">
               {[
@@ -147,20 +130,36 @@ export default function Footer() {
               </button>
             </form>
 
-            <div className="flex flex-col gap-1.5 pt-space-xs border-t border-surface-container/60 text-xs">
+            <div className="flex flex-col gap-2 pt-space-xs border-t border-surface-container/60 text-xs">
               <span className="font-label-md text-secondary font-bold uppercase tracking-wider">
                 Trung tâm kết nối Panduranga:
               </span>
-              <p className="font-body-sm text-on-surface-variant flex items-start gap-1.5">
+              <p className="font-body-sm text-on-surface-variant flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>Số 08 Đường Tháp Chàm, Đô Vinh, TP. Phan Rang - Tháp Chàm, Tỉnh Ninh Thuận</span>
+                <span>Chất Thường - Phước Hậu - Khánh Hoà</span>
               </p>
-              <p className="font-body-sm text-on-surface-variant flex items-center gap-1.5">
-                <Phone className="h-3.5 w-3.5 text-secondary shrink-0" />
-                <span>(+84) 259 388 9988</span>
-                <span className="mx-1">•</span>
-                <Mail className="h-3.5 w-3.5 text-secondary shrink-0" />
-                <span>contact@danacommunity.heritage.vn</span>
+              <p className="font-body-sm text-on-surface-variant flex items-center gap-2">
+                <Phone className="h-4 w-4 text-secondary shrink-0" />
+                <span>ĐT: <a href="tel:0976029004" className="hover:text-primary transition-colors font-medium">0976029004</a></span>
+              </p>
+              <p className="font-body-sm text-on-surface-variant flex items-center gap-2">
+                <a
+                  href="https://www.facebook.com/profile.php?id=100063464976505"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group"
+                >
+                  <svg className="h-4 w-4 text-secondary group-hover:text-primary transition-colors shrink-0 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                  <span>
+                    Fanpage: <span className="font-medium text-on-surface group-hover:text-primary transition-colors underline decoration-transparent group-hover:decoration-primary underline-offset-2">Dana</span>
+                  </span>
+                </a>
+              </p>
+              <p className="font-body-sm text-on-surface-variant flex items-center gap-2">
+                <Mail className="h-4 w-4 text-secondary shrink-0" />
+                <span>Email: <a href="mailto:admin@danacommunity.vn" className="hover:text-primary transition-colors font-medium">admin@danacommunity.vn</a></span>
               </p>
             </div>
           </div>
@@ -169,7 +168,7 @@ export default function Footer() {
         {/* Sub-footer / Copyright */}
         <div className="pt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm border-t border-surface-container-high/60 text-xs text-on-surface-variant">
           <div>
-            <span>© 2025 Dana Community Heritage Foundation. Bảo lưu mọi quyền di sản.</span>
+            <span>© 2025 Dana Community Tourism. Bảo lưu mọi quyền di sản.</span>
           </div>
           <div className="flex flex-wrap items-center gap-space-md font-label-md">
             <span className="hover:text-primary transition-colors cursor-pointer">

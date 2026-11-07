@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
 import ManifestoSection from "../components/ManifestoSection";
-import DanaLifeCarousel from "../components/DanaLifeCarousel"; // Tích hợp component mới
+import DanaLifeCarousel from "../components/DanaLifeCarousel";
 import ToursSection from "../components/ToursSection";
 import WaypointsSection from "../components/WaypointsSection";
 import ArtisansSection from "../components/ArtisansSection";
@@ -30,28 +29,25 @@ export default function DanaHome() {
         {/* BANNER SLIDER FULL-WIDTH NẰM NGAY ĐẦU TRANG */}
         <DanaLifeCarousel />
 
-        {/* Section 1: Hero / Tìm kiếm chuyến đi */}
-        <HeroSection onToggleAudio={toggleAudio} isAudioPlaying={isAudioPlaying} />
-
-        {/* Section 2: Triết lý Di sản */}
+        {/* Section: Triết lý Di sản */}
         <ManifestoSection />
 
-        {/* Section 3: Hành trình Độc bản */}
+        {/* Section: Hành trình Độc bản */}
         <ToursSection />
 
-        {/* Section 4: Bản đồ Tuyến Khảo Cổ & Văn Hóa */}
+        {/* Section: Bản đồ Tuyến Khảo Cổ & Văn Hóa */}
         <WaypointsSection
           activeStation={activeStation}
           onSelectStation={setActiveStation}
         />
 
-        {/* Section 5: Nghệ nhân */}
+        {/* Section: Nghệ nhân */}
         <ArtisansSection />
 
-        {/* Section 6: Các hình ảnh của Champa Community (3 hàng chạy xen kẽ từ phải sang trái) */}
+        {/* Section: Các hình ảnh của Champa Community (3 hàng chạy xen kẽ từ phải sang trái) */}
         <ChampaCommunityGallery />
 
-        {/* Section 7: Cảm nhận lữ khách */}
+        {/* Section: Cảm nhận lữ khách */}
         <TestimonialsSection />
       </main>
 

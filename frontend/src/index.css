@@ -61,7 +61,7 @@
 
 /* Champa Cultural Calendar Theme */
 .champa-calendar .rdp-root {
-  --rdp-accent-color: #972f12;
+  --rdp-accent-color: #8f4e00;
   --rdp-accent-background-color: #ffe9e2;
   --rdp-day-height: 38px;
   --rdp-day-width: 38px;
@@ -93,7 +93,7 @@
 }
 
 .champa-calendar .rdp-selected .rdp-day_button {
-  background-color: #972f12 !important;
+  background-color: #8f4e00 !important;
   color: #ffffff !important;
   font-weight: 700;
 }
@@ -130,4 +130,4 @@
 .hover-pause-marquee:hover .animate-marquee-row-2,
 .hover-pause-marquee:hover .animate-marquee-row-3 {
   animation-play-state: paused;
-}
+}

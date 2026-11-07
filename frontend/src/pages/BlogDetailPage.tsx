@@ -160,7 +160,7 @@ export default function BlogDetailPage() {
               className="max-h-[82vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
             />
             <div className="text-center text-white/80 text-xs mt-3 font-medium">
-              Tư liệu hình ảnh độ nét cao • Kho lưu trữ Dana Community Heritage
+              Tư liệu hình ảnh độ nét cao • Kho lưu trữ Dana Community Tourism Heritage
             </div>
           </div>
         </div>

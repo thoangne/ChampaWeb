@@ -127,7 +127,7 @@ export default function BlogDetailSidebar({ article }: BlogDetailSidebarProps) {
         </div>
 
         <p className="font-body-sm text-xs text-on-surface-variant/90 leading-relaxed pt-2 border-t border-surface-container/60">
-          Tư liệu được kiểm định bởi cộng đồng người Chăm bản địa và các nhà khảo cứu độc lập của dự án Dana Community Heritage.
+          Tư liệu được kiểm định bởi cộng đồng người Chăm bản địa và các nhà khảo cứu độc lập của dự án Dana Community Tourism Heritage.
         </p>
       </div>
 

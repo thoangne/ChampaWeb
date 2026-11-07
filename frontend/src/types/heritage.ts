@@ -82,6 +82,8 @@ export interface Artisan {
   bio: string;
   schedule: string;
   image: string;
+  productImage?: string;
+  productName?: string;
   badgeClass: string;
 }
 

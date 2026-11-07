@@ -2,7 +2,6 @@ import {
   Handshake,
   Landmark,
   Award,
-  Users,
 } from "lucide-react";
 import { MANIFESTO_METRICS } from "../data/champaData";
 
@@ -10,7 +9,6 @@ const METRIC_ICONS = {
   handshake: Handshake,
   museum: Landmark,
   workspace_premium: Award,
-  diversity_1: Users,
 };
 
 export default function ManifestoSection() {
@@ -45,8 +43,8 @@ export default function ManifestoSection() {
           </p>
         </div>
 
-        {/* 4 Impact Metric Cards Desktop Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+        {/* 3 Impact Metric Cards Desktop Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
           {MANIFESTO_METRICS.map((metric) => {
             const IconComponent =
               METRIC_ICONS[metric.icon as keyof typeof METRIC_ICONS] ?? Handshake;

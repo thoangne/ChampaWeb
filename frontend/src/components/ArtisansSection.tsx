@@ -1,14 +1,8 @@
-import { ArrowRight, Leaf, Quote } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
 import { ARTISANS } from "../data/champaData";
 import { toast } from "./ui/sonner";
 
 export default function ArtisansSection() {
-  const handleViewReport = () => {
-    toast.success("Báo cáo Hoàn lưu Sinh kế 2024", {
-      description: "70% doanh thu đã được phân bổ cho 140 hộ gia đình nghệ nhân và 3 lớp truyền dạy chữ Akhar Thrah.",
-    });
-  };
-
   return (
     <section id="nghe-nhan" className="w-full bg-surface py-space-xl">
       <div className="max-w-7xl mx-auto px-margin-mobile xl:px-margin">
@@ -27,7 +21,7 @@ export default function ArtisansSection() {
         </div>
 
         {/* Feature Split Section: Spotlight 2 Master Artisans */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-space-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
           {ARTISANS.map((artisan) => (
             <div
               key={artisan.name}
@@ -90,35 +84,6 @@ export default function ArtisansSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Regenerative Tourism Commitment Banner */}
-        <div className="p-space-lg xl:p-space-xl rounded-2xl bg-gradient-to-r from-primary via-primary-container to-secondary text-on-primary shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
-          <div className="flex items-center gap-space-md">
-            <div className="w-14 h-14 rounded-2xl bg-on-primary/10 flex items-center justify-center shrink-0 border border-white/20">
-              <Leaf className="h-8 w-8 text-primary-fixed" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5 mb-1">
-                <h4 className="font-serif text-xl xl:text-2xl font-bold">
-                  Cam kết Du lịch Chữa lành & Tái tạo Xứ Chăm
-                </h4>
-              </div>
-              <p className="font-body-md text-sm xl:text-base text-on-primary/90 max-w-2xl leading-relaxed">
-                100% rác thải nhựa bị loại bỏ trong mọi tour. Khách được trang bị
-                bình nước gốm Bàu Trúc và túi thổ cẩm Mỹ Nghiệp tái sử dụng làm
-                quà lưu niệm vĩnh cửu.
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={handleViewReport}
-            className="px-space-lg py-3 rounded-xl bg-surface text-on-surface font-label-lg text-sm xl:text-base whitespace-nowrap shadow-md hover:bg-surface-container transition-all font-semibold hover:shadow-lg"
-            type="button"
-          >
-            Xem Báo cáo Hoàn lưu 2024
-          </button>
         </div>
       </div>
     </section>

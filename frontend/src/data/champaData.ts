@@ -36,20 +36,12 @@ export const MANIFESTO_METRICS = [
     desc: 'Nghệ thuật làm gốm của người Chăm được ghi danh trong Danh mục Di sản phi vật thể cần bảo vệ khẩn cấp.',
     colorClass: 'text-tertiary',
   },
-  {
-    icon: 'diversity_1',
-    value: '70%',
-    title: 'Hoàn lưu Cộng đồng',
-    desc: 'Nguồn thu chuyển trực tiếp vào thù lao nghệ nhân, lớp truyền dạy chữ Chăm Akhar Thrah và quỹ y tế làng.',
-    colorClass: 'text-primary-container',
-  },
 ];
 
 export const MANIFESTO_STATS = [
   { value: '100%', label: 'Nghệ nhân bản địa', className: 'text-primary' },
   { value: '02', label: 'Làng cổ Đông Nam Á', className: 'text-secondary' },
   { value: 'UNESCO', label: 'Di sản bảo tồn', className: 'text-tertiary' },
-  { value: '70%', label: 'Hoàn lưu cộng đồng', className: 'text-primary-container' },
 ];
 
 export const TOURS: Tour[] = [
@@ -212,7 +204,9 @@ export const ARTISANS: Artisan[] = [
     bio: 'Muk Phan là một trong những nghệ nhân đại diện Việt Nam tham gia trình diễn tại trụ sở UNESCO Paris. Tại Bàu Trúc, bà đã truyền dạy kỹ thuật làm gốm không bàn xoay cho hơn 3 thế hệ con gái trong làng.',
     schedule: 'Lớp truyền dạy: Thứ Bảy & Chủ Nhật hàng tuần',
     image: ARTISAN_PHAN_IMAGE,
-    badgeClass: 'bg-secondary text-on-secondary',
+    productImage: '/images/dana-life/IMG_9911.JPG',
+    productName: 'Bình gốm ngấn khói Bàu Trúc & Lu đất nung lộ thiên',
+    badgeClass: 'bg-primary text-on-primary',
   },
   {
     id: 2,
@@ -225,7 +219,39 @@ export const ARTISANS: Artisan[] = [
     bio: 'Bà Phú Thị Mỡ đã phục dựng thành công hơn 20 mẫu hoa văn hoàng cung Champa thế kỷ XVII tưởng chừng đã thất truyền, hoàn toàn sử dụng phẩm màu nhuộm từ thảo mộc thiên nhiên vùng đồi cát.',
     schedule: 'Không gian dệt: Hợp tác xã Dệt Thổ cẩm Mỹ Nghiệp',
     image: ARTISAN_MO_IMAGE,
-    badgeClass: 'bg-tertiary text-on-tertiary',
+    productImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDXDHM6yk37AcZTWKD2kHI9jPGZKP1I4JY5yxSnfX4BbftErgSz5JHk80zz2TUzC_obO4A9NMXDFx8yx6BPBGmoGhCEaCXQvDZl1oXbqVoWkpJ3biH8-ERIAfE760E73pitqQdKh1Cszx9wZVscKNWrs_AhSvA-Knlo8t0FpNAlnZWyKlwoQFLeUtM0rrVeqUM5MhUYT5g8PyjacjFmVVYeo1XjeHE7PUh2mJzLoBrzGxvfV-vafEjkXA',
+    productName: 'Khăn thổ cẩm hoa văn chim công & Vải dệt Katê truyền thống',
+    badgeClass: 'bg-secondary text-on-secondary',
+  },
+  {
+    id: 3,
+    name: 'Nghệ nhân Đàng Xem',
+    title: 'Bậc Thầy Chế Tác Nhạc Cụ Chăm',
+    experience: '48 năm giữ nhịp • Truyền nhân thanh âm thiêng Katê',
+    village: 'Làng Chăm Hữu Đức',
+    quote:
+      '“Kèn Saranai làm từ gỗ mun, kẹp dăm lá buông thiêng. Tiếng kèn cất lên như ngọn gió Panduranga thổi bùng ký ức tiền nhân trong ngày hội Katê.”',
+    bio: 'Nghệ nhân Đàng Xem là bậc thầy hiếm hoi nắm giữ bí quyết chế tác thủ công trọn vẹn bộ ba nhạc khí nghi lễ Chăm: Kèn Saranai, Trống Paranưng và Trống Ginăng.',
+    schedule: 'Không gian diễn xướng Hữu Đức • Mùa nghi lễ Katê & Ramūwan',
+    image: '/images/dana-life/IMG_9901.JPG',
+    productImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAzljZH7__gmKglHYhA2NZtHh2wp1_j6eufhB24fW5dLEg6Q3iVPhcklfXTyfQfftG0s3kkeFa45XwJi0fI0t965d-lV9hy3Bp86bWdiRgQjJMFwqoPZzvC1Puek_bg_vu8Hy90bDTysgtbAXLReE5kLRMopjTkjh5Fgl-uWE2PDhyzuKEA3B_xFsrORw9XqbKdNdrSvBBD0BLP1ezotbfBBmrZCZNeWb86lbUY2kjNCncvJkPSIpv7pA',
+    productName: 'Kèn Saranai gỗ mun cổ truyền & Trống Paranưng bịt da',
+    badgeClass: 'bg-primary text-on-primary',
+  },
+  {
+    id: 4,
+    name: 'Nghệ nhân Đàng Năng Xoay',
+    title: 'Nghệ nhân Điêu Khắc Gốm Phù Điêu',
+    experience: '42 năm tạo tác • Phục dựng mỹ thuật đền tháp',
+    village: 'Làng gốm Bàu Trúc',
+    quote:
+      '“Từng thớ đất sét sông Quao qua bàn tay miết không cần bàn xoay, khi chạm khắc phù điêu Apsara là lúc linh hồn đền tháp sống lại trong từng vệt khói.”',
+    bio: 'Nghệ nhân Đàng Năng Xoay nổi tiếng với tài nghệ kết hợp gốm Bàu Trúc nung lộ thiên cùng nghệ thuật điêu khắc tượng thần, phù điêu Champa cổ được trưng bày tại nhiều triển lãm văn hóa.',
+    schedule: 'Xưởng gốm mỹ nghệ Bàu Trúc • Đón khách hàng ngày',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAd_yrvnJ_UmdnGzLVXjm5HJfxWX-epAuAP73cohAxtCHVP56EKuM52m07N2hY1obT1_Wmh6lUgDS8Ye5va33Sp_Ih3JQB5vwCQfB9tHTZWaggCM2XqEUXoaNx_-AKFbm6o3Qlh0IJLDyt4WaVcS1eO4R7ER_r7FvmnriVoglYc2JHMEote5IwsaQ4KO5jEbpEvgMErIntFFp0iOdJghlh9P7kXsJrT1xrzKEBAkfFj9OWLDV8DTpPJsg',
+    productImage: '/images/dana-life/IMG_9898.JPG',
+    productName: 'Phù điêu Vũ nữ Apsara gốm nung & Tượng thần hộ pháp',
+    badgeClass: 'bg-secondary text-on-secondary',
   },
 ];
 
@@ -261,14 +287,14 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const NAV_ITEMS: NavItem[] = [
   { path: 'cong-di-san', icon: 'temple_buddhist', label: 'Cổng di sản' },
-  { path: 'hanh-trinh-kham-pha', icon: 'explore', label: 'Hành trình' },
+  { path: 'hanh-trinh-kham-pha', icon: 'explore', label: 'Dana Tour' },
   { path: 'ban-do-thap-cham', icon: 'map', label: 'Bản đồ số' },
   { path: 'dat-tour-trai-nghiem', icon: 'calendar_month', label: 'Đặt tour' },
 ];
 
 export const PC_NAV_LINKS: PcNavLink[] = [
   { href: '/', label: 'Trang chủ' },
-  { href: '/tour', label: 'Hành trình' },
+  { href: '/tour', label: 'Dana Tour' },
   {
     href: '/bai-viet',
     label: 'Bài Viết',

@@ -21,7 +21,7 @@ export default function BlogCTASection() {
     e.preventDefault();
     if (!contributorName || !storyTopic) return;
     toast.success("Cảm ơn bạn đã đóng góp tư liệu điền dã!", {
-      description: "Hội đồng nghiên cứu Dana Community sẽ liên hệ để xác minh và lưu trữ bản ghi.",
+      description: "Hội đồng nghiên cứu Dana Community Tourism sẽ liên hệ để xác minh và lưu trữ bản ghi.",
     });
     setContributorName("");
     setStoryTopic("");
