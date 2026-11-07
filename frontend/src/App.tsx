@@ -7,15 +7,26 @@ import BlogDetailPage from "./pages/BlogDetailPage";
 import DigitalHeritagePage from "./pages/DigitalHeritagePage";
 import ProductListPage from "./pages/ProductListPage";
 import ArtisansPage from "./pages/ArtisansPage";
-import BlogEditorPage from "./pages/BlogEditorPage";
-import AdminBlogListPage from "./pages/AdminBlogListPage";
-import AdminRoute from "./components/blog/AdminRoute";
 import AuthPage from "./pages/AuthPage";
 import OAuthCallbackPage from "./pages/OAuthCallbackPage";
 import AuthModal from "./components/auth/AuthModal";
 import { Toaster } from "./components/ui/sonner";
 import { AudioProvider } from "./lib/AudioContext";
 import { AuthProvider } from "./context/AuthContext";
+
+// Admin CMS Modules
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminArticlesPage from "./pages/admin/AdminArticlesPage";
+import AdminArticleCreatePage from "./pages/admin/AdminArticleCreatePage";
+import AdminArticleEditPage from "./pages/admin/AdminArticleEditPage";
+import AdminNewsPage from "./pages/admin/AdminNewsPage";
+import AdminNewsCreatePage from "./pages/admin/AdminNewsCreatePage";
+import AdminNewsEditPage from "./pages/admin/AdminNewsEditPage";
+import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
+import AdminMediaPage from "./pages/admin/AdminMediaPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
+import AdminActivityLogsPage from "./pages/admin/AdminActivityLogsPage";
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage";
 
 export default function App() {
   return (
@@ -48,31 +59,25 @@ export default function App() {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/di-san" element={<BlogPage />} />
 
-            {/* Quản trị Blog (Chỉ dành riêng cho Admin) */}
-            <Route
-              path="/admin/blog/editor"
-              element={
-                <AdminRoute>
-                  <BlogEditorPage />
-                </AdminRoute>
-              }
-            />
-            <Route
-              path="/admin/blog/editor/:id"
-              element={
-                <AdminRoute>
-                  <BlogEditorPage />
-                </AdminRoute>
-              }
-            />
-            <Route
-              path="/admin/blog/quan-ly"
-              element={
-                <AdminRoute>
-                  <AdminBlogListPage />
-                </AdminRoute>
-              }
-            />
+            {/* Hệ thống Quản trị Nội dung Toàn diện (CMS Admin Management) */}
+            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/admin/articles" element={<AdminArticlesPage />} />
+            <Route path="/admin/articles/create" element={<AdminArticleCreatePage />} />
+            <Route path="/admin/articles/edit/:id" element={<AdminArticleEditPage />} />
+            <Route path="/admin/news" element={<AdminNewsPage />} />
+            <Route path="/admin/news/create" element={<AdminNewsCreatePage />} />
+            <Route path="/admin/news/edit/:id" element={<AdminNewsEditPage />} />
+            <Route path="/admin/categories" element={<AdminCategoriesPage />} />
+            <Route path="/admin/media" element={<AdminMediaPage />} />
+            <Route path="/admin/users" element={<AdminUsersPage />} />
+            <Route path="/admin/activity-logs" element={<AdminActivityLogsPage />} />
+            <Route path="/admin/settings" element={<AdminSettingsPage />} />
+
+            {/* Tương thích ngược các tuyến đường quản trị cũ */}
+            <Route path="/admin/blog" element={<Navigate to="/admin/articles" replace />} />
+            <Route path="/admin/blog/quan-ly" element={<Navigate to="/admin/articles" replace />} />
+            <Route path="/admin/blog/editor" element={<Navigate to="/admin/articles/create" replace />} />
+            <Route path="/admin/blog/editor/:id" element={<Navigate to="/admin/articles" replace />} />
 
             {/* Chi tiết bài viết khảo cứu: /blog/:articleSlug hoặc /bai-viet/:articleSlug */}
             <Route path="/blog/:articleSlug" element={<BlogDetailPage />} />

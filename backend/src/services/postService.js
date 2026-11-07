@@ -1,4 +1,5 @@
 const supabase = require("../config/supabaseClient");
+const { db } = require("../config/db");
 
 // Danh sách bài viết ban đầu (seed data chuẩn hóa văn hóa & di sản Champa)
 const INITIAL_POSTS = [
@@ -84,6 +85,49 @@ class PostService {
 
   // 1. Lấy danh sách bài viết công khai (chỉ bài 'published')
   async getPublishedPosts({ mainCategory = "all", category = "all", search = "", limit = 20, page = 1 } = {}) {
+    if (db) {
+      try {
+        let query = db("blog_articles")
+          .where(function () {
+            this.where("is_published", true).orWhere("status", "published");
+          });
+
+        if (mainCategory && mainCategory !== "all") {
+          query = query.where("main_category", mainCategory);
+        }
+        if (category && category !== "all") {
+          query = query.where("category_id", category);
+        }
+        if (search && search.trim()) {
+          const q = `%${search.trim()}%`;
+          query = query.where(function () {
+            this.where("title", "ilike", q)
+              .orWhere("summary", "ilike", q)
+              .orWhere("field_location", "ilike", q);
+          });
+        }
+
+        const countRes = await query.clone().count("id as count").first();
+        const total = parseInt(countRes?.count || "0", 10);
+
+        const rows = await query
+          .orderBy("created_at", "desc")
+          .limit(limit)
+          .offset((page - 1) * limit);
+
+        if (rows.length > 0 || total > 0) {
+          return {
+            posts: rows.map(this._mapDbArticleToModel),
+            total,
+            page,
+            limit,
+          };
+        }
+      } catch (err) {
+        console.warn("Lỗi đọc posts từ DB, dùng fallback:", err.message);
+      }
+    }
+
     if (this.isSupabaseConfigured) {
       let query = supabase
         .from("posts")
@@ -151,6 +195,24 @@ class PostService {
   // 2. Lấy chi tiết bài viết theo Slug (công khai)
   async getPostBySlug(slug) {
     if (!slug) return null;
+
+    if (db) {
+      try {
+        const row = await db("blog_articles")
+          .where("slug", slug)
+          .where(function () {
+            this.where("is_published", true).orWhere("status", "published");
+          })
+          .first();
+
+        if (row) {
+          await db("blog_articles").where("id", row.id).increment("views_count", 1);
+          return this._mapDbArticleToModel({ ...row, views_count: (row.views_count || 0) + 1 });
+        }
+      } catch (err) {
+        console.warn("Lỗi đọc post detail từ DB, dùng fallback:", err.message);
+      }
+    }
 
     if (this.isSupabaseConfigured) {
       const { data, error } = await supabase
@@ -331,6 +393,32 @@ class PostService {
     const words = text.trim().split(/\s+/).length;
     const minutes = Math.max(1, Math.ceil(words / 200));
     return `${minutes} phút đọc`;
+  }
+
+  _mapDbArticleToModel(row) {
+    return {
+      id: row.id,
+      title: row.title,
+      slug: row.slug,
+      excerpt: row.summary || row.excerpt || "",
+      content: row.content,
+      coverImage: row.featured_image || row.cover_image || "",
+      mainCategory: row.main_category,
+      category: row.category_id || row.category || "craft",
+      badge: row.badge,
+      badgeClass: row.badge_class,
+      fieldLocation: row.field_location,
+      readTime: row.read_time,
+      authorId: row.author_id,
+      authorName: row.author_name,
+      authorAvatar: row.author_avatar,
+      status: row.status || (row.is_published ? "published" : "draft"),
+      viewsCount: row.views_count || 0,
+      likesCount: row.likes_count || 0,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+      publishedAt: row.created_at,
+    };
   }
 
   _mapDbPostToModel(row) {
